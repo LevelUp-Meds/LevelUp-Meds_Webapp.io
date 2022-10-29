@@ -1,6 +1,4 @@
-import Login from './pages/Login/Login';
-import './pages/Login/Login.lazy'
-
+import Login from './components/Login/Login'
 
 function App() {
   return (
