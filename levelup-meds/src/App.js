@@ -1,11 +1,10 @@
-import './App.css';
+import Login from './components/Login/Login';
+import './components/Login/Login.lazy'
+
 
 function App() {
   return (
-    <div>
-      Hello Edward
-    </div>
-
+    <Login></Login>
   );
 }
 
