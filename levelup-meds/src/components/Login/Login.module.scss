@@ -4,19 +4,75 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(229, 139, 60);
 }
-.LeftSide {
-    width: 50%;
-    background-color: white;
+
+.CardContainer {
+    width: 30%;
+    height: 85%;
     display: flex;
+    align-items: center;
     justify-content: center;
     align-items: center;
+    flex-direction: column; 
+    background-color: #f0f2f5;
+    border-radius: 3rem;
+    -webkit-border-radius: 3rem;
+    -moz-border-radius: 3rem;
+    -ms-border-radius: 3rem;
+    -o-border-radius: 3rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.CardContainer button {
+    color: black;
+    padding: 20px;
+    margin: 10px; 
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.CardContainer label {
+    padding-top: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.InnerCardContainer input {
+    width: 225px;
+    font-size: 1rem;
+}
+
+.LeftSide img {
+    width: 250px;
+    height: 250px;
 }
 
 .RightSide {
-    width: 50%;
-    background-color: orange;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   width: inherit;
+   background-color: #f0f2f5;
+}
+
+#SignIn {
+    color: white;
+    background: hsla(28, 76%, 57%, 1);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+#Register {
+    color: rgb(229, 139, 60); 
+    outline: 2px solid rgb(229, 139, 60);
+    background-color: #f0f2f5;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+#ForgotPass {
+    position: sticky; 
+    margin-left: 100px;
 }
