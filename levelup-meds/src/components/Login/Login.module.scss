@@ -1,1 +1,22 @@
-.Login {}
+.MainContainer {
+    width: 100%px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.LeftSide {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.RightSide {
+    width: 50%;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

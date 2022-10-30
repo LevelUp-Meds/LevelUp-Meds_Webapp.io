@@ -1,5 +1,5 @@
 {
-  "usesTypeScript": true,
+  "usesTypeScript": false,
   "usesCssModule": true,
   "cssPreprocessor": "scss",
   "testLibrary": "None",
@@ -9,7 +9,7 @@
       "withStyle": true,
       "withTest": false,
       "withStory": false,
-      "withLazy": true
+      "withLazy": false
     }
   }
 }
