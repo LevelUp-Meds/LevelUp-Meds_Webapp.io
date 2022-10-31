@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Login.module.scss";
-import { useNavigate } from "react-router-dom";
+import Auth from "../firebase/firebase";
 import {
   Box,
   FormControl,
@@ -9,31 +9,58 @@ import {
   Button,
   Link,
 } from "@mui/material";
-import {
-  auth,
-  signInWithEmailAndPassword,
-  signInWithGoogle,
-} from "./firebase/firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import { style } from "@mui/system";
 import Person from "@mui/icons-material/Person";
 import HttpsRoundedIcon from "@mui/icons-material/HttpsRounded";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase";
+import { AuthContext } from "../contexts/AuthProvider";
+import { ref, onValue } from "firebase/database";
+import { db } from "../firebase/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    function onRegister() {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        console.log(error);
+      });
+      console.log(auth.name);
+      navigate("/homepage");
+    }
+    onRegister();
+  };
+
+  // const { currentUser } = useContext(AuthContext);
+  // const [username, setUsername] = useState("");
 
   // useEffect(() => {
-  //   if (loading) {
-  //     console.log("inside");
-  //     return;
+  //   if (currentUser) {
+  //     const starCountRef = ref(db, "users/" + currentUser.uid);
+  //     onValue(starCountRef, (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         var data = snapshot.val();
+  //         setUsername(data.firstName + " " + data.lastName);
+  //       }
+  //     });
   //   }
-  //   if (user) navigate("");
-  // }, [user, loading]);
+  // }, [currentUser]);
+
+  // const clickLogin = () => {
+  //   if (currentUser) {
+  //     console.log("Edward");
+  //   } else {
+  //     navigate("/homepage");
+  //   }
+  // };
+
   return (
     <Box className={styles.MainContainer}>
       <Box component={"div"} className={styles.CardContainer}>
@@ -42,7 +69,10 @@ const Login = () => {
             <img src={LUMLogo} alt="main-logo"></img>
           </Box>
           <Box component="div" className={styles.RightSide}>
-            <FormControl className={style.FormContainer}>
+            <FormControl
+              className={style.FormContainer}
+              onSubmit={handleSubmit}
+            >
               <FormLabel>Email</FormLabel>
               <Person
                 sx={{
@@ -52,7 +82,11 @@ const Login = () => {
                   color: "gray",
                 }}
               ></Person>
-              <Input type="email" placeholder="Email"></Input>
+              <Input
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              ></Input>
               <FormLabel>Password</FormLabel>
               <HttpsRoundedIcon
                 sx={{
@@ -62,8 +96,14 @@ const Login = () => {
                   bottom: "222px",
                 }}
               ></HttpsRoundedIcon>
-              <Input type="password" placeholder="Password"></Input>
-              <Button id={styles.SignIn}>Login</Button>
+              <Input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              ></Input>
+              <Button id={styles.SignIn} type="submit" onClick={handleSubmit}>
+                Login
+              </Button>
               <Link to="/levelup-meds/" variant="body2" id={styles.ForgotPass}>
                 Forgot password?
               </Link>
