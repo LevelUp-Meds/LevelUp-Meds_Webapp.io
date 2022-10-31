@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
-import { useNavigate } from "react-router-dom";
+import Auth from "../firebase/firebase";
+
 import {
   Box,
   FormControl,
@@ -8,13 +9,14 @@ import {
   Input,
   Button,
   Link,
+  InputBase,
 } from "@mui/material";
+import { auth } from "../firebase/firebase";
 import {
-  auth,
+  getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithGoogle,
-} from "./firebase/firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+} from "firebase/auth";
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import { style } from "@mui/system";
 import Person from "@mui/icons-material/Person";
@@ -23,17 +25,32 @@ import HttpsRoundedIcon from "@mui/icons-material/HttpsRounded";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
 
-  //const navigate = useNavigate();
+  const [user, setUser] = useState({});
 
-  // useEffect(() => {
-  //   if (loading) {
-  //     console.log("inside");
-  //     return;
-  //   }
-  //   if (user) navigate("");
-  // }, [user, loading]);
+  const login = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
     <Box className={styles.MainContainer}>
       <Box component={"div"} className={styles.CardContainer}>
@@ -42,7 +59,10 @@ const Login = () => {
             <img src={LUMLogo} alt="main-logo"></img>
           </Box>
           <Box component="div" className={styles.RightSide}>
-            <FormControl className={style.FormContainer}>
+            <FormControl
+              className={style.FormContainer}
+              onSubmit={handleSubmit}
+            >
               <FormLabel>Email</FormLabel>
               <Person
                 sx={{
@@ -52,7 +72,11 @@ const Login = () => {
                   color: "gray",
                 }}
               ></Person>
-              <Input type="email" placeholder="Email"></Input>
+              <Input
+                type="email"
+                placeholder="Email"
+                onChange={handleEmailChange}
+              ></Input>
               <FormLabel>Password</FormLabel>
               <HttpsRoundedIcon
                 sx={{
@@ -62,8 +86,14 @@ const Login = () => {
                   bottom: "222px",
                 }}
               ></HttpsRoundedIcon>
-              <Input type="password" placeholder="Password"></Input>
-              <Button id={styles.SignIn}>Login</Button>
+              <Input
+                type="password"
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              ></Input>
+              <Button id={styles.SignIn} type="submit" onClick={login}>
+                Login
+              </Button>
               <Link to="/levelup-meds/" variant="body2" id={styles.ForgotPass}>
                 Forgot password?
               </Link>

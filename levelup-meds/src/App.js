@@ -1,13 +1,14 @@
-import Login from "./components/Login/Login";
 import style from "./App.css";
-import { Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login/Login";
+import Homepage from "./components/Homepage/Homepage";
 
 function App() {
   return (
-    <div>
-      <h1>Bookkeeper</h1>
-      <Link to="/">Login</Link>
-    </div>
+    <Routes>
+      <Route exact path="/" />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
