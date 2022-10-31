@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Login.module.scss";
 import Auth from "../firebase/firebase";
-
 import {
   Box,
   FormControl,
@@ -9,47 +8,58 @@ import {
   Input,
   Button,
   Link,
-  InputBase,
 } from "@mui/material";
-import { auth } from "../firebase/firebase";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import { style } from "@mui/system";
 import Person from "@mui/icons-material/Person";
 import HttpsRoundedIcon from "@mui/icons-material/HttpsRounded";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase";
+import { AuthContext } from "../contexts/AuthProvider";
+import { ref, onValue } from "firebase/database";
+import { db } from "../firebase/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [user, setUser] = useState({});
+  const navigate = useNavigate();
 
-  const login = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      console.log(error);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    function onRegister() {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        console.log(error);
+      });
+      console.log(auth.name);
+      navigate("/homepage");
     }
+    onRegister();
   };
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // const { currentUser } = useContext(AuthContext);
+  // const [username, setUsername] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     const starCountRef = ref(db, "users/" + currentUser.uid);
+  //     onValue(starCountRef, (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         var data = snapshot.val();
+  //         setUsername(data.firstName + " " + data.lastName);
+  //       }
+  //     });
+  //   }
+  // }, [currentUser]);
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  // const clickLogin = () => {
+  //   if (currentUser) {
+  //     console.log("Edward");
+  //   } else {
+  //     navigate("/homepage");
+  //   }
+  // };
 
   return (
     <Box className={styles.MainContainer}>
@@ -75,7 +85,7 @@ const Login = () => {
               <Input
                 type="email"
                 placeholder="Email"
-                onChange={handleEmailChange}
+                onChange={(e) => setEmail(e.target.value)}
               ></Input>
               <FormLabel>Password</FormLabel>
               <HttpsRoundedIcon
@@ -89,9 +99,9 @@ const Login = () => {
               <Input
                 type="password"
                 placeholder="Password"
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
               ></Input>
-              <Button id={styles.SignIn} type="submit" onClick={login}>
+              <Button id={styles.SignIn} type="submit" onClick={handleSubmit}>
                 Login
               </Button>
               <Link to="/levelup-meds/" variant="body2" id={styles.ForgotPass}>
