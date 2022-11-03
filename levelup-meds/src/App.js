@@ -2,6 +2,7 @@ import style from "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Homepage from "./components/Homepage/Homepage";
+import Menubar from "./components/Menubar/Menubar";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route exact path="/" />
       <Route path="/login" element={<Login />} />
       <Route path="/homepage" element={<Homepage />} />
+      <Route path="/menubar" element={<Menubar />} />
     </Routes>
   );
 }
