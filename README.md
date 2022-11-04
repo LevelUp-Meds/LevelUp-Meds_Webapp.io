@@ -14,4 +14,4 @@ LevelUp Meds is a website designed to organize and coordinate care. This year pr
 Tools: 
 Node.js
 React
-MongoDB
+Firebase
