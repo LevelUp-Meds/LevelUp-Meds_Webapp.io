@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Homepage from "./components/Homepage/Homepage";
 import Menubar from "./components/Menubar/Menubar";
+//import firebase from "firebase";
 
 function App() {
   return (
