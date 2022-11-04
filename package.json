@@ -1,0 +1,31 @@
+{
+  "name": "levelup-meds_webapp",
+  "version": "1.0.0",
+  "description": "By:    Edward Esqueda,    Corey Fortin,    Elijah Mangal,    Aaron Mendez,   and   Pranav Rao",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeX000/LevelUp-Meds_Webapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeX000/LevelUp-Meds_Webapp/issues"
+  },
+  "homepage": "https://github.com/CodeX000/LevelUp-Meds_Webapp#readme",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.12"
+  },
+  "devDependencies": {
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "webpack": "^5.74.0"
+  }
+}
