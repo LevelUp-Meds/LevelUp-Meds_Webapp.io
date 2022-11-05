@@ -21,12 +21,15 @@ import { ref, onValue } from "firebase/database";
 import LevelUpShowcase from "../../assets/showcase.webp";
 import LevelUpLargeLogo from "../../assets/levelupmeds_large_logo.webp";
 import Menubar from "../Menubar/Menubar";
+import Appointment from "../Appointment/Appointment";
+
 
 const Homepage = () => {
   return (
     <Box>
       <Menubar/>
       <Box>
+        <Appointment/>
         <img src={LevelUpShowcase} alt="main-logo"></img>
         <img src={LevelUpLargeLogo} alt="main-logo"></img>
         <Grid container spacing={0} directions="column" justifyContent="center" alignItems="center">
