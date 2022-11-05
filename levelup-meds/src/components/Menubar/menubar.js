@@ -16,17 +16,14 @@ import {
     Button,
   } from "@mui/material";
   
-  import Drawer from "@mui/material/Drawer";
-  import List from "@mui/material/List";
-  import ListItem from "@mui/material/ListItem";
-  import ListItemButton from "@mui/material/ListItemButton";
-  import ListItemText from "@mui/material/ListItemText";
-  import { style } from "@mui/system";
-  import Person from "@mui/icons-material/Person";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import LUMLogo from "../../assets/Logo_Orange.svg";
-import LevelUpShowcase from "../../assets/showcase.webp";
-import LevelUpLargeLogo from "../../assets/levelupmeds_large_logo.webp";
-import { FOCUSABLE_SELECTOR } from "@testing-library/user-event/dist/utils";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 type menu = "open";
@@ -44,7 +41,7 @@ export default function Menubar() {
 
   const list = (anchor: menu) => (
     <Box
-      sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -52,10 +49,10 @@ export default function Menubar() {
       <List>
         <ListItem disablePadding>
           <ListItemButton>
-              <ListItemText primary="X"/>
+            <CloseIcon/>
           </ListItemButton>
         </ListItem>
-        {["Medications", "Calendar", "Login"].map((text, index) => (
+        {["Medications", "Calendar", "Login", "Sign In"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemText primary={text} />
@@ -74,12 +71,14 @@ export default function Menubar() {
           <AppBar sx={{bgcolor: "transparent", color:"black"}} position="static">
               <Toolbar>
                   <Box sx={{mr: 'auto'}}>
-                    <Button onClick={toggleDrawer(anchor, true)} color="inherit">
-                      <img className={styles.levelupmedslogo} src={LUMLogo} alt="main-logo"></img>
+                    <Button onClick={toggleDrawer(anchor, true)} color="inherit"> 
+                      <MenuIcon fontSize="large"/>
                     </Button>
                   </Box>
                   <Box sx={{mr: 0, ml: 'auto'}}>
-                    <Button color="inherit" sx={{ margin: .1, mr: 1, fontWeight: 'bold', bgcolor: "white"}}>Sign Up</Button>
+                    <Button color="inherit">
+                      <img className={styles.levelupmedslogo} src={LUMLogo} alt="main-logo"></img>
+                    </Button>
                   </Box>
               </Toolbar>
           </AppBar>
