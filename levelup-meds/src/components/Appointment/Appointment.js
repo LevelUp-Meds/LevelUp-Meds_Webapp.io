@@ -39,6 +39,7 @@ import { FOCUSABLE_SELECTOR } from "@testing-library/user-event/dist/utils";
 import PlaceIcon from '@mui/icons-material/Place';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CreateIcon from '@mui/icons-material/Create';
+import { Wrapper } from "@googlemaps/react-wrapper";
 
 
 export default function Appointment() {
@@ -48,17 +49,17 @@ export default function Appointment() {
         <List>
           <ListItem disablePadding>
             <CreateIcon sx={{marginRight: 1}}/>
-            <ListItemText primary="Name" />
+            <ListItemText id="NameTab" primary="Name" />
           </ListItem>
           <Divider sx={{margin: 1}}/>
           <ListItem disablePadding>
             <CalendarMonthIcon sx={{marginRight: 1}}/>
-            <ListItemText primary="Date" />
+            <ListItemText id="DateTab" primary="Date" />
           </ListItem>
           <Divider sx={{margin: 1}}/>
           <ListItem disablePadding>
             <PlaceIcon sx={{marginRight: 1}}/>
-            <ListItemText primary="Location" />
+            <ListItemText id="LocationTab" primary="Location" />
           </ListItem>
           <Divider sx={{margin: 1}}/>
           <ListItem disablePadding>
