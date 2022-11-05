@@ -1,1 +1,55 @@
-.Login {}
+.Container {
+    background-color: orange;
+   width: inherit; 
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center; 
+}
+
+.InnerContainer {
+    background-color: orange;
+    width: 50%;
+    height: 85%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.Card {
+    background-color: white;
+    text-align: center;
+    width: 50%;
+    height: inherit;  
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.MainButton {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.FormContainer {
+    height: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.Card > img {
+    width: 15rem;
+    height: 15rem;
+}
+
+#ForgotPass {
+    
+}

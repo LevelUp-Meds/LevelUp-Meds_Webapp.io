@@ -1,12 +1,15 @@
-import React, { FC } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Medication.module.scss';
 
-interface MedicationProps {}
-
-const Medication: FC<MedicationProps> = () => (
+const Medication = () => (
   <div className={styles.Medication}>
     Medication Component
   </div>
 );
+
+Medication.propTypes = {};
+
+Medication.defaultProps = {};
 
 export default Medication;
