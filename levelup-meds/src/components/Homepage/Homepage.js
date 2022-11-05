@@ -4,6 +4,7 @@ import styles from "./Homepage.module.scss";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Menubar from "../Menubar/Menubar"
+import Appointment from "../Appointment/Appointment"
 import { Box } from "@mui/material";
 
 function Homepage() {
@@ -14,16 +15,15 @@ function Homepage() {
   };
 
   return (
-    <Box>
+    <Box className={styles.Homepage}>
+      <Menubar/>
+      <Appointment/>
       <Box>
-        <Menubar/>
-      </Box>
-      <div className={styles.Homepage}>
         <h1>HOMEPAGE</h1>
         <Button variant="contained" onClick={goToLoginPage}>
           Go TO LOGIN PAGE
         </Button>
-      </div>
+      </Box>
     </Box>
   );
 }
