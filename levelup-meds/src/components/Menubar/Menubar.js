@@ -14,6 +14,7 @@ import {
     Input,
     InputLabel,
     Button,
+    Divider,
   } from "@mui/material";
   
 import Drawer from "@mui/material/Drawer";
@@ -24,6 +25,11 @@ import ListItemText from "@mui/material/ListItemText";
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import EventIcon from '@mui/icons-material/Event';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import MedicationIcon from '@mui/icons-material/Medication';
+  
+
 
 
 type menu = "open";
@@ -47,20 +53,48 @@ export default function Menubar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        <ListItem sx={{justifyContent: "right", padding: 2}}>
+          <Button>
+            <CloseIcon sx={{margin: 1}} color="action"/>
+          </Button>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <MedicationIcon sx={{margin: 1}}/>
+            <ListItemText primary="Medications" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <EventIcon sx={{margin: 1}}/>
+            <ListItemText primary="Appointments" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <CalendarMonthIcon sx={{margin: 1}}/>
+            <ListItemText primary="Calendar" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
         <ListItem disablePadding>
           <ListItemButton>
             <CloseIcon/>
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
-        {["Medications", "Calendar", "Login", "Sign In"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <CloseIcon/>
+            <ListItemText primary="Sign In" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
+
   );
 
   return (
