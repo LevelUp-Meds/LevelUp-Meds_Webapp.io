@@ -95,9 +95,3 @@ export default function Menubar() {
     </div>
   );
 }
-
-Menubar.propTypes = {};
-
-Menubar.defaultProps = {};
-
-export {Menubar};

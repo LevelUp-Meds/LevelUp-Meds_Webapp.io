@@ -76,5 +76,3 @@ export default function Appointment() {
 Appointment.propTypes = {};
 
 Appointment.defaultProps = {};
-
-export {Appointment};

@@ -6,17 +6,21 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.11",
+    "@mui/material": "^5.10.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
     "firebase": "^9.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-firebase-hooks": "^5.0.3",
-    "react-redux-firebase-auth": "^2.0.0",
-    "react-router-dom": "^6.4.2",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "resolve-url-loader": "^5.0.0",
+    "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -44,8 +48,11 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.55.0",
+    "postcss": "^8.4.18",
+    "postcss-loader": "^7.0.1",
+    "sass": "^1.56.0",
     "sass-loader": "^13.1.0",
+    "url-loader": "^4.1.1",
     "webpack": "^5.74.0"
   }
 }

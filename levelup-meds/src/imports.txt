@@ -1,0 +1,10 @@
+npm i sass-loader
+npm i resolve-url-loader
+npm install -g sass
+npm install --save-dev postcss-loader postcss
+npm install @mui/icons-material
+npm install @mui/material @emotion/react @emotion/styled
+npm install firebase
+npm install firebase-tools
+npm install react-router-dom
+
