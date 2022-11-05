@@ -8,6 +8,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Login() {
+  // used for navigating between pages
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
