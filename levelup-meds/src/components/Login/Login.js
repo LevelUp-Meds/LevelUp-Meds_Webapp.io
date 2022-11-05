@@ -4,8 +4,6 @@ import styles from "./Login.module.scss";
 import { TextField, Box, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
-import PersonIcon from "@mui/icons-material/Person";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Login() {
   // used for navigating between pages
@@ -38,7 +36,7 @@ function Login() {
   return (
     <Box className={styles.Container}>
       <Box className={styles.InnerContainer}>
-        <PersonIcon
+        {/* <PersonIcon
           sx={{
             position: "absolute",
             marginRight: "15rem",
@@ -53,7 +51,7 @@ function Login() {
             top: "36.25rem",
             color: "grey",
           }}
-        />
+        /> */}
         <Box className={styles.Card}>
           <img
             src={LumLogo}
