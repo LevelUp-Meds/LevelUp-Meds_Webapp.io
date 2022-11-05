@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
+
+const Menubar = () => <div className={styles.Menubar}>Menubar Component</div>;
 import {
     AppBar,
     Toolbar,
@@ -25,6 +27,7 @@ import LUMLogo from "../../assets/Logo_Orange.svg";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
+main
 
 type menu = "open";
 
