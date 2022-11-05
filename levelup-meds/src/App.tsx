@@ -2,10 +2,10 @@ import React from "react";
 import "./App.css";
 import Login from "./components/Login/Login";
 import { Routes, Route } from "react-router-dom";
-import Homepage from "./components/Homepage/Homepage";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Register from "./components/Register/Register";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
+import Homepage from "./components/Homepage/Homepage";
 
 function App() {
   return (
