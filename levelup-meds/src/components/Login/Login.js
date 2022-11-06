@@ -4,6 +4,11 @@ import styles from "./Login.module.scss";
 import { TextField, Box, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
+import auth from "../Auth/AuthProvider";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 function Login() {
   // used for navigating between pages
@@ -11,6 +16,29 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const goToDashBoard = () => {
+    navigate("/dashboard");
+  };
+
+  const goToRegister = () => {
+    navigate("/register");
+  };
+
+  const login = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
 
   const updateEmailInput = (e) => {
     setEmail(e.target.value);
@@ -20,17 +48,8 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  const goToDashBoard = () => {
-    navigate("/dashboard");
-  };
-  const goToRegister = () => {
-    navigate("/register");
-  };
-
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-    console.log(password);
+    login();
   };
 
   return (
@@ -58,11 +77,7 @@ function Login() {
             alt="img"
             sx={{ width: "50px", height: "50px" }}
           ></img>
-          <form
-            className={styles.FormContainer}
-            type="submit"
-            onSubmit={handleSubmit}
-          >
+          <form type="submit" className={styles.FormContainer}>
             <h1>LevelUp Meds</h1>
             <TextField
               id="standard-basic"
@@ -70,6 +85,7 @@ function Login() {
               className={styles.InputField}
               value={email}
               onChange={updateEmailInput}
+              required
             ></TextField>
             <TextField
               id="standard-basic"
@@ -78,11 +94,12 @@ function Login() {
               className={styles.InputField}
               value={password}
               onChange={updatePasswordInput}
+              required
             ></TextField>
             <Button
               size="large"
               variant="contained"
-              onClick={goToDashBoard}
+              onClick={handleSubmit}
               className={styles.MainButton}
             >
               Sign-In
