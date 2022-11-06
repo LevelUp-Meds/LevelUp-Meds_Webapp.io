@@ -38,7 +38,7 @@
 }
 
 .FormContainer {
-    height: 60%;
+    height: 70%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -47,4 +47,8 @@
 
 .Card > img {
     width: inherit;
+}
+
+.ErrorMsg {
+    color: red;
 }

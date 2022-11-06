@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
 import { TextField, Box, Button, Link } from "@mui/material";
@@ -9,6 +9,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
+import db from "../database/FirestoreConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Login() {
   // used for navigating between pages
@@ -16,6 +18,10 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isValid, setIsValid] = useState(true);
+  const [user, setUser] = useState();
+  const [initializing, setInitializing] = useState(true);
 
   const goToDashBoard = () => {
     navigate("/dashboard");
@@ -30,15 +36,36 @@ function Login() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+        if (user) {
+          setUser(user);
+          goToDashBoard();
+        }
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode);
-        const errorMessage = error.message;
-        console.log(errorMessage);
+      .catch(() => {
+        setIsValid(false);
+        setErrorMessage("Invalid Email or Password.");
       });
   };
+
+  // function onAuthStateChanged(user) {
+  //   if (initializing) {
+  //     setInitializing(false);
+  //   }
+  // }
+
+  useEffect(() => {
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user);
+      } else {
+        console.log(user);
+      }
+    });
+  }, []);
+
+  // if (initializing) {
+  //   return null;
+  // }
 
   const updateEmailInput = (e) => {
     setEmail(e.target.value);
@@ -84,6 +111,8 @@ function Login() {
               label="Email"
               className={styles.InputField}
               value={email}
+              error={!isValid}
+              helperText={!isValid && "Invalid email"}
               onChange={updateEmailInput}
               required
             ></TextField>
@@ -91,8 +120,10 @@ function Login() {
               id="standard-basic"
               label="Password"
               type="password"
+              helperText={!isValid && "Invalid password"}
               className={styles.InputField}
               value={password}
+              error={!isValid}
               onChange={updatePasswordInput}
               required
             ></TextField>
