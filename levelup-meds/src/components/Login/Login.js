@@ -5,7 +5,7 @@ import { TextField, Box, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
 import auth from "../Auth/AuthProvider";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
@@ -43,8 +43,11 @@ function Login() {
       })
       .catch(() => {
         setIsValid(false);
-        setErrorMessage("Invalid Email or Password.");
       });
+  };
+
+  const logout = () => {
+    signOut(auth);
   };
 
   // function onAuthStateChanged(user) {
@@ -54,18 +57,14 @@ function Login() {
   // }
 
   useEffect(() => {
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        console.log(user);
+    onAuthStateChanged(auth, (data) => {
+      if (data) {
+        goToDashBoard();
       } else {
-        console.log(user);
+        navigate("/login");
       }
     });
   }, []);
-
-  // if (initializing) {
-  //   return null;
-  // }
 
   const updateEmailInput = (e) => {
     setEmail(e.target.value);
@@ -75,7 +74,7 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     login();
   };
 
@@ -130,7 +129,7 @@ function Login() {
             <Button
               size="large"
               variant="contained"
-              onClick={handleSubmit}
+              onClick={handleLogin}
               className={styles.MainButton}
             >
               Sign-In
