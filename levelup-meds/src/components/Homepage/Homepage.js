@@ -6,20 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Menubar from "../Menubar/Menubar";
 import Appointment from "../Appointment/Appointment";
 import { Box } from "@mui/material";
-import firebaseConfig from "../config/firebase";
 import auth from "../Auth/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
 
 function Homepage() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (data) => {
-      if (!data) {
-        goToLoginPage();
-      }
-    });
-  }, []);
 
   const goToLoginPage = () => {
     navigate("/login");
