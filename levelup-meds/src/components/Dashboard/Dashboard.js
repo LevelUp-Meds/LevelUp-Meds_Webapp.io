@@ -13,22 +13,17 @@ function Dashboard() {
     onAuthStateChanged(auth, (data) => {
       if (data) {
       } else {
+        goToLoginPage();
       }
     });
   }, []);
 
-  const goToHomePage = () => {
-    navigate("/");
+  const goToLoginPage = () => {
+    navigate("/login");
   };
 
   const logout = () => {
     signOut(auth);
-    onAuthStateChanged(auth, (data) => {
-      if (!data) {
-        goToHomePage();
-      } else {
-      }
-    });
   };
 
   return (
