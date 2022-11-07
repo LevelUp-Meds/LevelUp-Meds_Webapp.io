@@ -12,6 +12,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { createUser } = UserAuth();
+  const navigate = useNavigate();
+
   // const handleRegister = () => {
 
   //   createUserWithEmailAndPassword(auth, email, password)
@@ -25,13 +28,10 @@ function Register() {
   //     });
   // };
 
-  const { createUser } = UserAuth();
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     try {
       await createUser(email, password);
-      navigate("/createsuccess");
+      navigate("/dashboard");
     } catch (e) {
       setError(e);
     }
@@ -39,27 +39,29 @@ function Register() {
 
   return (
     <div className={styles.Register}>
-      <TextField label="First name:"></TextField>
-      <TextField label="Last name:"></TextField>
-      <TextField
-        label="Email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          console.log(email);
-        }}
-      ></TextField>
-      <TextField
-        label="Password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-          console.log(password);
-        }}
-      ></TextField>
-      <Button variant="contained" size="medium" onClick={handleSubmit}>
-        Register
-      </Button>
+      <form>
+        <TextField label="First name:"></TextField>
+        <TextField label="Last name:"></TextField>
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            console.log(email);
+          }}
+        ></TextField>
+        <TextField
+          label="Password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            console.log(password);
+          }}
+        ></TextField>
+        <Button variant="contained" size="medium" onClick={handleSubmit}>
+          Register
+        </Button>
+      </form>
     </div>
   );
 }

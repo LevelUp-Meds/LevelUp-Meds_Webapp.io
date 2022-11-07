@@ -5,31 +5,36 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import auth from "../Auth/AuthProvider";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { UserAuth } from "../context/AuthContext";
 
 function Dashboard() {
+  const { user, logout } = UserAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
       if (data) {
       } else {
-        goToLoginPage();
+        navigate("/login");
       }
     });
   }, []);
 
-  const goToLoginPage = () => {
-    navigate("/login");
+  const handleLogout = async (e) => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (e) {}
   };
-
-  const logout = () => {
-    signOut(auth);
-  };
+  // const logout = () => {
+  //   signOut(auth);
+  // };
 
   return (
     <div className={styles.Dashboard}>
       <h1>LOGGED IN PAGE</h1>
-      <Button variant="contained" onClick={logout}>
+      <p>User email: {user && user.email}</p>
+      <Button variant="contained" onClick={handleLogout}>
         Logout
       </Button>
     </div>
