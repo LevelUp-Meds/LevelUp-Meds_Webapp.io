@@ -1,10 +1,17 @@
 .Container {
-    background-color: orange;
+   background-color: orange;
    width: inherit; 
    height: 100vh;
    display: flex;
-   justify-content: center;
-   align-items: center; 
+   flex-direction: column;
+}
+
+.MainContent {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .InnerContainer {
@@ -20,7 +27,7 @@
     background-color: white;
     text-align: center;
     width: 50%;
-    height: inherit;  
+    height: 75vh;  
     padding: 2rem;
     align-items: center;
     justify-content: center;
@@ -38,7 +45,7 @@
 }
 
 .FormContainer {
-    height: 60%;
+    height: 70%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -46,6 +53,9 @@
 }
 
 .Card > img {
-    width: 15rem;
-    height: 15rem;
+    width: inherit;
+}
+
+.ErrorMsg {
+    color: red;
 }
