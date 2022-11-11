@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Register.module.scss";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateCurrentUser,
+  updateProfile,
+} from "firebase/auth";
 import { Button, TextField } from "@mui/material";
 import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { createUser } = UserAuth();
+  const { user, createUser } = UserAuth();
   const navigate = useNavigate();
 
   // const handleRegister = () => {
@@ -31,17 +38,34 @@ function Register() {
   const handleSubmit = async (e) => {
     try {
       await createUser(email, password);
+      updateProfile(auth.currentUser, {
+        displayName: firstName + " " + lastName,
+      })
+        .then(() => {
+          console.log("profile updated");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       navigate("/dashboard");
     } catch (e) {
       setError(e);
     }
   };
 
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
+  };
+
   return (
     <div className={styles.Register}>
       <form>
-        <TextField label="First name:"></TextField>
-        <TextField label="Last name:"></TextField>
+        <TextField label="First name:" onChange={updateFirstName}></TextField>
+        <TextField label="Last name:" onChange={updateLastName}></TextField>
         <TextField
           label="Email"
           value={email}
