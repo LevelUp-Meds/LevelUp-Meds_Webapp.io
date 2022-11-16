@@ -1,16 +1,18 @@
-import style from "./App.css";
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Homepage from "./components/Homepage/Homepage";
 import Menubar from "./components/Menubar/Menubar";
+import LevelUpMedsCalendar from "./components/calendar/Calendar";
 
 function App() {
   return (
     <Routes>
       <Route exact path="/" />
-      <Route path="/login" element={<Login />} />
-      <Route path="/homepage" element={<Homepage />} />
-      <Route path="/menubar" element={<Menubar />} />
+      <Route path="/Login" element={<Login />} />
+      <Route path="/Homepage" element={<Homepage />} />
+      <Route path="/Menubar" element={<Menubar />} />
+      <Route path="/Calendar" element={<LevelUpMedsCalendar />} />
     </Routes>
   );
 }
