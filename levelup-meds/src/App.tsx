@@ -8,11 +8,9 @@ import ResetPassword from "./components/ResetPassword/ResetPassword";
 import Homepage from "./components/Homepage/Homepage";
 import { AuthContext } from "./components/context/AuthContext";
 import CreateSuccess from "./components/CreateSuccess/CreateSuccess";
-Auth-Feature
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import Calendar from "./components/Calendar/Calendar";
 import Medication from "./components/Medication/Medication";
-main
 
 function App() {
   return (
