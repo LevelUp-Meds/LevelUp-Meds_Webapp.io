@@ -32,7 +32,6 @@ function App() {
           ></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/calendar" element={<Calendar />}></Route>
-          main
           <Route path="/calendar" element={<Calendar />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/medication" element={<Medication />}></Route>
