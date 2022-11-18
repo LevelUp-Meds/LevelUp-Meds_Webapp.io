@@ -61,7 +61,7 @@ function Login() {
         goToDashBoard();
       }
     });
-  }, []);
+  }, [goToDashBoard]);
 
   // updates email on input
   const updateEmailInput = (e) => {

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import {
+Auth-Feature
   AppBar,
   Toolbar,
   Typography,
@@ -16,14 +17,40 @@ import {
   Button,
 } from "@mui/material";
 
+    AppBar,
+    Toolbar,
+    Typography,
+    IconButton,
+    Box,
+    Grid,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    Input,
+    InputLabel,
+    Button,
+    Divider,
+  } from "@mui/material";
+  
+main
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import LUMLogo from "../../assets/Logo_Orange.svg";
+Auth-Feature
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import EventIcon from '@mui/icons-material/Event';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import MedicationIcon from '@mui/icons-material/Medication';
+  
+
+main
 
 type menu = "open";
 
@@ -32,11 +59,20 @@ export default function Menubar() {
     open: false,
   });
 
+Auth-Feature
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
       setState({ ...state, [anchor]: open });
     };
 
+
+  const toggleDrawer = (anchor: menu, open: boolean) => (
+    event: React.MouseEvent
+  ) => {
+    setState({ ...state, [anchor]: open });
+  };
+  
+main
   const list = (anchor: menu) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
@@ -45,20 +81,52 @@ export default function Menubar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        <ListItem sx={{justifyContent: "right", padding: 2}}>
+          <Button>
+            <CloseIcon sx={{margin: 1}} color="action"/>
+          </Button>
+        </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
-            <CloseIcon />
+            <MedicationIcon sx={{margin: 1}}/>
+            <ListItemText primary="Medications" />
           </ListItemButton>
         </ListItem>
-        {["Medications", "Calendar", "Login", "Sign In"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <EventIcon sx={{margin: 1}}/>
+            <ListItemText primary="Appointments" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <CalendarMonthIcon sx={{margin: 1}}/>
+            <ListItemText primary="Calendar" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+Auth-Feature
+            <CloseIcon />
+
+            <CloseIcon/>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{margin: 0}}/>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <CloseIcon/>
+            <ListItemText primary="Sign In" />
+main
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
+
   );
 
   return (
