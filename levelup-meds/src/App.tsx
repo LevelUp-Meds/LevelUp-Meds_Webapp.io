@@ -19,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          Auth-Feature
           <Route
             path="/dashboard"
             element={
@@ -29,7 +30,7 @@ function App() {
           ></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/calendar" element={<Calendar />}></Route>
-          <Route path="/calendar" element={<Calendar/>}></Route> 
+          <Route path="/calendar" element={<Calendar />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/medication" element={<Medication />}></Route>
           <Route path="/resetpassword" element={<ResetPassword />}></Route>
