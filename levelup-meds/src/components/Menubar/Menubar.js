@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import {
-Auth-Feature
   AppBar,
   Toolbar,
   Typography,
@@ -15,42 +14,20 @@ Auth-Feature
   Input,
   InputLabel,
   Button,
+  Divider,
 } from "@mui/material";
 
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Box,
-    Grid,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Input,
-    InputLabel,
-    Button,
-    Divider,
-  } from "@mui/material";
-  
-main
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import LUMLogo from "../../assets/Logo_Orange.svg";
-Auth-Feature
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import EventIcon from '@mui/icons-material/Event';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MedicationIcon from '@mui/icons-material/Medication';
-  
-
-main
 
 type menu = "open";
 
@@ -59,20 +36,10 @@ export default function Menubar() {
     open: false,
   });
 
-Auth-Feature
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
       setState({ ...state, [anchor]: open });
     };
-
-
-  const toggleDrawer = (anchor: menu, open: boolean) => (
-    event: React.MouseEvent
-  ) => {
-    setState({ ...state, [anchor]: open });
-  };
-  
-main
   const list = (anchor: menu) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
@@ -109,9 +76,7 @@ main
         <Divider sx={{margin: 0}}/>
         <ListItem disablePadding>
           <ListItemButton>
-Auth-Feature
             <CloseIcon />
-
             <CloseIcon/>
             <ListItemText primary="Logout" />
           </ListItemButton>
@@ -121,7 +86,6 @@ Auth-Feature
           <ListItemButton>
             <CloseIcon/>
             <ListItemText primary="Sign In" />
-main
           </ListItemButton>
         </ListItem>
       </List>
