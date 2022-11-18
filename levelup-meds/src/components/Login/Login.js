@@ -1,77 +1,96 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
-import { TextField, Box, Button, Link } from "@mui/material";
+import { TextField, Box, Button, Link, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
 import auth from "../Auth/AuthProvider";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, addDoc } from "firebase/firestore";
+import { getFirestore, where } from "firebase/firestore";
+import { collection, Doc, setDoc, query } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import Menubar from "../Menubar/Menubar";
 import firebaseConfig from "../config/firebase";
+import { UserAuth } from "../context/AuthContext";
+import PersonIcon from "@mui/icons-material/Person";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import MenuAppBar from "../Menubar/MenuAppBar";
 
 function Login() {
   // used for navigating between pages
   const navigate = useNavigate();
 
+  // fields for each account
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isValid, setIsValid] = useState(true);
-  const [user, setUser] = useState();
+  const { user, signIn } = UserAuth();
 
+  // Navigates user to dashboard
   const goToDashBoard = () => {
     navigate("/dashboard");
   };
 
+  // Navigates user to register page
   const goToRegister = () => {
     navigate("/register");
   };
 
-  const login = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user.uid);
-        if (user) {
-          setUser(user);
-          // goToDashBoard();
-        }
-      })
-      .catch(() => {
-        setIsValid(false);
-      });
-  };
+  // signs user into Firebase
+  // const login = () => {
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       if (user) {
+  //         setUser(user);
+  //         // goToDashBoard();
+  //       }
+  //     })
+  //     .catch(() => {
+  //       setIsValid(false);
+  //     });
+  // };
 
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
       if (data) {
         goToDashBoard();
-      } else {
       }
     });
   }, [goToDashBoard]);
 
+  // updates email on input
   const updateEmailInput = (e) => {
     setEmail(e.target.value);
   };
 
+  // updates password on input
   const updatePasswordInput = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
-    login();
+  // // handles login
+  // const handleLogin = (e) => {
+  //   login();
+  // };
+
+  const handleSubmit = async (e) => {
+    setErrorMessage("");
+    try {
+      await signIn(email, password);
+      goToDashBoard();
+    } catch (e) {
+      setErrorMessage(e.message);
+      console.log(e.message);
+    }
   };
 
   return (
     <Box className={styles.Container}>
-      <Menubar></Menubar>
       <Box className={styles.MainContent}>
         <Box className={styles.InnerContainer}>
           <Box className={styles.Card}>
@@ -91,6 +110,13 @@ function Login() {
                 helperText={!isValid && "Invalid email"}
                 onChange={updateEmailInput}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
               ></TextField>
               <TextField
                 id="standard-basic"
@@ -102,11 +128,18 @@ function Login() {
                 error={!isValid}
                 onChange={updatePasswordInput}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <VisibilityIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
               ></TextField>
               <Button
                 size="large"
                 variant="contained"
-                onClick={handleLogin}
+                onClick={handleSubmit}
                 className={styles.MainButton}
               >
                 Sign-In
