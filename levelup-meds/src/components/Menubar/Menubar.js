@@ -31,7 +31,6 @@ import MedicationIcon from '@mui/icons-material/Medication';
   
 
 
-
 type menu = "open";
 
 export default function Menubar() {
@@ -44,7 +43,7 @@ export default function Menubar() {
   ) => {
     setState({ ...state, [anchor]: open });
   };
-
+  
   const list = (anchor: menu) => (
     <Box
       sx={{width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}

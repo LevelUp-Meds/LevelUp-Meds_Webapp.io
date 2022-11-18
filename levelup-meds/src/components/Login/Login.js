@@ -55,10 +55,10 @@ function Login() {
       } else {
       }
     });
-  }, []);
+  }, [goToDashBoard]);
 
   const updateEmailInput = (e) => {
-    db.setEmail(e.target.value);
+    setEmail(e.target.value);
   };
 
   const updatePasswordInput = (e) => {
