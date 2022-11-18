@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
-import { TextField, Box, Button, Link } from "@mui/material";
+import { TextField, Box, Button, Link, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
 import auth from "../Auth/AuthProvider";
@@ -14,6 +14,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import Menubar from "../Menubar/Menubar";
 import firebaseConfig from "../config/firebase";
 import { UserAuth } from "../context/AuthContext";
+import PersonIcon from "@mui/icons-material/Person";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import MenuAppBar from "../Menubar/MenuAppBar";
 
 function Login() {
   // used for navigating between pages
@@ -88,7 +91,6 @@ function Login() {
 
   return (
     <Box className={styles.Container}>
-      <Menubar></Menubar>
       <Box className={styles.MainContent}>
         <Box className={styles.InnerContainer}>
           <Box className={styles.Card}>
@@ -108,6 +110,13 @@ function Login() {
                 helperText={!isValid && "Invalid email"}
                 onChange={updateEmailInput}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
               ></TextField>
               <TextField
                 id="standard-basic"
@@ -119,6 +128,13 @@ function Login() {
                 error={!isValid}
                 onChange={updatePasswordInput}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <VisibilityIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
               ></TextField>
               <Button
                 size="large"

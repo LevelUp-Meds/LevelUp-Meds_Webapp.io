@@ -9,15 +9,15 @@ import {
 import { Button, TextField } from "@mui/material";
 import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSubmit } from "react-router-dom";
+import { useSignup, isPending, error } from "../hooks/useSignup";
 
 function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { signup } = useSignup();
 
   const { user, createUser } = UserAuth();
   const navigate = useNavigate();
@@ -35,37 +35,40 @@ function Register() {
   //     });
   // };
 
-  const handleSubmit = async (e) => {
-    try {
-      await createUser(email, password);
-      updateProfile(auth.currentUser, {
-        displayName: firstName + " " + lastName,
-      })
-        .then(() => {
-          console.log("profile updated");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      navigate("/dashboard");
-    } catch (e) {
-      setError(e);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   try {
+  //     await createUser(email, password);
+  //     updateProfile(auth.currentUser, {
+  //       displayName: firstName + " " + lastName,
+  //     })
+  //       .then(() => {
+  //         console.log("profile updated");
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //     navigate("/dashboard");
+  //   } catch (e) {
+  //     setError(e);
+  //   }
+  // };
 
-  const updateFirstName = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const updateLastName = (e) => {
-    setLastName(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(email, password, displayName);
   };
 
   return (
     <div className={styles.Register}>
-      <form>
-        <TextField label="First name:" onChange={updateFirstName}></TextField>
-        <TextField label="Last name:" onChange={updateLastName}></TextField>
+      <form typeof="submit" onSubmit={handleSubmit}>
+        <TextField
+          label="Full name:"
+          onChange={(e) => {
+            setDisplayName(e.target.value);
+          }}
+          value={displayName}
+        ></TextField>
+
         <TextField
           label="Email"
           value={email}
@@ -82,7 +85,7 @@ function Register() {
             console.log(password);
           }}
         ></TextField>
-        <Button variant="contained" size="medium" onClick={handleSubmit}>
+        <Button variant="contained" size="medium" type="submit">
           Register
         </Button>
       </form>
