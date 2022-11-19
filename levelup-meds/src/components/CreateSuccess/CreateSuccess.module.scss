@@ -1,1 +1,10 @@
-.CreateSuccess {}
+.CreateSuccess {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+body {
+    width: auto;
+    background-color: orange;
+}
