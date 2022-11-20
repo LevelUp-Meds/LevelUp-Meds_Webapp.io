@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Menubar.module.scss";
+import styles from "./menubar.module.scss";
 import {
     AppBar,
     Toolbar,

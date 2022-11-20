@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Login.module.scss";
-import Auth from "../firebase/firebase";
+// import Auth from "../firebase/config";
 import {
   Box,
   FormControl,
@@ -15,10 +15,8 @@ import { style } from "@mui/system";
 import Person from "@mui/icons-material/Person";
 import HttpsRoundedIcon from "@mui/icons-material/HttpsRounded";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase";
-import { AuthContext } from "../contexts/AuthProvider";
-import { ref, onValue } from "firebase/database";
-import { db } from "../firebase/firebase";
+// import { auth } from "../firebase/firebase";
+import { db } from "../firebase/config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,10 +27,10 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     function onRegister() {
-      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+      signInWithEmailAndPassword( email, password).catch((error) => {
         console.log(error);
       });
-      console.log(auth.name);
+      console.log();
       navigate("/homepage");
     }
     onRegister();

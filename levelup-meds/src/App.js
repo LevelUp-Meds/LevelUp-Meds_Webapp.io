@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Homepage from "./components/Homepage/Homepage";
-import Menubar from "./components/Menubar/Menubar";
+import Menubar from "./components/Menubar/menubar";
 import LevelUpMedsCalendar from "./components/calendar/Calendar";
 
 function App() {

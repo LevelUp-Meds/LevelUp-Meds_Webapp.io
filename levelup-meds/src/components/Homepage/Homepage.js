@@ -1,6 +1,6 @@
 import React from "react";
-import { auth, db } from "../firebase/firebase";
-import { AuthContext } from "../contexts/AuthProvider";
+import { db } from "../firebase/config";
+//import { AuthContext } from "../contexts/AuthProvider";
 import "./Homepage.module.scss";
 import {
     AppBar,
@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import LevelUpShowcase from "../../assets/showcase.webp";
 import LevelUpLargeLogo from "../../assets/levelupmeds_large_logo.webp";
-import Menubar from "../Menubar/Menubar";
+import Menubar from "../Menubar/menubar"
 
 const Homepage = () => {
   return (
