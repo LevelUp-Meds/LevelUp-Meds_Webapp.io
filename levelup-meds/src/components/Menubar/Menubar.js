@@ -1,21 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Box,
-  Grid,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Input,
-  InputLabel,
-  Button,
-  Divider,
-} from "@mui/material";
+import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
 
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -25,16 +11,35 @@ import ListItemText from "@mui/material/ListItemText";
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import EventIcon from '@mui/icons-material/Event';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import MedicationIcon from '@mui/icons-material/Medication';
+import EventIcon from "@mui/icons-material/Event";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import MedicationIcon from "@mui/icons-material/Medication";
+import { UserAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
+import MailIcon from "@mui/icons-material/Mail";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 type menu = "open";
 
 export default function Menubar() {
+  const { logout } = UserAuth();
+  const navigate = useNavigate();
+  const { user } = useSignup();
+
   const [state, setState] = React.useState({
     open: false,
   });
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+      if (!user) {
+        <redirect to="/login"></redirect>;
+      }
+    } catch (e) {}
+  };
 
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
@@ -48,49 +53,47 @@ export default function Menubar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem sx={{justifyContent: "right", padding: 2}}>
+        <ListItem sx={{ justifyContent: "right", padding: 2 }}>
           <Button>
-            <CloseIcon sx={{margin: 1}} color="action"/>
+            <CloseIcon sx={{ margin: 1 }} color="action" />
           </Button>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
-            <MedicationIcon sx={{margin: 1}}/>
+            <MedicationIcon sx={{ margin: 1 }} />
             <ListItemText primary="Medications" />
           </ListItemButton>
         </ListItem>
-        <Divider sx={{margin: 0}}/>
+        <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
-            <EventIcon sx={{margin: 1}}/>
+            <EventIcon sx={{ margin: 1 }} />
             <ListItemText primary="Appointments" />
           </ListItemButton>
         </ListItem>
-        <Divider sx={{margin: 0}}/>
+        <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
-            <CalendarMonthIcon sx={{margin: 1}}/>
+            <CalendarMonthIcon sx={{ margin: 1 }} />
             <ListItemText primary="Calendar" />
           </ListItemButton>
         </ListItem>
-        <Divider sx={{margin: 0}}/>
         <ListItem disablePadding>
           <ListItemButton>
-            <CloseIcon />
-            <CloseIcon/>
-            <ListItemText primary="Logout" />
+            <MailIcon sx={{ margin: 1 }} />
+            <ListItemText primary="Inbox" onClick={handleLogout} />
           </ListItemButton>
         </ListItem>
-        <Divider sx={{margin: 0}}/>
+        <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
-            <CloseIcon/>
-            <ListItemText primary="Sign In" />
+            <LogoutIcon sx={{ margin: 1 }} />
+            <ListItemText primary="Logout" onClick={handleLogout} />
           </ListItemButton>
         </ListItem>
+        <Divider sx={{ margin: 0 }} />
       </List>
     </Box>
-
   );
 
   return (

@@ -1,43 +1,56 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import MedicationRoundedIcon from '@mui/icons-material/MedicationRounded';
-import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
-import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
+import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import styles from "./Medication.module.scss";
-
+import { TextField, InputAdornment } from "@mui/material";
 
 const Medication = () => {
-  document.body.style.backgroundColor = "orange"
-  
+  document.body.style.backgroundColor = "orange";
+
   return (
-      <Card sx={{ width: 500, length: 500 }}>
+    <Card sx={{ width: 500, length: 500 }}>
       <CardContent>
         <List>
           <ListItem enablePadding>
-            <MedicationRoundedIcon sx={{marginRight: 2}}/>
+            <MedicationRoundedIcon sx={{ marginRight: 2 }} />
             <ListItemText primary="Medication Name:" />
           </ListItem>
-          <Divider sx={{margin: 1}}/>
+          <TextField
+            id="standard-basic"
+            label="Medication"
+            className={styles.InputField}
+            required
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <MedicationRoundedIcon fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          ></TextField>
+          <Divider sx={{ margin: 1 }} />
           <ListItem enablePadding>
-            <HistoryRoundedIcon sx={{marginRight: 2}}/>
+            <HistoryRoundedIcon sx={{ marginRight: 2 }} />
             <ListItemText primary="Dosage:" />
           </ListItem>
-          <Divider sx={{margin: 1}}/>
+          <Divider sx={{ margin: 1 }} />
           <ListItem enablePadding>
-            <HistoryRoundedIcon sx={{marginRight: 2}}/>
+            <HistoryRoundedIcon sx={{ marginRight: 2 }} />
             <ListItemText primary="Time:" />
           </ListItem>
-          <Divider sx={{margin: 1}}/>
+          <Divider sx={{ margin: 1 }} />
           <ListItem enablePadding>
             <ListItemButton>
-            <EventNoteRoundedIcon sx={{marginRight: 2}}/>
+              <EventNoteRoundedIcon sx={{ marginRight: 2 }} />
               <ListItemText primary="Reoccurence:" />
             </ListItemButton>
           </ListItem>
@@ -45,7 +58,7 @@ const Medication = () => {
       </CardContent>
     </Card>
   );
-}
+};
 
 Medication.propTypes = {};
 
