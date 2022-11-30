@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
-import { TextField, Box, Button, Link, InputAdornment } from "@mui/material";
+// import Auth from "../firebase/config";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Link,
+} from "@mui/material";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import LUMLogo from "../../assets/Logo_Orange.svg";
+import { style } from "@mui/system";
+import Person from "@mui/icons-material/Person";
+import HttpsRoundedIcon from "@mui/icons-material/HttpsRounded";
 import { useNavigate } from "react-router-dom";
-import LumLogo from "../../assets/Logo_Orange.svg";
-import auth from "../Auth/AuthProvider";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { getFirestore, where } from "firebase/firestore";
-import { collection, Doc, setDoc, query } from "firebase/firestore";
-import db from "../database/FirestoreConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import Menubar from "../Menubar/Menubar";
-import firebaseConfig from "../config/firebase";
-import { UserAuth } from "../context/AuthContext";
-import PersonIcon from "@mui/icons-material/Person";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import MenuAppBar from "../Menubar/MenuAppBar";
+// import { auth } from "../firebase/firebase";
+import { db } from "../firebase/config";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
 function Login() {
   // used for navigating between pages
   const navigate = useNavigate();
-
-  // fields for each account
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isValid, setIsValid] = useState(true);
-  const { user, signIn } = UserAuth();
-
-  // Navigates user to dashboard
-  const goToDashBoard = () => {
-    navigate("/dashboard");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    function onRegister() {
+      signInWithEmailAndPassword( email, password).catch((error) => {
+        console.log(error);
+      });
+      console.log();
+      navigate("/homepage");
+    }
+    onRegister();
   };
 
   // Navigates user to register page
