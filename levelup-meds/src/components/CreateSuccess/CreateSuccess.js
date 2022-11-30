@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./CreateSuccess.module.scss";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -22,9 +21,5 @@ const CreateSuccess = () => {
     </div>
   );
 };
-
-CreateSuccess.propTypes = {};
-
-CreateSuccess.defaultProps = {};
 
 export default CreateSuccess;

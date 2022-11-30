@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./Register.module.scss";
 import { Box, Button, FormLabel, TextField } from "@mui/material";
-import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate, useSubmit } from "react-router-dom";
-import { useSignup, isPending, error } from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { InputAdornment } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
-import { Image, Opacity } from "@mui/icons-material";
 import medTeam from "../../assets/medical-team.jpg";
 
 function Register() {
@@ -150,9 +147,5 @@ function Register() {
     </Box>
   );
 }
-
-Register.propTypes = {};
-
-Register.defaultProps = {};
 
 export default Register;

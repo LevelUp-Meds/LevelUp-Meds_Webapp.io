@@ -24,6 +24,7 @@ type menu = "open";
 
 export default function Menubar() {
   const { logout } = UserAuth();
+  //const { logout } = useLogout();
   const navigate = useNavigate();
   const { user } = useSignup();
 

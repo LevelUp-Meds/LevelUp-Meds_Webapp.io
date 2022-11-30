@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { Button, FormLabel } from "@mui/material";
-import auth from "../Auth/AuthProvider";
+import { FormLabel } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import Menubar from "../Menubar/Menubar";
-import { onAuthStateChanged } from "firebase/auth";
 import { useSignup } from "../hooks/useSignup";
 import Medication from "../Medication/Medication";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
+// import { useLogout } from "../hooks/useLogout";
 
 function Dashboard() {
-  const { logout } = UserAuth();
+  // const { logout } = UserAuth();
+  // const { logout } = useLogout();
   const { user } = useSignup();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (!user) {
@@ -87,9 +87,5 @@ function Dashboard() {
     </Box>
   );
 }
-
-Dashboard.propTypes = {};
-
-Dashboard.defaultProps = {};
 
 export default Dashboard;
