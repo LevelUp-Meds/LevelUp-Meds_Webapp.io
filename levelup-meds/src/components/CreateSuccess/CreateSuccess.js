@@ -43,7 +43,6 @@ export default function CreateSuccess () {
   );
 };
 
-export default CreateSuccess;
 CreateSuccess.propTypes = {};
 
 CreateSuccess.defaultProps = {};
