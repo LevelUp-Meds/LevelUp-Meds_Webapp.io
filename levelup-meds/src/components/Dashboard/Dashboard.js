@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Dashboard.module.scss";
-import { redirect, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-import auth from "../Auth/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { FormLabel } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
-import MenuAppBar from "../Menubar/MenuAppBar";
-import { onAuthStateChanged } from "firebase/auth";
+import Menubar from "../Menubar/Menubar";
 import { useSignup } from "../hooks/useSignup";
+import Medication from "../Medication/Medication";
+import { Box } from "@mui/system";
+import CustomDay from "../Calendar/CustomDay";
+// import { useLogout } from "../hooks/useLogout";
 
 function Dashboard() {
-  const { logout } = UserAuth();
+  // const { logout } = UserAuth();
+  // const { logout } = useLogout();
   const { user } = useSignup();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
-  //   const doAfter = async () => {
-  //     handleUpdate();
-  //   };
-  //   doAfter();
+  //   if (!user) {
+  //   }
   // }, []);
 
   // useEffect(() => {
@@ -28,19 +29,20 @@ function Dashboard() {
   //       console.log("Edward");
   //       navigate("/login");
   //     } else {
+  //       console.log("Edward");
   //     }
   //   });
   // }, []);
 
-  const handleLogout = async (e) => {
-    try {
-      await logout();
-      navigate("/login");
-      if (!user) {
-        <redirect to="/login"></redirect>;
-      }
-    } catch (e) {}
-  };
+  // const handleLogout = async (e) => {
+  //   try {
+  //     await logout();
+  //     navigate("/login");
+  //     if (!user) {
+  //       <redirect to="/login"></redirect>;
+  //     }
+  //   } catch (e) {}
+  // };
 
   const handleUpdate = () => {
     const findUser = async () => {
@@ -64,25 +66,26 @@ function Dashboard() {
   // };
 
   return (
-    <div className={styles.Dashboard}>
-      <MenuAppBar firstName={user.displayName}></MenuAppBar>
-      <div className={styles.Body}>
-        <h1>LOGGED IN PAGE</h1>
-        <p>User email: {user && user.email}</p>
-        {user && <p> Name: {user.displayName}</p>}
-        <Button variant="contained" onClick={handleLogout}>
-          Logout
-        </Button>
-        <Button variant="contained" onClick={handleClick}>
-          Update User
-        </Button>
-      </div>
-    </div>
+    <Box className={styles.Dashboard}>
+      <Menubar></Menubar>
+      <Box className={styles.Body}>
+        <Box className={styles.LandingCard}>
+          <Box className={styles.CardContents}>
+            <FormLabel
+              sx={{ fontSize: "3rem" }}
+            >{`Welcome, ${user.displayName}!`}</FormLabel>
+            {/* <p>User email: {user && user.email}</p> */}
+            {/* {user && <p> Name: {user.displayName}</p>} */}
+            <CustomDay></CustomDay>
+            <Medication></Medication>
+            {/* <Button variant="contained" onClick={handleClick}>
+              Update User
+            </Button> */}
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }
-
-Dashboard.propTypes = {};
-
-Dashboard.defaultProps = {};
 
 export default Dashboard;

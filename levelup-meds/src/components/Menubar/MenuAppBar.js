@@ -12,10 +12,15 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { UserAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 
 export default function MenuAppBar(props) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { logout } = UserAuth();
+  const navigate = useNavigate();
+  const { user } = useSignup();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -25,8 +30,14 @@ export default function MenuAppBar(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+      if (!user) {
+        <redirect to="/login"></redirect>;
+      }
+    } catch (e) {}
   };
 
   return (
@@ -70,11 +81,11 @@ export default function MenuAppBar(props) {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={handleLogout}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Sign Out</MenuItem>
+                <MenuItem>Profile</MenuItem>
+                <MenuItem>My Account</MenuItem>
+                <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
               </Menu>
             </div>
           )}

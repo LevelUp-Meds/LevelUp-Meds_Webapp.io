@@ -1,6 +1,5 @@
-import userEvent from "@testing-library/user-event";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
@@ -13,7 +12,6 @@ export const useSignup = () => {
   const { createUser } = UserAuth();
   const [user, setUser] = useState({});
   // const { dispatch } = useAuthContext();
-  const dbRef = collection(db, "Accounts");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

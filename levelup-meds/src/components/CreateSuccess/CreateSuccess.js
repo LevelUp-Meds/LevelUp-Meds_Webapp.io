@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./CreateSuccess.module.scss";
 import { Typography, Box, Divider, Button, Card, CardContent, List, ListItem, ListItemText} from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -44,6 +43,7 @@ export default function CreateSuccess () {
   );
 };
 
+export default CreateSuccess;
 CreateSuccess.propTypes = {};
 
 CreateSuccess.defaultProps = {};

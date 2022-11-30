@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
 import { TextField, Box, Button, Link, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LumLogo from "../../assets/Logo_Orange.svg";
 import auth from "../Auth/AuthProvider";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { getFirestore, where } from "firebase/firestore";
-import { collection, Doc, setDoc, query } from "firebase/firestore";
-import db from "../database/FirestoreConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import Menubar from "../Menubar/Menubar";
-import firebaseConfig from "../config/firebase";
 import { UserAuth } from "../context/AuthContext";
 import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import MenuAppBar from "../Menubar/MenuAppBar";
 
 function Login() {
   // used for navigating between pages
@@ -27,10 +18,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isValid, setIsValid] = useState(true);
-  const { user, signIn } = UserAuth();
+  const { signIn } = UserAuth();
 
   // Navigates user to dashboard
-  const goToDashBoard = () => {
+  const goToDashBoard = async () => {
     navigate("/dashboard");
   };
 
@@ -59,6 +50,8 @@ function Login() {
     onAuthStateChanged(auth, (data) => {
       if (data) {
         goToDashBoard();
+      } else {
+        console.log(errorMessage);
       }
     });
   }, [goToDashBoard]);
@@ -66,26 +59,24 @@ function Login() {
   // updates email on input
   const updateEmailInput = (e) => {
     setEmail(e.target.value);
+    setIsValid(true);
   };
 
   // updates password on input
   const updatePasswordInput = (e) => {
     setPassword(e.target.value);
+    setIsValid(true);
   };
 
-  // // handles login
-  // const handleLogin = (e) => {
-  //   login();
-  // };
-
   const handleSubmit = async (e) => {
+    e.preventDefault();
     setErrorMessage("");
     try {
       await signIn(email, password);
       goToDashBoard();
     } catch (e) {
       setErrorMessage(e.message);
-      console.log(e.message);
+      setIsValid(false);
     }
   };
 
@@ -99,7 +90,7 @@ function Login() {
               alt="img"
               sx={{ width: "50px", height: "50px" }}
             ></img>
-            <form type="submit" className={styles.FormContainer}>
+            <form onSubmit={handleSubmit} className={styles.FormContainer}>
               <h1>LevelUp Meds</h1>
               <TextField
                 id="standard-basic"
@@ -139,7 +130,7 @@ function Login() {
               <Button
                 size="large"
                 variant="contained"
-                onClick={handleSubmit}
+                type="submit"
                 className={styles.MainButton}
               >
                 Sign-In
