@@ -1,67 +1,15 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import {Calendar, momentLocalizer} from 'react-big-calendar';
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import {db} from '../firebase/config';
-import {collection, getDocs, Timestamp} from 'firebase/firestore';
+import PropTypes from 'prop-types';
+import styles from './Calendar.module.scss';
 
-const localizer = momentLocalizer(moment);
+const Calendar = () => (
+  <div className={styles.Calendar}>
+    Calendar Component
+  </div>
+);
 
-const appointments = collection(db, "Appointments");
-const medications = collection(db, "Medications");
+Calendar.propTypes = {};
 
-var calEvents = [
-    
-]
+Calendar.defaultProps = {};
 
-
-const getMedications = async() => {
-
-    const medSnap = await getDocs(medications);
-    
-    medSnap.forEach((doc) => {
-        console.log(doc);
-        let title = doc.data().name;
-        let start = doc.data().time.toDate();
-        let end = doc.data().time.toDate()
-        
-        let event = {start , end, title}
-        calEvents.push(event)
-    })
-}
-
-const getAppointments = async() => {
-    const appSnap = await getDocs(appointments);
-    
-    appSnap.forEach((doc) => {
-        console.log(doc)
-        let title = doc.data().name;
-        let start = doc.data().appointmentDate.toDate();
-        let end = doc.data().appointmentDate.toDate()
-
-        let event = {start, end, title}
-        calEvents.push(event)
-    })
-}
-
-getAppointments();
-getMedications();
-
-const LevelUpMedsCalendar = () => {
-    return (
-       <>
-        <Calendar 
-            events={calEvents}
-            localizer={localizer}
-            startAccessor="start"
-            endAccessor="end"
-            style={{height:700}}
-            defaultView='day'
-            defaultDate={moment().toDate()}
-         />
-       </>
-    );
-}
-
-export default LevelUpMedsCalendar;
+export default Calendar;
