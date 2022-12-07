@@ -1,15 +1,69 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './Calendar.module.scss';
+import {Calendar, momentLocalizer} from 'react-big-calendar';
+// import AddEventForm from "./addEvents/AddEvents"
 
-const Calendar = () => (
-  <div className={styles.Calendar}>
-    Calendar Component
-  </div>
-);
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import {db} from '../firebase/config';
+import {collection, getDocs} from 'firebase/firestore';
 
-Calendar.propTypes = {};
+const localizer = momentLocalizer(moment);
 
-Calendar.defaultProps = {};
+const appointments = collection(db, "Appointments");
+const medications = collection(db, "Medications");
 
-export default Calendar;
+var calEvents = [
+    
+]
+
+
+const getMedications = async() => {
+
+    const medSnap = await getDocs(medications);
+    
+    medSnap.forEach((doc) => {
+        console.log(doc);
+        let title = doc.data().name;
+        let start = doc.data().time.toDate();
+        let end = doc.data().time.toDate()
+        
+        let event = {start , end, title}
+        calEvents.push(event)
+    })
+}
+
+const getAppointments = async() => {
+    const appSnap = await getDocs(appointments);
+    
+    appSnap.forEach((doc) => {
+        console.log(doc)
+        let title = doc.data().name;
+        let start = doc.data().appointmentDate.toDate();
+        let end = doc.data().appointmentDate.toDate()
+
+        let event = {start, end, title}
+        calEvents.push(event)
+    })
+}
+
+getAppointments();
+getMedications();
+
+const LevelUpMedsCalendar = () => {
+    return (
+       <>
+        <Calendar 
+            events={calEvents}
+            localizer={localizer}
+            startAccessor="start"
+            endAccessor="end"
+            style={{height:700}}
+            defaultView='month'
+            defaultDate={moment().toDate()}
+         />
+
+         {/* <AddEventForm /> */}
+       </>
+    );
+}
+
+export default LevelUpMedsCalendar;
