@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styles from "./Login.module.scss";
 // import Auth from "../firebase/config";
 import {
@@ -22,8 +23,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+function Login() {
+  // used for navigating between pages
   const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     function onRegister() {
@@ -36,82 +38,137 @@ const Login = () => {
     onRegister();
   };
 
-  // const { currentUser } = useContext(AuthContext);
-  // const [username, setUsername] = useState("");
+  // Navigates user to register page
+  const goToRegister = () => {
+    navigate("/register");
+  };
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     const starCountRef = ref(db, "users/" + currentUser.uid);
-  //     onValue(starCountRef, (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         var data = snapshot.val();
-  //         setUsername(data.firstName + " " + data.lastName);
+  // signs user into Firebase
+  // const login = () => {
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       if (user) {
+  //         setUser(user);
+  //         // goToDashBoard();
   //       }
+  //     })
+  //     .catch(() => {
+  //       setIsValid(false);
   //     });
-  //   }
-  // }, [currentUser]);
-
-  // const clickLogin = () => {
-  //   if (currentUser) {
-  //     console.log("Edward");
-  //   } else {
-  //     navigate("/homepage");
-  //   }
   // };
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (data) => {
+      if (data) {
+        goToDashBoard();
+      }
+    });
+  }, [goToDashBoard]);
+
+  // updates email on input
+  const updateEmailInput = (e) => {
+    setEmail(e.target.value);
+  };
+
+  // updates password on input
+  const updatePasswordInput = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // // handles login
+  // const handleLogin = (e) => {
+  //   login();
+  // };
+
+  const handleSubmit = async (e) => {
+    setErrorMessage("");
+    try {
+      await signIn(email, password);
+      goToDashBoard();
+    } catch (e) {
+      setErrorMessage(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
-    <Box className={styles.MainContainer}>
-      <Box component={"div"} className={styles.CardContainer}>
-        <Box component={"div"} className={styles.InnerCardContainer}>
-          <Box component="div" className={styles.LeftSide}>
-            <img src={LUMLogo} alt="main-logo"></img>
-          </Box>
-          <Box component="div" className={styles.RightSide}>
-            <FormControl
-              className={style.FormContainer}
-              onSubmit={handleSubmit}
-            >
-              <FormLabel>Email</FormLabel>
-              <Person
-                sx={{
-                  position: "absolute",
-                  right: "230px",
-                  top: "57.5px",
-                  color: "gray",
+    <Box className={styles.Container}>
+      <Box className={styles.MainContent}>
+        <Box className={styles.InnerContainer}>
+          <Box className={styles.Card}>
+            <img
+              src={LumLogo}
+              alt="img"
+              sx={{ width: "50px", height: "50px" }}
+            ></img>
+            <form type="submit" className={styles.FormContainer}>
+              <h1>LevelUp Meds</h1>
+              <TextField
+                id="standard-basic"
+                label="Email"
+                className={styles.InputField}
+                value={email}
+                error={!isValid}
+                helperText={!isValid && "Invalid email"}
+                onChange={updateEmailInput}
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
                 }}
-              ></Person>
-              <Input
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              ></Input>
-              <FormLabel>Password</FormLabel>
-              <HttpsRoundedIcon
-                sx={{
-                  position: "absolute",
-                  color: "gray",
-                  right: "230px",
-                  bottom: "222px",
-                }}
-              ></HttpsRoundedIcon>
-              <Input
+              ></TextField>
+              <TextField
+                id="standard-basic"
+                label="Password"
                 type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></Input>
-              <Button id={styles.SignIn} type="submit" onClick={handleSubmit}>
-                Login
+                helperText={!isValid && "Invalid password"}
+                className={styles.InputField}
+                value={password}
+                error={!isValid}
+                onChange={updatePasswordInput}
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <VisibilityIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
+              ></TextField>
+              <Button
+                size="large"
+                variant="contained"
+                onClick={handleSubmit}
+                className={styles.MainButton}
+              >
+                Sign-In
               </Button>
-              <Link to="/levelup-meds/" variant="body2" id={styles.ForgotPass}>
+              <Link href="/resetpassword" id={styles.ForgotPass}>
                 Forgot password?
               </Link>
-              <Button id={styles.Register}>Register</Button>
-            </FormControl>
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={goToRegister}
+                className={styles.MainButton}
+              >
+                Register
+              </Button>
+            </form>
           </Box>
         </Box>
       </Box>
     </Box>
   );
-};
+}
+
+Login.propTypes = {};
+
+Login.defaultProps = {};
 
 export default Login;

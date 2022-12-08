@@ -1,78 +1,61 @@
-.MainContainer {
-    width: 100%px;
-    height: 100vh;
+.Container {
+   background-color: orange;
+   width: inherit; 
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+
+.MainContent {
+    width: inherit;
+    height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(229, 139, 60);
 }
 
-.CardContainer {
-    width: 30%;
+.InnerContainer {
+    background-color: orange;
+    width: 50%;
     height: 85%;
-    display: flex;
-    align-items: center;
+    display: flex; 
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
-    background-color: #f0f2f5;
-    border-radius: 3rem;
-    -webkit-border-radius: 3rem;
-    -moz-border-radius: 3rem;
-    -ms-border-radius: 3rem;
-    -o-border-radius: 3rem;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
+.Card {
+    background-color: white;
+    text-align: center;
+    width: 50%;
+    height: 75vh;  
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-.CardContainer button {
-    color: black;
-    padding: 20px;
-    margin: 10px; 
-    font-size: 1rem;
-    font-weight: bold;
-    margin-top: 20px;
+.MainButton {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.CardContainer label {
-    padding-top: 30px;
-    font-size: 1rem;
-    font-weight: bold;
+.FormContainer {
+    height: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.InnerCardContainer input {
-    width: 225px;
-    font-size: 1rem;
+.Card > img {
+    width: inherit;
 }
 
-.LeftSide img {
-    width: 250px;
-    height: 250px;
-}
-
-.RightSide {
-   width: inherit;
-   background-color: #f0f2f5;
-}
-
-#SignIn {
-    color: white;
-    background: hsla(28, 76%, 57%, 1);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
-    background: -moz-linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
-    background: -webkit-linear-gradient(90deg, hsla(28, 76%, 57%, 1) 0%, hsla(43, 79%, 59%, 1) 100%);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-}
-
-
-#Register {
-    color: rgb(229, 139, 60); 
-    outline: 2px solid rgb(229, 139, 60);
-    background-color: #f0f2f5;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-}
-
-#ForgotPass {
-    position: sticky; 
-    margin-left: 100px;
+.ErrorMsg {
+    color: red;
 }

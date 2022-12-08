@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from "moment";
