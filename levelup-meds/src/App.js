@@ -12,7 +12,7 @@ function App() {
       <Route path="/Login" element={<Login />} />
       <Route path="/Homepage" element={<Homepage />} />
       <Route path="/Menubar" element={<Menubar />} />
-      <Route path="/Calendar" element={<LevelUpMedsCalendar />} />
+      <Route path="/calendar" element={<LevelUpMedsCalendar />} />
     </Routes>
   );
 }

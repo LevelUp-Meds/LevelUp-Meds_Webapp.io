@@ -4,7 +4,7 @@ import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {db} from '../firebase/config';
-import {collection, getDocs, Timestamp} from 'firebase/firestore';
+import {collection, getDocs} from 'firebase/firestore';
 
 const localizer = momentLocalizer(moment);
 
@@ -57,7 +57,7 @@ const LevelUpMedsCalendar = () => {
             startAccessor="start"
             endAccessor="end"
             style={{height:700}}
-            defaultView='day'
+            defaultView='month'
             defaultDate={moment().toDate()}
          />
        </>
