@@ -41,15 +41,42 @@ export default function Menubar() {
       }
     } catch (e) {}
   };
-
-  const handleCalendar = () => {
-    navigate("/calendar");
+  const calanderdirect = async () => {
+    try {
+      await logout();
+      navigate("/calander");
+      if (!user) {
+        <redirect to="/calander"></redirect>;
+      }
+    } catch (e) {}
   };
-
-  const handleInbox = () => {
-    navigate("/inbox");
+  const inboxdirect = async () => {
+    try {
+      await logout();
+      navigate("/inbox");
+      if (!user) {
+        <redirect to="/inbox"></redirect>;
+      }
+    } catch (e) {}
   };
-
+  const appointmentdirect = async () => {
+    try {
+      await logout();
+      navigate("/appointment");
+      if (!user) {
+        <redirect to="/appointment"></redirect>;
+      }
+    } catch (e) {}
+  };
+  const medicationsdirect = async () => {
+    try {
+      await logout();
+      navigate("/medication");
+      if (!user) {
+        <redirect to="/medication"></redirect>;
+      }
+    } catch (e) {}
+  };
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
       setState({ ...state, [anchor]: open });
@@ -70,27 +97,27 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" />
+            <ListItemText primary="Medications" onClick={medicationsdirect}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" />
+            <ListItemText primary="Appointments" onClick={appointmentdirect}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar" onClick={handleCalendar} />
+            <ListItemText primary="Calendar"onClick={calanderdirect} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={handleInbox} />
+            <ListItemText primary="Inbox" onClick={inboxdirect}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
