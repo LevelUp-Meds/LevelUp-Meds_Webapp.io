@@ -1,0 +1,30 @@
+.FooterContainer {
+    width: 100%;
+    height: 300px;
+    background-color: rgb(60, 60, 81); 
+    display: flex;
+}
+
+.FooterMain {
+    width: 25%;
+    padding: 2rem; 
+}
+
+.FooterMainInner > img {
+    width: 300px;
+}
+
+.FooterSecond {
+    width: 25%;
+    padding: 2rem; 
+}
+
+.FooterThird {
+    width: 25%;
+    padding: 2rem; 
+}
+
+.FooterFourth {
+    width: 25%;
+    padding: 2rem; 
+}

@@ -10,6 +10,7 @@ import { useSignup } from "../hooks/useSignup";
 import Medication from "../Medication/Medication";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
+import Footer from "../Footer/Footer";
 // import { useLogout } from "../hooks/useLogout";
 
 function Dashboard() {
@@ -77,13 +78,14 @@ function Dashboard() {
             {/* <p>User email: {user && user.email}</p> */}
             {/* {user && <p> Name: {user.displayName}</p>} */}
             <CustomDay></CustomDay>
-            <Medication></Medication>
+            {/* <Medication></Medication> */}
             {/* <Button variant="contained" onClick={handleClick}>
               Update User
             </Button> */}
           </Box>
         </Box>
       </Box>
+      <Medication></Medication>
     </Box>
   );
 }
