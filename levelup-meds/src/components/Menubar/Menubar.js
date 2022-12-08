@@ -44,9 +44,9 @@ export default function Menubar() {
   const calanderdirect = async () => {
     try {
       await logout();
-      navigate("/calander");
+      navigate("/calender");
       if (!user) {
-        <redirect to="/calander"></redirect>;
+        <redirect to="/calender"></redirect>;
       }
     } catch (e) {}
   };
