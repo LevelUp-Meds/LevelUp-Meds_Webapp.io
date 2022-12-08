@@ -1,3 +1,25 @@
-.Container {
-    background-color: orange;
- }
+.MedContainer {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.InputContainer {
+    width: inherit / 4;
+    height: inherit;  
+    padding: 3rem;
+    background-color: #edf0f5; 
+    display: flex;
+    border-radius: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 2.5rem;
+    -webkit-border-radius: 2.5rem;
+    -moz-border-radius: 2.5rem;
+    -ms-border-radius: 2.5rem;
+    -o-border-radius: 2.5rem;
+}

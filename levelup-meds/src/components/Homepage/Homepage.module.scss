@@ -1,5 +1,18 @@
 .Homepage {
     width: 100%;
-    height:100vh;
+    height: 100%;
+    background-color: #edf0f5;
 }
+
+.Container {
+    background-color: #edf0f5;
+    width: 50%;  
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
 

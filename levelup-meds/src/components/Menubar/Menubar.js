@@ -82,7 +82,7 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={handleLogout} />
+            <ListItemText primary="Inbox" />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
