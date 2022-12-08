@@ -41,12 +41,12 @@ export default function Menubar() {
       }
     } catch (e) {}
   };
-  const calanderdirect = async () => {
+  const calenderdirect = async () => {
     try {
       await logout();
-      navigate("/calander");
+      navigate("/calender");
       if (!user) {
-        <redirect to="/calander"></redirect>;
+        <redirect to="/calender"></redirect>;
       }
     } catch (e) {}
   };
@@ -111,7 +111,7 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={calanderdirect} />
+            <ListItemText primary="Calendar"onClick={calenderdirect} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
