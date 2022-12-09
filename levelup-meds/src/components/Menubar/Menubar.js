@@ -61,7 +61,6 @@ export default function Menubar() {
   const handleInbox = () => {
     navigate("/inbox");
   };
-
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
       setState({ ...state, [anchor]: open });
@@ -96,13 +95,13 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar" onClick={handleCalendar} />
+            <ListItemText primary="Calendar"onClick={calenderdirect} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={handleInbox} />
+            <ListItemText primary="Inbox" onClick={inboxdirect}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
