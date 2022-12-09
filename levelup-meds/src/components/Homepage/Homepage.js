@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Homepage.module.scss";
-import { Button } from "@mui/material";
+import { Button, CssBaseline } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Menubar from "../Menubar/Menubar";
 import Appointment from "../Appointment/Appointment";
@@ -18,13 +18,13 @@ function Homepage() {
 
   return (
     <Box className={styles.Homepage}>
-      <Box className={styles.Container}>
+      {/* <Box className={styles.Container}>
         <h1>HOMEPAGE</h1>
         <Button variant="contained" onClick={goToLoginPage}>
           Go TO LOGIN PAGE
         </Button>
       </Box>
-      <Footer />
+      <Footer /> */}
     </Box>
   );
 }
