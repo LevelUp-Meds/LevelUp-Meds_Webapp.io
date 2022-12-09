@@ -4,6 +4,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
+import Menubar from "../Menubar/Menubar";
 
 const localizer = momentLocalizer(moment);
 
@@ -45,6 +46,10 @@ getMedications();
 
 const LevelUpMedsCalendar = () => {
   return (
+    
+    <>
+      <Menubar></Menubar>
+      
     <>
       <Calendar
         events={calEvents}
@@ -55,6 +60,7 @@ const LevelUpMedsCalendar = () => {
         defaultView="day"
         defaultDate={moment().toDate()}
       />
+    </>
     </>
   );
 };

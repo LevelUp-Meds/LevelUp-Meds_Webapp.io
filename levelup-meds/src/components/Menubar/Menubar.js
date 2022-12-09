@@ -42,8 +42,20 @@ export default function Menubar() {
     } catch (e) {}
   };
 
+  const handleMedication = () => {
+    navigate("/medication");
+  };
+
+  const handleAppointment = () => {
+    navigate("/appointment");
+  };
+
   const handleCalendar = () => {
     navigate("/calendar");
+  };
+
+  const handleDashboard = () => {
+    navigate("/dashboard");
   };
 
   const handleInbox = () => {
@@ -70,14 +82,14 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" />
+            <ListItemText primary="Medications" onClick={handleMedication}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" />
+            <ListItemText primary="Appointments" onClick={handleAppointment}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
@@ -121,7 +133,7 @@ export default function Menubar() {
                   </Button>
                 </Box>
                 <Box sx={{ mr: 0, ml: "auto" }}>
-                  <Button color="inherit">
+                  <Button color="inherit" onClick={handleDashboard}>
                     <img
                       className={styles.levelupmedslogo}
                       src={LUMLogo}

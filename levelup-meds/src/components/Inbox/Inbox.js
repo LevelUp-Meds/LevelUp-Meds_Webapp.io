@@ -13,4 +13,19 @@ Inbox.propTypes = {};
 
 Inbox.defaultProps = {};
 
-export default Inbox;
+const inboxCom = () => {
+  return (
+  <>
+    <Menubar></Menubar>
+    
+    <box className={styles.Inbox}>
+        <h1>Inbox Component</h1>
+    
+    </box>
+    </>
+)
+}
+
+export default inboxCom;
+
+//export default Inbox;
