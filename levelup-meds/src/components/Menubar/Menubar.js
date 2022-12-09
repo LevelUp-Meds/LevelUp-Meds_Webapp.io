@@ -95,13 +95,13 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={calenderdirect} />
+            <ListItemText primary="Calendar"onClick={handleCalendar} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={inboxdirect}/>
+            <ListItemText primary="Inbox" onClick={handleInbox}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
