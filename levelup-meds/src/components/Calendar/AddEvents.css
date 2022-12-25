@@ -1,0 +1,31 @@
+input[type='text'], [type="datetime-local"]{
+    border-radius: 25px;
+    border: 1px solid black;
+    height: 30px;
+    font-size: 25px;
+}
+
+input[type="submit"] {
+    border-radius: 25px;
+    padding: 8px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form fieldset {
+    border-radius: 25px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+form legend {
+    margin-left: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
