@@ -15,7 +15,7 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 940, 
+  height: 950, 
   width: 1100,
   position: "relative",
   float: "left"
