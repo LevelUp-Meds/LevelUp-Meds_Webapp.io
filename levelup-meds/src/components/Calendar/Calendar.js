@@ -1,20 +1,18 @@
 /* eslint-disable no-unused-vars */
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
-import { collection, getDocs, Timestamp, addDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, Timestamp, addDoc } from "firebase/firestore";
 import './AddEvents.css'
+import Select from "react-select"
 import {Button, Badge} from "react-bootstrap";
 
 const localizer = momentLocalizer(moment);
 
 const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
-
-var calEvents = [];
-
 
 const calendarStyle = {
   height: 940, 
@@ -25,57 +23,95 @@ const calendarStyle = {
 
 const formStyle = {
   color: "black",
-  backgroundColor: "white",
-  border: "10px solid yellow",
+  backgroundColor: "yellow",
+  border: "5px solid red",
   borderRadius: "25px",
   fontSize: "30px",
   margin: "auto",
   textAlign: "center",
   fontFamily: "Montserrat",
   float: "right",
-  position: "relative"
+  position: "relative",
+  marginBottom: "10px"
 }
 
+const LevelUpMedsCalendar = () => {
+  var appointmentOptions = [];
+  var medicationOptions = [];
+  var calEvents = [];
+  
+  const getMedications = async () => {
+    const medSnap = await getDocs(medications);
+  
+    medSnap.forEach((doc) => {
+      //console.log(doc);
+      let title = doc.data().name;
+      let start = doc.data().time.toDate();
+      let end = doc.data().time.toDate();
+  
+      let event = { start, end, title };
+      calEvents.push(event);
+    });
+  };
+  
+  const getAppointments = async () => {
+    const appSnap = await getDocs(appointments);
+  
+    appSnap.forEach((doc) => {
+      //console.log(doc)
+      let title =  doc.data().name
+      let start = doc.data().appointmentDate.toDate();
+      let end = doc.data().appointmentDate.toDate();
+  
+      let event = { start, end, title };
+      calEvents.push(event);
+    });
+  };
+  
+  
+  getAppointments();
+  getMedications();
 
-const getMedications = async () => {
-  const medSnap = await getDocs(medications);
+  const getAppointmentTitleandID = async() => {
+    const appSnap = await getDocs(appointments);
+    
+    appSnap.forEach((doc) => {
+    let label =  doc.data().name
+    let value = doc.id
+  
+   // console.log(label + ", " + value);
+  
+    let item = {value, label}
+    appointmentOptions.push(item);
+  })
+  };
+
+  const getMedicationTitleandID = async() => {
+    const medSnap = await getDocs(medications);
 
   medSnap.forEach((doc) => {
-    console.log(doc);
-    let title = doc.data().name;
-    let start = doc.data().time.toDate();
-    let end = doc.data().time.toDate();
-
-    let event = { start, end, title };
-    calEvents.push(event);
+    //console.log(doc);
+    let label =  doc.data().name
+    let value = doc.id
+  
+   // console.log(label + ", " + value);
+  
+    let item = {value, label}
+    medicationOptions.push(item); 
   });
-};
+  }
 
-const getAppointments = async () => {
-  const appSnap = await getDocs(appointments);
-
-  appSnap.forEach((doc) => {
-    console.log(doc);
-    let title = doc.data().name;
-    let start = doc.data().appointmentDate.toDate();
-    let end = doc.data().appointmentDate.toDate();
-
-    let event = { start, end, title };
-    calEvents.push(event);
-  });
-};
-
-getAppointments();
-getMedications();
-
-const LevelUpMedsCalendar = () => {
+  getAppointmentTitleandID();
+  getMedicationTitleandID();
+  const [selectedAppointment, setSelectedAppointments] = useState(null);
+  const [selectedMedication, setSelectedMedication] = useState(null);
 
   const appName = useRef();
   const appNotes = useRef();
   const appDate = useRef();
   const appAddress = useRef();
 
-  const submitHandler = async(event) => {
+  const addToCalendarHandler = async(event) => {
    event.preventDefault();
 
    const appointment = appName.current.value;
@@ -90,8 +126,30 @@ const LevelUpMedsCalendar = () => {
     notes: appointmentNotes
    })
 
-   window.location.reload(false);
+   window.location.reload(true);
 
+  }
+
+  const deleteAppointment = async(selectedOption) => {
+ 
+    setSelectedAppointments(selectedOption)
+    console.log(selectedOption)
+    console.log(selectedOption.value + ", " + selectedOption.label)
+    let docID = selectedOption.value;
+    
+    await deleteDoc(doc(db, "Appointments", docID));
+    window.location.reload(true);
+  }
+
+  const deleteMedication = async(selectedOption) => {
+ 
+    setSelectedMedication(selectedOption)
+    console.log(selectedOption)
+    console.log(selectedOption.value + ", " + selectedOption.label)
+    let docID = selectedOption.value;
+    
+    await deleteDoc(doc(db, "Medications", docID));
+    window.location.reload(true);
   }
 
   return (
@@ -105,10 +163,9 @@ const LevelUpMedsCalendar = () => {
         defaultView="day"
         defaultDate={moment().toDate()}
       />
-      <br />
-      <br />
+    
       <div style={formStyle}>
-        <form onSubmit={submitHandler} method="POST">
+        <form onSubmit={addToCalendarHandler}>
           <fieldset>
             <legend>Add Appointment:</legend>
           <div>
@@ -137,6 +194,32 @@ const LevelUpMedsCalendar = () => {
           </fieldset>
         </form>
       </div>
+
+      <div style={formStyle}>
+        <form>
+          <fieldset>
+            <legend>Delete Appointment:</legend>
+            <div>
+              <label>Select Appointment to Delete: </label>
+              <Select options={appointmentOptions} onChange={deleteAppointment} autoFocus={true} />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div style={formStyle}>
+        <form>
+          <fieldset>
+            <legend>Delete Medication:</legend>
+            <div>
+              <label>Select Medication to Delete: </label>
+              <Select options={medicationOptions} onChange={deleteMedication} autoFocus={true} />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      
     </>
   );
 };
