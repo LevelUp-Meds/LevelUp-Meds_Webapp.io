@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 import {useRef, useState} from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import moment, { invalid } from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
-import { collection, getDocs, deleteDoc, doc, Timestamp, addDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, updateDoc, doc, Timestamp, addDoc } from "firebase/firestore";
 import './AddEvents.css'
+import { Box } from "@mui/system";
 import Select from "react-select"
-import {Button, Badge} from "react-bootstrap";
+import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 
 const localizer = momentLocalizer(moment);
 
@@ -35,6 +36,21 @@ const formStyle = {
   marginBottom: "10px"
 }
 
+const delMedFormStyle = {
+  position: "absolute",
+  top: "1150",
+  left: "1150",
+  float: "right",
+  color: "black",
+  backgroundColor: "yellow",
+  border: "5px solid red",
+  borderRadius: "25px",
+  fontSize: "30px",
+  margin: "auto",
+  textAlign: "center",
+  fontFamily: "Montserrat"
+}
+
 const LevelUpMedsCalendar = () => {
   var appointmentOptions = [];
   var medicationOptions = [];
@@ -48,8 +64,51 @@ const LevelUpMedsCalendar = () => {
       let title = doc.data().name;
       let start = doc.data().time.toDate();
       let end = doc.data().time.toDate();
-  
-      let event = { start, end, title };
+
+      let info = "Name: " + title + "\nAmount: " + doc.data().amount + 
+                "\nNotes: " + doc.data().notes + 
+                "\nDays to take:\n"
+                
+      let days = doc.data().days
+      
+      if (days.m === true)
+      {
+        info+="Monday\n"
+      }
+
+      if (days.t === true)
+      {
+        info+="Tuesday\n"
+      }
+
+      if (days.w === true)
+      {
+        info+="Wednesday\n"
+      }
+
+      if (days.r === true)
+      {
+        info+="Thursday\n"
+      }
+
+      if(days.f === true)
+      {
+        info+="Friday\n"
+      }
+
+      if (days.s === true)
+      {
+        info+="Saturday\n"
+      }
+
+      if (days.u === true)
+      {
+        info+="Sunday\n"
+      }
+
+      let color = "green";
+
+      let event = { start, end, title, info, color};
       calEvents.push(event);
     });
   };
@@ -62,8 +121,10 @@ const LevelUpMedsCalendar = () => {
       let title =  doc.data().name
       let start = doc.data().appointmentDate.toDate();
       let end = doc.data().appointmentDate.toDate();
-  
-      let event = { start, end, title };
+
+      let info = "Name: " + title + "\nStarts at: " + start + "\nAddress: " + doc.data().address + "\nNotes: " + doc.data().notes
+
+      let event = { start, end, title, info};
       calEvents.push(event);
     });
   };
@@ -79,8 +140,6 @@ const LevelUpMedsCalendar = () => {
     let label =  doc.data().name
     let value = doc.id
   
-   // console.log(label + ", " + value);
-  
     let item = {value, label}
     appointmentOptions.push(item);
   })
@@ -90,11 +149,8 @@ const LevelUpMedsCalendar = () => {
     const medSnap = await getDocs(medications);
 
   medSnap.forEach((doc) => {
-    //console.log(doc);
-    let label =  doc.data().name
+    let label =  doc.data().name 
     let value = doc.id
-  
-   // console.log(label + ", " + value);
   
     let item = {value, label}
     medicationOptions.push(item); 
@@ -103,13 +159,19 @@ const LevelUpMedsCalendar = () => {
 
   getAppointmentTitleandID();
   getMedicationTitleandID();
-  const [selectedAppointment, setSelectedAppointments] = useState(null);
-  const [selectedMedication, setSelectedMedication] = useState(null);
+  const [selectedAppointment, setSelectedAppointments] = useState("");
+  const [selectedMedication, setSelectedMedication] = useState("");
+  const [appUpdated, setUpdatedAppointment] = useState("");
 
   const appName = useRef();
   const appNotes = useRef();
   const appDate = useRef();
   const appAddress = useRef();
+
+  const updatedName = useRef();
+  const updatedNotes = useRef();
+  const updatedDate = useRef();
+  const updatedAddress = useRef();
 
   const addToCalendarHandler = async(event) => {
    event.preventDefault();
@@ -127,6 +189,66 @@ const LevelUpMedsCalendar = () => {
    })
 
    window.location.reload(true);
+
+  }
+
+  const assignUpdatedAppointment = (selectedOption) => {
+    setUpdatedAppointment(selectedOption)
+  }
+  
+  const updateEventHandler  = async(event) => {
+    event.preventDefault();
+
+    const newName = updatedName.current.value;
+    const newNotes = updatedNotes.current.value;
+    const newAddress = updatedAddress.current.value;
+    const newDate = new Date(updatedDate.current.value);
+
+    if (appUpdated == null)
+    {
+      alert("You need to select an appointment you want to update");
+      return false;
+    }
+
+    if (newName === "" && newNotes === "" && newAddress === "" && (isNaN(newDate.getTime())) )
+    {
+      alert("You need to specify at least one field of the appointment you want to update")
+      return false;
+    }
+
+    let id = appUpdated.value;
+
+    const updatedRef = doc(db, "Appointments", id);
+
+    if (newName !== "")
+    {
+      await updateDoc(updatedRef, {
+        name: newName
+      })
+    }
+
+    if (newAddress !== "")
+    {
+      await updateDoc(updatedRef, {
+        address: newAddress
+      })
+    }
+
+    if (newNotes !== "")
+    {
+      await updateDoc(updatedRef, {
+        notes: newNotes
+      })
+    }
+
+    if ((!isNaN(newDate.getTime())))
+    {
+      await updateDoc(updatedRef, {
+        appointmentDate: Timestamp.fromDate(newDate)
+      })
+    }
+
+    window.location.reload(true);
 
   }
 
@@ -162,6 +284,12 @@ const LevelUpMedsCalendar = () => {
         style={calendarStyle}
         defaultView="day"
         defaultDate={moment().toDate()}
+        selectable
+        onSelectEvent={event=>alert(event.info)}
+        eventPropGetter={(event)=>{
+          const backgroundColor = event.color === "green" ? 'green': 'blue'
+          return {style: {backgroundColor: backgroundColor, color: 'white'}}
+        }}
       />
     
       <div style={formStyle}>
@@ -219,7 +347,41 @@ const LevelUpMedsCalendar = () => {
         </form>
       </div>
 
-      
+      <div style={formStyle}>
+        <form onSubmit={updateEventHandler}>
+          <fieldset>
+            <legend>Update Appointment:</legend>
+            <div>
+              <label>Select Appointment to Update: </label>
+              <Select options={appointmentOptions} onChange={assignUpdatedAppointment} required />
+            </div>
+
+            <div>
+            <label>Appointment Name: </label>
+            <input type="text" ref={updatedName} name="name" size="35"></input>
+          </div>
+
+          <div>
+            <label>Address: </label>
+            <input type="text" ref={updatedAddress} name="name" size="50"></input>
+          </div>
+          
+          <div>
+            <label>Notes: </label>
+            <input type="text" ref={updatedNotes} name="app_notes"></input>
+          </div>
+
+          <div>
+            <label>Date and Time: </label>
+            <input type="datetime-local" ref={updatedDate} name="date"></input>
+          </div>
+
+          <div>
+            <input type="submit" name="Submit" value="Update"></input>
+          </div>
+          </fieldset>
+        </form>
+      </div>
     </>
   );
 };
