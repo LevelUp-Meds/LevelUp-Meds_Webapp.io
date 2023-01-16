@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {useRef, useState} from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment, { invalid } from "moment";
+import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
 import { collection, getDocs, deleteDoc, updateDoc, doc, Timestamp, addDoc } from "firebase/firestore";
@@ -19,7 +19,9 @@ const calendarStyle = {
   height: 950, 
   width: 1100,
   position: "relative",
-  float: "left"
+  float: "left",
+  backgroundColor: 'white',
+  fontFamily: 'Montserrat'
 }
 
 const formStyle = {
@@ -45,7 +47,7 @@ const delMedFormStyle = {
   backgroundColor: "yellow",
   border: "5px solid red",
   borderRadius: "25px",
-  fontSize: "30px",
+  fontSize: "30px", 
   margin: "auto",
   textAlign: "center",
   fontFamily: "Montserrat"
@@ -286,6 +288,7 @@ const LevelUpMedsCalendar = () => {
         defaultDate={moment().toDate()}
         selectable
         onSelectEvent={event=>alert(event.info)}
+        slotPropGetter={()=>{return {style: {backgroundColor: 'white'}}}}
         eventPropGetter={(event)=>{
           const backgroundColor = event.color === "green" ? 'green': 'blue'
           return {style: {backgroundColor: backgroundColor, color: 'white'}}
