@@ -1,12 +1,10 @@
 /* eslint-disable no-unused-vars */
-import {useRef, useState} from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
-import { collection, getDocs, deleteDoc, updateDoc, doc, Timestamp, addDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import '../../Calendar.css'
-import Select from "react-select"
 import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
 import DeleteMedication from "../DeleteMedication/DeleteMedication";
@@ -24,35 +22,6 @@ const calendarStyle = {
   float: "left",
   backgroundColor: 'white',
   fontFamily: 'Montserrat'
-}
-
-const formStyle = {
-  color: "black",
-  backgroundColor: "yellow",
-  border: "5px solid red",
-  borderRadius: "25px",
-  fontSize: "30px",
-  margin: "auto",
-  textAlign: "center",
-  fontFamily: "Montserrat",
-  float: "right",
-  position: "relative",
-  marginBottom: "10px"
-}
-
-const delMedFormStyle = {
-  position: "absolute",
-  top: "1150",
-  left: "1150",
-  float: "right",
-  color: "black",
-  backgroundColor: "yellow",
-  border: "5px solid red",
-  borderRadius: "25px",
-  fontSize: "30px", 
-  margin: "auto",
-  textAlign: "center",
-  fontFamily: "Montserrat"
 }
 
 const LevelUpMedsCalendar = () => {
