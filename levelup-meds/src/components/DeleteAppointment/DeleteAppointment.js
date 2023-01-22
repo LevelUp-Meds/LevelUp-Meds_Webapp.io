@@ -39,26 +39,39 @@ const DeleteAppointment = () => {
       getAppointmentTitleandID();
       const [selectedAppointment, setSelectedAppointments] = useState("");
 
-      const deleteAppointment = async(selectedOption) => {
+      const setDeletedAppointment = async(selectedOption) => {
  
         setSelectedAppointments(selectedOption)
         console.log(selectedOption)
         console.log(selectedOption.value + ", " + selectedOption.label)
-        let docID = selectedOption.value;
-        
+      }
+
+      const deleteAppointmentHandler = async() => {
+        if (selectedAppointment === "" || selectedAppointment === undefined || selectedAppointment === null)
+        {
+          window.alert("You must select an appointment you wish to remove!")
+          return false;
+        }
+
+        let docID = selectedAppointment.value;
+    
         await deleteDoc(doc(db, "Appointments", docID));
         window.location.reload(true);
       }
 
       return (<>
         <div style={formStyle}>
-        <form>
+        <form onSubmit={deleteAppointmentHandler}>
           <fieldset>
             <legend>Delete Appointment:</legend>
             <div>
               <label>Select Appointment to Delete: </label>
-              <Select options={appointmentOptions} onChange={deleteAppointment} autoFocus={true} />
+              <Select options={appointmentOptions} onChange={setDeletedAppointment} autoFocus={true} />
             </div>
+            
+          <div>
+            <input type="submit" name="Submit" value="Delete"></input>
+          </div>
           </fieldset>
         </form>
       </div>

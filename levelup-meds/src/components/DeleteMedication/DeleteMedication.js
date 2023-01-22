@@ -44,7 +44,16 @@ const DeleteMedication = () => {
         setSelectedMedication(selectedOption)
         console.log(selectedOption)
         console.log(selectedOption.value + ", " + selectedOption.label)
-        let docID = selectedOption.value;
+      }
+
+      const deleteMedicationHandler = async() => {
+        if (selectedMedication === "" || selectedMedication === undefined || selectedMedication === null)
+        {
+          window.alert("You must select a medication you wish to remove!")
+          return false;
+        }
+
+        let docID = selectedMedication.value;
         
         await deleteDoc(doc(db, "Medications", docID));
         window.location.reload(true);
@@ -52,13 +61,18 @@ const DeleteMedication = () => {
 
       return (<>
         <div style={formStyle}>
-        <form>
+        <form onSubmit={deleteMedicationHandler}>
           <fieldset>
             <legend>Delete Medication:</legend>
             <div>
               <label>Select Medication to Delete: </label>
               <Select options={medicationOptions} onChange={deleteMedication} autoFocus={true} />
             </div>
+            
+            <div>
+              <input type="submit" name="Submit" value="Delete"></input>
+            </div>
+
           </fieldset>
         </form>
       </div>
