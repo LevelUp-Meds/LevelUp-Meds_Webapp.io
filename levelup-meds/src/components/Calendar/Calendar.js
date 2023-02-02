@@ -9,6 +9,8 @@ import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
 import DeleteMedication from "../DeleteMedication/DeleteMedication";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointment";
+import AddMedications from "../AddMedications/AddMedications";
+import UpdateMedications from "../UpdateMedications/UpdateMedications";
 
 const localizer = momentLocalizer(moment);
 
@@ -22,6 +24,20 @@ const calendarStyle = {
   float: "left",
   backgroundColor: 'white',
   fontFamily: 'Montserrat'
+}
+
+const formStyle = {
+  color: "black",
+  backgroundColor: "yellow",
+  border: "5px solid red",
+  borderRadius: "25px",
+  fontSize: "30px",
+  margin: "auto",
+  textAlign: "center",
+  fontFamily: "Montserrat",
+  float: "right",
+  position: "relative",
+  marginBottom: "10px"
 }
 
 const LevelUpMedsCalendar = () => {
@@ -38,6 +54,7 @@ const LevelUpMedsCalendar = () => {
 
       let info = "Name: " + title + "\nAmount: " + doc.data().amount + 
                 "\nNotes: " + doc.data().notes + 
+                "\nStart date: " + start +
                 "\nDays to take:\n"
                 
       let days = doc.data().days
@@ -123,10 +140,30 @@ const LevelUpMedsCalendar = () => {
         }}
       />
 
-      <AddAppointment />
-      <DeleteAppointment />
-      <DeleteMedication />
-      <UpdateAppointment />
+      <div style={formStyle}>
+        <AddAppointment /> 
+      </div>
+
+      <div style={formStyle}>
+        <DeleteAppointment />
+      </div>
+
+      <div style={formStyle}>
+        <DeleteMedication />
+      </div>
+
+      <div style={formStyle}>
+        <UpdateAppointment />
+      </div>
+
+      <div style={formStyle}>
+        <AddMedications />
+      </div>
+
+
+      <div style={formStyle}>
+        <UpdateMedications />
+      </div>
     </>
   );
 };

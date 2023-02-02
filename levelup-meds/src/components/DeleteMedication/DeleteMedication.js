@@ -46,7 +46,8 @@ const DeleteMedication = () => {
         console.log(selectedOption.value + ", " + selectedOption.label)
       }
 
-      const deleteMedicationHandler = async() => {
+      const deleteMedicationHandler = async(event) => {
+        event.preventDefault();
         if (selectedMedication === "" || selectedMedication === undefined || selectedMedication === null)
         {
           window.alert("You must select a medication you wish to remove!")
@@ -60,7 +61,7 @@ const DeleteMedication = () => {
       }
 
       return (<>
-        <div style={formStyle}>
+        <div>
         <form onSubmit={deleteMedicationHandler}>
           <fieldset>
             <legend>Delete Medication:</legend>

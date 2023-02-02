@@ -105,7 +105,6 @@ const UpdateAppointment = () => {
       }
 
       return(<>
-      <div style={formStyle}>
         <form onSubmit={updateEventHandler}>
           <fieldset>
             <legend>Update Appointment:</legend>
@@ -139,7 +138,6 @@ const UpdateAppointment = () => {
           </div>
           </fieldset>
         </form>
-      </div>
       </>)
 }
 

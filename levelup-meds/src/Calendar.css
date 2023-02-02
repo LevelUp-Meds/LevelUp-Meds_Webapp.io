@@ -5,6 +5,18 @@ input[type='text'], [type="datetime-local"], select{
     font-size: 25px;
 }
 
+input[type='radio']
+{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 2px solid blue;
+    transition: 0.2s all linear;
+    position: relative;
+    vertical-align: middle;
+    /* top: 4px; */
+}
+
 input[type="submit"] {
     border-radius: 25px;
     padding: 8px;

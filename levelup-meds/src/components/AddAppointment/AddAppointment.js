@@ -47,7 +47,7 @@ const AddAppointment = () => {
        }
 
     return(<>
-        <div style={formStyle}>
+        <div>
         <form onSubmit={addToCalendarHandler}>
           <fieldset>
             <legend>Add Appointment:</legend>

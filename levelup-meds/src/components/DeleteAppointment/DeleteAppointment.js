@@ -46,7 +46,8 @@ const DeleteAppointment = () => {
         console.log(selectedOption.value + ", " + selectedOption.label)
       }
 
-      const deleteAppointmentHandler = async() => {
+      const deleteAppointmentHandler = async(event) => {
+        event.preventDefault();
         if (selectedAppointment === "" || selectedAppointment === undefined || selectedAppointment === null)
         {
           window.alert("You must select an appointment you wish to remove!")
@@ -60,7 +61,7 @@ const DeleteAppointment = () => {
       }
 
       return (<>
-        <div style={formStyle}>
+        <div>
         <form onSubmit={deleteAppointmentHandler}>
           <fieldset>
             <legend>Delete Appointment:</legend>
