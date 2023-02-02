@@ -81,13 +81,14 @@ const UpdateMedications = () => {
           window.alert("You must select a medication you wish to update!")
           return false;
         }
-        
+
         const name = updatedMedName.current.value
         const amountToTake = updatedAmount.current.value
         const medNotes = updatedMedNotes.current.value
         const startDate = new Date(updatedStartDate.current.value)
 
-        if (name === "" && amountToTake === "" && medNotes === "" && ( isNaN(startDate.getTime()) ) )
+        if ((name === "" && amountToTake === "" && medNotes === "" && ( isNaN(startDate.getTime()) ) ) && (mondaySelected === "" && tuesdaySelected === "" && wednesdaySelected === "" && thursdaySelected === "" && 
+        fridaySelected === "" && saturdaySelected === "" && sundaySelected === ""))
         {
             alert("You need to specify at least one field of the appointment you want to update")
             return false;
