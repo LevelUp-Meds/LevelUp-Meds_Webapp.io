@@ -140,12 +140,18 @@ const LevelUpMedsCalendar = () => {
       />
 
       <div style={formStyle}>
-        <AddAppointment /> 
-        <DeleteAppointment />
-        <DeleteMedication />
-        <UpdateAppointment />
-        <AddMedications />
-        <UpdateMedications />
+        <AddAppointment id={1} label="Add Appointment Speech" /> 
+        <br /> <br />
+        <DeleteAppointment id={2} label="Delete Appointment Speech"/>
+        <br /> <br />
+        <UpdateAppointment id={3} label="Update Appointment Speech"/>
+        <br /> <br />
+        <DeleteMedication id={4} label="Delete Medication Speech"/>
+        <br /> <br />
+        <AddMedications id={5} label="Add Medication Speech" />
+        <br /> <br />
+        <UpdateMedications id={6} label="Update Medication Speech"/>
+        <br /> <br />
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import db from "../database/FirestoreConfig";
 import Menubar from "../Menubar/Menubar";
 import { useSignup } from "../hooks/useSignup";
 import Medication from "../Medication/Medication";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
@@ -17,6 +18,7 @@ function Dashboard() {
   // const { logout } = UserAuth();
   // const { logout } = useLogout();
   const { user } = useSignup();
+  const userName = user.displayName
   // const navigate = useNavigate();
 
   // useEffect(() => {
@@ -74,7 +76,10 @@ function Dashboard() {
           <Box className={styles.CardContents}>
             <FormLabel
               sx={{ fontSize: "3rem" }}
-            >{`Welcome, ${user.displayName}!`}</FormLabel>
+            >{`Welcome, ${userName}!`}
+            <br />
+            <TexttoSpeech id={7} label={"Greeting Speech"} textToRead={"Welcome, " + userName + "!"}></TexttoSpeech>
+            </FormLabel>
             {/* <p>User email: {user && user.email}</p> */}
             {/* {user && <p> Name: {user.displayName}</p>} */}
             <CustomDay></CustomDay>
