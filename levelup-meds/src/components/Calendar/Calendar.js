@@ -18,7 +18,6 @@ const getMedications = async () => {
   const medSnap = await getDocs(medications);
 
   medSnap.forEach((doc) => {
-    console.log(doc);
     let title = doc.data().name;
     let start = doc.data().time.toDate();
     let end = doc.data().time.toDate();
@@ -32,7 +31,6 @@ const getAppointments = async () => {
   const appSnap = await getDocs(appointments);
 
   appSnap.forEach((doc) => {
-    console.log(doc);
     let title = doc.data().name;
     let start = doc.data().appointmentDate.toDate();
     let end = doc.data().appointmentDate.toDate();
@@ -47,21 +45,20 @@ getMedications();
 
 const LevelUpMedsCalendar = () => {
   return (
-    
     <>
       <Menubar></Menubar>
-      
-    <>
-      <Calendar
-        events={calEvents}
-        localizer={localizer}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 700 }}
-        defaultView="day"
-        defaultDate={moment().toDate()}
-      />
-    </>
+
+      <>
+        <Calendar
+          events={calEvents}
+          localizer={localizer}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 700 }}
+          defaultView="day"
+          defaultDate={moment().toDate()}
+        />
+      </>
     </>
   );
 };

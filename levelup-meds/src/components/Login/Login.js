@@ -122,7 +122,7 @@ function Login() {
             }}
           ></TextField>
         </Grid>
-        <Grid item  sx={{ paddingTop: "1.5rem" }}>
+        <Grid item sx={{ paddingTop: "1.5rem" }}>
           <TextField
             id="standard-basic"
             label="Password"
@@ -154,12 +154,19 @@ function Login() {
               type="submit"
               className={styles.MainButton}
               sx={{ marginTop: "1rem" }}
+              onClick={handleSubmit}
             >
               Sign-In
             </Button>
           </Grid>
-          <Grid item  xs={12} sm={12} md={12}>
-            <Box sx={{ marginTop: "0.5rem", display: "flex", justifyContent: "center"}} >
+          <Grid item xs={12} sm={12} md={12}>
+            <Box
+              sx={{
+                marginTop: "0.5rem",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               <Link href="/resetpassword">Forgot password?</Link>
             </Box>
           </Grid>
@@ -169,7 +176,7 @@ function Login() {
               variant="outlined"
               onClick={goToRegister}
               className={styles.MainButton}
-              sx={{marginTop: "1rem"}}
+              sx={{ marginTop: "1rem" }}
             >
               Register
             </Button>
