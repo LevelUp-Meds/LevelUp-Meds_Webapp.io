@@ -35,20 +35,17 @@
 
 .MainButton {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
 
 @media only screen and (max-width: 500px)  {
     .CardContainer {
-        background-color: white;
+        background-color: #edf0f5;
         max-width: 70%;
     }
     .Logo {
         height: 8rem;
     }
 }
-
-
 
 // .Container {
 //    background-color: orange;

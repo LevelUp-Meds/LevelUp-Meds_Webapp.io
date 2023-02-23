@@ -59,7 +59,7 @@ export default function Menubar() {
   };
 
   const handleInbox = () => {
-    navigate("/inbox");
+    navigate("/inboxpage");
   };
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
@@ -81,27 +81,27 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" onClick={handleMedication}/>
+            <ListItemText primary="Medications" onClick={handleMedication} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" onClick={handleAppointment}/>
+            <ListItemText primary="Appointments" onClick={handleAppointment} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={handleCalendar} />
+            <ListItemText primary="Calendar" onClick={handleCalendar} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={handleInbox}/>
+            <ListItemText primary="Inbox" onClick={handleInbox} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />

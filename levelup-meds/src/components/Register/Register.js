@@ -59,8 +59,9 @@ function Register() {
   };
 
   return (
-    <Box className={styles.Register}>
-      <Box className={styles.Left}>
+    <Box className={styles.RegisterContainer}>
+      <Box className={styles.RegisterCard}></Box>
+      {/* <Box className={styles.Left}>
         <Box className={styles.ImagesContainer}>
           <img
             src={medTeam}
@@ -143,7 +144,7 @@ function Register() {
           </form>
           <ArrowBackIcon className={styles.BackIcon}></ArrowBackIcon>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

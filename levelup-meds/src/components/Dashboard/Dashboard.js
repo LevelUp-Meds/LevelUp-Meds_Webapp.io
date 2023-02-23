@@ -78,7 +78,7 @@ function Dashboard() {
             >{`Welcome, ${user.displayName}!`}</FormLabel>
             {/* <p>User email: {user && user.email}</p> */}
             {/* {user && <p> Name: {user.displayName}</p>} */}
-            <CustomDay></CustomDay>
+
             {/* <Medication></Medication> */}
             {/* <Button variant="contained" onClick={handleClick}>
               Update User
