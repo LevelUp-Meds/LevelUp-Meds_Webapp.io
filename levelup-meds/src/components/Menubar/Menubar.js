@@ -66,6 +66,10 @@ export default function Menubar() {
   const handleInbox = () => {
     navigate("/inbox");
   };
+
+  const handleMedication = () => {
+    
+  }
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
       setState({ ...state, [anchor]: open });
