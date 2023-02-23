@@ -10,6 +10,8 @@ import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
 import Hero from "../Hero/Hero";
 import HeroImage from "../../assets/medical-team.jpg";
+import TextToSpeech from "../TextToSpeech/TextToSpeech";
+import "../TextToSpeech/TexttoSpeech.css"
 import Slider from "../Slider/Slider";
 import MedTwo from "../../assets/medical_2.jpg";
 import ChatImage from "../../assets/chat_image.jpg";
@@ -45,17 +47,25 @@ function Homepage() {
         title={"Schedule Your Appointments"}
         subTitle={"scheduling an appointment has never been easier."}
       ></Slider>
+      <TextToSpeech id={0} label="Schedule Speech" textToRead="Schedule Your Appointments, 
+              scheduling an appointment has never been easier"></TextToSpeech>
+      
       <Slider
         imageSrc={ChatImage}
         title={"Live Chat"}
         subTitle="Send and receive messages with a medical professional."
         flipped={true}
       ></Slider>
+      <TextToSpeech id={1} label="Message Speech" textToRead="Live Chat, 
+          Send and receive messages with a medical professional"></TextToSpeech>
+
       <Slider
         imageSrc={MedImage}
         title={"Track You Medications"}
-        subTitle="Look at your calendar and see what medications you need to take."
+        subTitle="Look at the calendar and see what medications you need to take."
       ></Slider>
+      <TextToSpeech id={2} label="Medication Speech"  textToRead="Track Your Medications, 
+          Look at the calendar and see what medications you need to take"></TextToSpeech>
     </Box>
   );
 }
