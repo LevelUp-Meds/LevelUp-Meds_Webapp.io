@@ -20,7 +20,7 @@ import { useSignup } from "../hooks/useSignup";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-type menu = "open";
+var menu = "open";
 
 export default function Menubar() {
   const { logout } = UserAuth();
@@ -68,13 +68,13 @@ export default function Menubar() {
   };
 
   const handleMedication = () => {
-    
+
   }
   const toggleDrawer =
-    (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
+    (anchor, open) => (event) => {
       setState({ ...state, [anchor]: open });
     };
-  const list = (anchor: menu) => (
+  const list = (anchor) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
       role="presentation"
