@@ -90,7 +90,7 @@ function Login() {
   };
 
   return (
-    <Box className={styles.LoginContainer}>
+    <Box className={styles.LoginWrapper}>
       <Grid container className={styles.CardContainer} boxShadow={10}>
         <Grid item className={styles.Header} xs={12} md={12}>
           <img
