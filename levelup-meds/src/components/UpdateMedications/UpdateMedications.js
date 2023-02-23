@@ -7,6 +7,16 @@ import Select from "react-select"
 const medications = collection(db, "Medications");
 
 const UpdateMedications = ({id, label}) => {
+
+    var textForSpeech = "Update Medication Form, "
+    textForSpeech+="Select which medication you wish to update, "
+    textForSpeech+="Then, you have the choice of updating whichever of the following you want to, "
+    textForSpeech+="1, the amount of medication to be taken by the patient, any or no units acceptable"
+    textForSpeech+="2, the days for the patient to take the medication, "
+    textForSpeech+="3, the name of the medication, "
+    textForSpeech+="4, the notes about the medication, "
+    textForSpeech+="5, the date where the patient starts taking the medication"
+
     var medicationOptions = [];
 
     const getMedicationTitleandID = async() => {
@@ -256,7 +266,7 @@ const UpdateMedications = ({id, label}) => {
         </fieldset>
     </form>
     </div>
-    <TexttoSpeech id={id} label={label}></TexttoSpeech>
+    <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
     </>)
 
 }
