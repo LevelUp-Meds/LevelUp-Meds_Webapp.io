@@ -36,10 +36,11 @@ function App() {
           <Route path="/createsuccess" element={<CreateSuccess />}></Route>
           <Route path="/appointment" element={<Appointment />}></Route>
           <Route path="/inboxpage" element={<InboxPage/>}></Route>
+         <Route path="/Helppage" element={<InboxPage/>}></Route>
         </Routes>
       </AuthContext>
     </div>
-  );
+  )
 }
 
 export default App;
