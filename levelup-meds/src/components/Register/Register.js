@@ -43,6 +43,7 @@ function Register() {
   const navigate = useNavigate();
 
   const goBackToLogin = () => {
+    console.log(gender);
     navigate("/login");
   };
 
@@ -133,10 +134,10 @@ function Register() {
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
+              row
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="female"
               name="radio-buttons-group"
-              sx={{ display: "flex", flexDirection: "row" }}
             >
               <FormControlLabel
                 value="female"
