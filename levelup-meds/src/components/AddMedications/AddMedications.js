@@ -8,7 +8,7 @@ const medications = collection(db, "Medications");
 const AddMedications = ({id, label}) => {
 
     var textForSpeech = "Add Medication Form, "
-    textForSpeech+="Enter the dosage of the medication the patient needs to take, any or no units allowed, "
+    textForSpeech+="Enter the dosage of the medication the patient needs to take, no measurement required, "
     textForSpeech+="Then select which days the medication must be taken, "
     textForSpeech+="Then enter the name of the medication, "
     textForSpeech+="Then enter any necessary notes for the medication, "
