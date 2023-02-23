@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { FormLabel } from "@mui/material";
+import { FormLabel, Typography } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";

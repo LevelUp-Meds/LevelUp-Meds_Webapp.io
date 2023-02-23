@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
-
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
