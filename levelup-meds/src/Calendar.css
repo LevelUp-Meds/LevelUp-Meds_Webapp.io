@@ -1,4 +1,4 @@
-input[type='text'], [type="datetime-local"], select{
+input[type='text'], [type="datetime-local"], Select{
     border-radius: 25px;
     border: 1px solid black;
     height: 30px;

@@ -1,0 +1,9 @@
+
+button
+{
+    border-radius: 25px;
+    font-size: inherit;
+    font-family: inherit;
+    border: 1px solid black;
+    padding: 8px;
+}

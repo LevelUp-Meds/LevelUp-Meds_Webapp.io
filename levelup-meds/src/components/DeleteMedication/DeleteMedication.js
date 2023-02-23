@@ -5,6 +5,7 @@ import Select from "react-select";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 const formStyle = {
@@ -21,7 +22,7 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const DeleteMedication = () => {
+const DeleteMedication = ({id, label}) => {
     var medicationOptions = [];
 
     const getMedicationTitleandID = async() => {
@@ -77,6 +78,7 @@ const DeleteMedication = () => {
           </fieldset>
         </form>
       </div>
+      <TexttoSpeech id={id} label={label}></TexttoSpeech>
       </>)
       
 

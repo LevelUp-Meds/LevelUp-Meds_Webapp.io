@@ -1,10 +1,11 @@
 import {useRef, useState} from "react";
 import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 
-const AddMedications = () => {
+const AddMedications = ({id, label}) => {
 
     const [mondaySelected, setMondaySelected] = useState("")
     const [tuesdaySelected, setTuesdaySelected] = useState("");
@@ -117,7 +118,7 @@ const AddMedications = () => {
         window.location.reload(true);
             
     }
-
+   
     return (<>
     <div>
     <form onSubmit={addAppointmentHandler}>
@@ -178,9 +179,10 @@ const AddMedications = () => {
                 <input type="submit" value="Add Medication"></input>
             </div>
         </fieldset>
-       
     </form>
     </div>
+
+    <TexttoSpeech id={id} label={label}></TexttoSpeech>
     </>)
 
 

@@ -1,11 +1,12 @@
 import {useRef, useState} from "react";
 import { db } from "../firebase/config";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 import { collection, getDocs, updateDoc, doc, Timestamp } from "firebase/firestore";
 import Select from "react-select"
 
 const medications = collection(db, "Medications");
 
-const UpdateMedications = () => {
+const UpdateMedications = ({id, label}) => {
     var medicationOptions = [];
 
     const getMedicationTitleandID = async() => {
@@ -187,8 +188,8 @@ const UpdateMedications = () => {
 
     }
 
-    return(
-    <>
+    return(<>
+    <div>
     <form onSubmit={updateMedicationHandler}>
         <fieldset>
             <legend>Update Medications: </legend>
@@ -254,6 +255,8 @@ const UpdateMedications = () => {
             </div>
         </fieldset>
     </form>
+    </div>
+    <TexttoSpeech id={id} label={label}></TexttoSpeech>
     </>)
 
 }

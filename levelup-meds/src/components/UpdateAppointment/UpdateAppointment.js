@@ -2,6 +2,7 @@ import {useRef, useState} from "react";
 import { db } from "../firebase/config";
 import { collection, getDocs, updateDoc, doc, Timestamp } from "firebase/firestore";
 import Select from "react-select"
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
@@ -21,7 +22,7 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const UpdateAppointment = () => {
+const UpdateAppointment = ({id, label}) => {
     var appointmentOptions = [];
     const getAppointmentTitleandID = async() => {
         const appSnap = await getDocs(appointments);
@@ -138,6 +139,7 @@ const UpdateAppointment = () => {
           </div>
           </fieldset>
         </form>
+        <TexttoSpeech id={id} label={label}></TexttoSpeech>
       </>)
 }
 
