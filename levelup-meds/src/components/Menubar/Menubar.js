@@ -41,6 +41,7 @@ export default function Menubar() {
       }
     } catch (e) {}
   };
+
   const calenderdirect = async () => {
     try {
       await logout();
@@ -49,125 +50,124 @@ export default function Menubar() {
         <redirect to="/calendar"></redirect>;
       }
     } catch (e) {}
-  };
-  const inboxdirect = async () => {
-    try {
-      await logout();
-      navigate("/inbox");
-      if (!user) {
-        <redirect to="/inbox"></redirect>;
-      }
-    } catch (e) {}
-  };
-  const appointmentdirect = async () => {
-    try {
-      await logout();
-      navigate("/appointment");
-      if (!user) {
-        <redirect to="/appointment"></redirect>;
-      }
-    } catch (e) {}
-  };
-  const medicationsdirect = async () => {
-    try {
-      await logout();
-      navigate("/medication");
-      if (!user) {
-        <redirect to="/medication"></redirect>;
-      }
-    } catch (e) {}
-  };
-  const toggleDrawer =
-    (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
-      setState({ ...state, [anchor]: open });
-    };
-  const list = (anchor: menu) => (
-    <Box
-      sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItem sx={{ justifyContent: "right", padding: 2 }}>
-          <Button>
-            <CloseIcon sx={{ margin: 1 }} color="action" />
-          </Button>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" onClick={medicationsdirect}/>
-          </ListItemButton>
-        </ListItem>
-        <Divider sx={{ margin: 0 }} />
-        <ListItem disablePadding>
-          <ListItemButton>
-            <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" onClick={appointmentdirect}/>
-          </ListItemButton>
-        </ListItem>
-        <Divider sx={{ margin: 0 }} />
-        <ListItem disablePadding>
-          <ListItemButton>
-            <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={calenderdirect} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={inboxdirect}/>
-          </ListItemButton>
-        </ListItem>
-        <Divider sx={{ margin: 0 }} />
-        <ListItem disablePadding>
-          <ListItemButton>
-            <LogoutIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Logout" onClick={handleLogout} />
-          </ListItemButton>
-        </ListItem>
-        <Divider sx={{ margin: 0 }} />
-      </List>
-    </Box>
-  );
 
-  return (
-    <div>
-      {["open"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Box className={styles.navbar} sx={{ bgcolor: "white" }}>
-            <AppBar
-              sx={{ bgcolor: "transparent", color: "black" }}
-              position="static"
+    const handleMedication = () => {
+      navigate("/medication");
+    };
+
+    const handleAppointment = () => {
+      navigate("/appointment");
+    };
+
+    const handleCalendar = () => {
+      navigate("/calendar");
+    };
+
+    const handleDashboard = () => {
+      navigate("/dashboard");
+    };
+
+    const handleInbox = () => {
+      navigate("/inbox");
+    };
+    const toggleDrawer =
+      (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
+        setState({ ...state, [anchor]: open });
+      };
+    const list = (anchor: menu) => (
+      <Box
+        sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <List>
+          <ListItem sx={{ justifyContent: "right", padding: 2 }}>
+            <Button>
+              <CloseIcon sx={{ margin: 1 }} color="action" />
+            </Button>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <MedicationIcon sx={{ margin: 1 }} />
+              <ListItemText primary="Medications" onClick={handleMedication} />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ margin: 0 }} />
+          <ListItem disablePadding>
+            <ListItemButton>
+              <EventIcon sx={{ margin: 1 }} />
+              <ListItemText
+                primary="Appointments"
+                onClick={handleAppointment}
+              />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ margin: 0 }} />
+          <ListItem disablePadding>
+            <ListItemButton>
+              <CalendarMonthIcon sx={{ margin: 1 }} />
+              <ListItemText primary="Calendar" onClick={handleCalendar} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <MailIcon sx={{ margin: 1 }} />
+              <ListItemText primary="Inbox" onClick={handleInbox} />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ margin: 0 }} />
+          <ListItem disablePadding>
+            <ListItemButton>
+              <LogoutIcon sx={{ margin: 1 }} />
+              <ListItemText primary="Logout" onClick={handleLogout} />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ margin: 0 }} />
+        </List>
+      </Box>
+    );
+
+    return (
+      <div>
+        {["open"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Box className={styles.navbar} sx={{ bgcolor: "white" }}>
+              <AppBar
+                sx={{ bgcolor: "transparent", color: "black" }}
+                position="static"
+              >
+                <Toolbar>
+                  <Box sx={{ mr: "auto" }}>
+                    <Button
+                      onClick={toggleDrawer(anchor, true)}
+                      color="inherit"
+                    >
+                      <MenuIcon fontSize="large" />
+                    </Button>
+                  </Box>
+                  <Box sx={{ mr: 0, ml: "auto" }}>
+                    <Button color="inherit" onClick={handleDashboard}>
+                      <img
+                        className={styles.levelupmedslogo}
+                        src={LUMLogo}
+                        alt="main-logo"
+                      ></img>
+                    </Button>
+                  </Box>
+                </Toolbar>
+              </AppBar>
+            </Box>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
             >
-              <Toolbar>
-                <Box sx={{ mr: "auto" }}>
-                  <Button onClick={toggleDrawer(anchor, true)} color="inherit">
-                    <MenuIcon fontSize="large" />
-                  </Button>
-                </Box>
-                <Box sx={{ mr: 0, ml: "auto" }}>
-                  <Button color="inherit">
-                    <img
-                      className={styles.levelupmedslogo}
-                      src={LUMLogo}
-                      alt="main-logo"
-                    ></img>
-                  </Button>
-                </Box>
-              </Toolbar>
-            </AppBar>
-          </Box>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
 }
