@@ -23,6 +23,15 @@ const formStyle = {
   }
 
 const UpdateAppointment = ({id, label}) => {
+
+  var textForSpeech = "Update Appointment Form, "
+    textForSpeech+="Select from drop down menu which appointment you want to update, "
+    textForSpeech+="Then, you have the choice of updating whichever of the following you want to, "
+    textForSpeech+="1, the name of the appointment, "
+    textForSpeech+="2, the location of the appointment, "
+    textForSpeech+="3, the notes for the appointment, "
+    textForSpeech+="4, the date and time of the appointment "
+
     var appointmentOptions = [];
     const getAppointmentTitleandID = async() => {
         const appSnap = await getDocs(appointments);
@@ -139,7 +148,7 @@ const UpdateAppointment = ({id, label}) => {
           </div>
           </fieldset>
         </form>
-        <TexttoSpeech id={id} label={label}></TexttoSpeech>
+        <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 
