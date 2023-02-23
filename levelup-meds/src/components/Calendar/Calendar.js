@@ -5,6 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import '../../Calendar.css'
+import Menubar from "../Menubar/Menubar";
 import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
 import DeleteMedication from "../DeleteMedication/DeleteMedication";
@@ -122,6 +123,7 @@ const LevelUpMedsCalendar = () => {
 
   return (
     <>
+      <Menubar></Menubar>
       <Calendar
         events={calEvents}
         localizer={localizer}

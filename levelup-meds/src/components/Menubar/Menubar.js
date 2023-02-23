@@ -50,32 +50,21 @@ export default function Menubar() {
       }
     } catch (e) {}
   };
-  const inboxdirect = async () => {
-    try {
-      await logout();
-      navigate("/inbox");
-      if (!user) {
-        <redirect to="/inbox"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleAppointment = () => {
+    navigate("/appointment");
   };
-  const appointmentdirect = async () => {
-    try {
-      await logout();
-      navigate("/appointment");
-      if (!user) {
-        <redirect to="/appointment"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleCalendar = () => {
+    navigate("/calendar");
   };
-  const medicationsdirect = async () => {
-    try {
-      await logout();
-      navigate("/medication");
-      if (!user) {
-        <redirect to="/medication"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleDashboard = () => {
+    navigate("/dashboard");
+  };
+
+  const handleInbox = () => {
+    navigate("/inbox");
   };
   const toggleDrawer =
     (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
@@ -97,27 +86,27 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" onClick={medicationsdirect}/>
+            <ListItemText primary="Medications" onClick={handleMedication}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" onClick={appointmentdirect}/>
+            <ListItemText primary="Appointments" onClick={handleAppointment}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={calenderdirect} />
+            <ListItemText primary="Calendar"onClick={handleCalendar} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={inboxdirect}/>
+            <ListItemText primary="Inbox" onClick={handleInbox}/>
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
@@ -148,7 +137,7 @@ export default function Menubar() {
                   </Button>
                 </Box>
                 <Box sx={{ mr: 0, ml: "auto" }}>
-                  <Button color="inherit">
+                  <Button color="inherit" onClick={handleDashboard}>
                     <img
                       className={styles.levelupmedslogo}
                       src={LUMLogo}

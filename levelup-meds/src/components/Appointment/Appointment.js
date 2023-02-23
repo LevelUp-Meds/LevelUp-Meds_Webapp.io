@@ -9,9 +9,12 @@ import ListItemText from "@mui/material/ListItemText";
 import PlaceIcon from "@mui/icons-material/Place";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreateIcon from "@mui/icons-material/Create";
+import Menubar from "../Menubar/Menubar";
 
 export default function Appointment() {
   return (
+    <>
+    <Menubar></Menubar>
     <Card sx={{ boxShadow: 15, margin: 2, maxWidth: 650, maxHeight: 650 }}>
       <CardContent>
         <List>
@@ -38,6 +41,7 @@ export default function Appointment() {
         </List>
       </CardContent>
     </Card>
+    </>
   );
 }
 

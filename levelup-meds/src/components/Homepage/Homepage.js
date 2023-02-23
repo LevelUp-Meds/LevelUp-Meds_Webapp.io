@@ -8,6 +8,19 @@ import Appointment from "../Appointment/Appointment";
 import Medication from "../Medication/Medication";
 import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
+import Hero from "../Hero/Hero";
+import HeroImage from "../../assets/medical-team.jpg";
+import Slider from "../Slider/Slider";
+import MedTwo from "../../assets/medical_2.jpg";
+import ChatImage from "../../assets/chat_image.jpg";
+import MedImage from "../../assets/medicine.jpg";
+import Navbar from "../Navbar/Navbar";
+
+const navbarLinks = [
+  { url: "/login", title: "Login" },
+  { url: "/", title: "Home" },
+  { url: "/about", title: "About" },
+];
 
 function Homepage() {
   const navigate = useNavigate();
@@ -25,6 +38,24 @@ function Homepage() {
         </Button>
       </Box>
       <Footer /> */}
+      <Navbar navbarLinks={navbarLinks}></Navbar>
+      <Hero imageSrc={HeroImage}></Hero>
+      <Slider
+        imageSrc={MedTwo}
+        title={"Schedule Your Appointments"}
+        subTitle={"scheduling an appointment has never been easier."}
+      ></Slider>
+      <Slider
+        imageSrc={ChatImage}
+        title={"Live Chat"}
+        subTitle="Send and receive messages with a medical professional."
+        flipped={true}
+      ></Slider>
+      <Slider
+        imageSrc={MedImage}
+        title={"Track You Medications"}
+        subTitle="Look at your calendar and see what medications you need to take."
+      ></Slider>
     </Box>
   );
 }

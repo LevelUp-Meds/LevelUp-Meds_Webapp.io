@@ -12,6 +12,7 @@ import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
+import Appointment from "../Appointment/Appointment";
 // import { useLogout } from "../hooks/useLogout";
 
 function Dashboard() {
@@ -90,7 +91,6 @@ function Dashboard() {
           </Box>
         </Box>
       </Box>
-      <Medication></Medication>
     </Box>
   );
 }
