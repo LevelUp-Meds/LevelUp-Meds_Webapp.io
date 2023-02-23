@@ -204,7 +204,7 @@ function Register() {
             }}
           ></TextField>
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={12} sx={{ paddingTop: "0.75rem" }}>
           <Button
             variant="contained"
             onClick={goBackToLogin}
