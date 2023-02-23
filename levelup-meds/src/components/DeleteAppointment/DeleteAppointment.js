@@ -24,6 +24,11 @@ const formStyle = {
 }
 
 const DeleteAppointment = ({id, label}) => {
+
+  var textForSpeech = "Delete Appointment Form, "
+    textForSpeech+="Select from drop down menu which appointment you want to remove from the database and calendar"
+
+
     var appointmentOptions = [];
     const getAppointmentTitleandID = async() => {
         const appSnap = await getDocs(appointments);
@@ -77,7 +82,7 @@ const DeleteAppointment = ({id, label}) => {
           </fieldset>
         </form>
       </div>
-      <TexttoSpeech id={id} label={label}></TexttoSpeech>
+      <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 

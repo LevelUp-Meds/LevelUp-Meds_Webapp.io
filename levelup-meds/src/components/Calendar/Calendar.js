@@ -148,9 +148,9 @@ const LevelUpMedsCalendar = () => {
         <br /> <br />
         <UpdateAppointment id={3} label="Update Appointment Speech"/>
         <br /> <br />
-        <DeleteMedication id={4} label="Delete Medication Speech"/>
-        <br /> <br />
         <AddMedications id={5} label="Add Medication Speech" />
+        <br /> <br />
+        <DeleteMedication id={4} label="Delete Medication Speech"/>
         <br /> <br />
         <UpdateMedications id={6} label="Update Medication Speech"/>
         <br /> <br />

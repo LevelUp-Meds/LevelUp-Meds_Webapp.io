@@ -23,10 +23,10 @@ const formStyle = {
 }
 
 const AddAppointment = ({id, label}) => {
-    var textForSpeech = "Add Appointment Form,"
-    textForSpeech+="Enter Appointment Name,"
-    textForSpeech+="Then Enter location of appointment,"
-    textForSpeech+="Then Enter important information or reminders to remember for the appointment,"
+    var textForSpeech = "Add Appointment Form, "
+    textForSpeech+="Enter Appointment Name, "
+    textForSpeech+="Then Enter location of appointment, "
+    textForSpeech+="Then Enter important information or reminders to remember for the appointment, "
     textForSpeech+="Lastly enter the day and time that the appointment begins"
 
     const appName = useRef();

@@ -23,6 +23,10 @@ const formStyle = {
   }
 
 const DeleteMedication = ({id, label}) => {
+
+  var textForSpeech = "Delete Medication Form, "
+    textForSpeech+="Select from drop down menu which medication you want to remove from the database and calendar"
+   
     var medicationOptions = [];
 
     const getMedicationTitleandID = async() => {
@@ -78,7 +82,7 @@ const DeleteMedication = ({id, label}) => {
           </fieldset>
         </form>
       </div>
-      <TexttoSpeech id={id} label={label}></TexttoSpeech>
+      <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
       </>)
       
 

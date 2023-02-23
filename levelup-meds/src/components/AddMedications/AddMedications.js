@@ -7,6 +7,13 @@ const medications = collection(db, "Medications");
 
 const AddMedications = ({id, label}) => {
 
+    var textForSpeech = "Add Medication Form, "
+    textForSpeech+="Enter the dosage of the medication the patient needs to take, any or no units allowed, "
+    textForSpeech+="Then select which days the medication must be taken, "
+    textForSpeech+="Then enter the name of the medication, "
+    textForSpeech+="Then enter any necessary notes for the medication, "
+    textForSpeech+="Finally, enter the date that the patient begins taking the medication"
+
     const [mondaySelected, setMondaySelected] = useState("")
     const [tuesdaySelected, setTuesdaySelected] = useState("");
     const [wednesdaySelected, setWednesdaySelected]  = useState("")
@@ -182,7 +189,7 @@ const AddMedications = ({id, label}) => {
     </form>
     </div>
 
-    <TexttoSpeech id={id} label={label}></TexttoSpeech>
+    <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
     </>)
 
 
