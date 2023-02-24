@@ -10,13 +10,12 @@ import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
 import Hero from "../Hero/Hero";
 import HeroImage from "../../assets/medical-team.jpg";
-import TextToSpeech from "../TextToSpeech/TextToSpeech";
-import "../TextToSpeech/TexttoSpeech.css"
 import Slider from "../Slider/Slider";
 import MedTwo from "../../assets/medical_2.jpg";
 import ChatImage from "../../assets/chat_image.jpg";
 import MedImage from "../../assets/medicine.jpg";
 import Navbar from "../Navbar/Navbar";
+import TextToSpeech from "../TextToSpeech/TextToSpeech";
 
 const navbarLinks = [
   { url: "/login", title: "Login" },

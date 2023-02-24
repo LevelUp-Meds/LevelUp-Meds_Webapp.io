@@ -5,6 +5,15 @@ input[type='text'], [type="datetime-local"], Select{
     font-size: 25px;
 }
 
+input
+{
+    background-color: white;
+}
+
+input:focus
+{
+    background-color: cornsilk;
+}
 input[type='radio']
 {
     border-radius: 50%;
