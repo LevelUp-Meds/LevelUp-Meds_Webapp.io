@@ -30,7 +30,8 @@ const UpdateAppointment = ({id, label}) => {
     textForSpeech+="1, the name of the appointment, "
     textForSpeech+="2, the location of the appointment, "
     textForSpeech+="3, the notes for the appointment, "
-    textForSpeech+="4, the date and time of the appointment "
+    textForSpeech+="4, the date and time of the appointment, "
+    textForSpeech+="However, you need to update at least one of the aforementioned pieces of information"
 
     var appointmentOptions = [];
     const getAppointmentTitleandID = async() => {

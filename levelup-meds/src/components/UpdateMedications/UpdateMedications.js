@@ -15,7 +15,8 @@ const UpdateMedications = ({id, label}) => {
     textForSpeech+="2, the days for the patient to take the medication, "
     textForSpeech+="3, the name of the medication, "
     textForSpeech+="4, the notes about the medication, "
-    textForSpeech+="5, the date where the patient starts taking the medication"
+    textForSpeech+="5, the date where the patient starts taking the medication, "
+    textForSpeech+="However, you need to update at least one of the aforementioned pieces of information"
 
     var medicationOptions = [];
 
