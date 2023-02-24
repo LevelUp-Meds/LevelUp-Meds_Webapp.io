@@ -133,7 +133,7 @@ const AddMedications = ({id, label}) => {
             <legend>Add Medications:</legend>
             <div>
                 <label>Amount: </label>
-                <input type="text" ref={amount} size="3" required></input>
+                <input type="text" ref={amount} size="5" required></input>
             </div>
 
             <div>

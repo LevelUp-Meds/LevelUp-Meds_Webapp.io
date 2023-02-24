@@ -211,7 +211,7 @@ const UpdateMedications = ({id, label}) => {
 
             <div>
                 <label>Amount: </label>
-                <input type="text" ref={updatedAmount} size="3"></input>
+                <input type="text" ref={updatedAmount} size="5"></input>
             </div>
 
             <div>
