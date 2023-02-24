@@ -3,10 +3,11 @@ import "../../App.css";
 import "./TexttoSpeech.css";
 
 const TexttoSpeech = ({id, label, textToRead}) => {
-    const startSpeech = <button>{label}</button>
+    const startSpeech = <button id="speechButton">{label}</button>
+    const stopSpeech = <button id="stopButton">Stop Speech</button>
     return (
         <>
-            <Speech id={id} text={textToRead} startBtn={startSpeech}></Speech>
+            <Speech id={id} text={textToRead} startBtn={startSpeech} stopBtn={stopSpeech}></Speech>
         </>
     )
 }
