@@ -10,7 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { updateProfile } from "firebase/auth";
 import { UserAuth } from "../context/AuthContext";
+import auth from "../Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -37,13 +39,16 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup } = useSignup();
+  const [error, setError] = useState("");
+  // const { signup } = useSignup();
 
-  const { user, createUser } = UserAuth();
+  const { createUser } = UserAuth();
   const navigate = useNavigate();
 
+  /**
+   * * Return back to login
+   */
   const goBackToLogin = () => {
-    console.log(gender);
     navigate("/login");
   };
 
@@ -60,27 +65,40 @@ function Register() {
   //     });
   // };
 
-  // const handleSubmit = async (e) => {
-  //   try {
-  //     await createUser(email, password);
-  //     updateProfile(auth.currentUser, {
-  //       displayName: firstName + " " + lastName,
-  //     })
-  //       .then(() => {
-  //         console.log("profile updated");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //     navigate("/dashboard");
-  //   } catch (e) {
-  //     setError(e);
-  //   }
+  /**
+   * * Login Function Once User Clicks Submit
+   */
+
+  const handleSubmit = async (e) => {
+    try {
+      await createUser(email, password);
+      updateProfile(auth.currentUser, {
+        displayName: firstName + " " + lastName,
+      })
+        .then(() => {
+          console.log("profile updated");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      navigate("/dashboard");
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   updateDisplayName();
+  //   signUp(email, password, displayName);
   // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    signup(email, password, displayName);
+  /**
+   * * Handles input change on gender
+   */
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+    console.log(gender);
   };
 
   return (
@@ -91,7 +109,12 @@ function Register() {
             Sign Up
           </FormLabel>
         </Grid>
-        <Grid item xs={12} md={12} sx={{ textAlign: "center" }}>
+        <Grid
+          item
+          xs={12}
+          md={12}
+          sx={{ textAlign: "center", padding: "1rem 0 1rem 0" }}
+        >
           <Typography variant="p1">
             Tell us a little about yourself...
           </Typography>
@@ -100,10 +123,8 @@ function Register() {
           <TextField
             label="First Name"
             value={firstName}
-            type="password"
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
+            type="text"
+            onChange={(e) => setFirstName(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -117,10 +138,8 @@ function Register() {
           <TextField
             label="Last Name"
             value={lastName}
-            type="password"
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
+            type="text"
+            onChange={(e) => setLastName(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -137,6 +156,8 @@ function Register() {
               row
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="female"
+              value={gender}
+              onChange={handleGenderChange}
               name="radio-buttons-group"
             >
               <FormControlLabel
@@ -157,7 +178,7 @@ function Register() {
           <TextField
             label="E-Mail Address"
             value={email}
-            type="password"
+            type="text"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
