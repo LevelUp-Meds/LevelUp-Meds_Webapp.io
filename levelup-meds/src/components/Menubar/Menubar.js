@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
-
+import { onAuthStateChanged } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,6 +19,10 @@ import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Typography from "@mui/material/Typography";
+import { doc, getDoc } from "firebase/firestore";
+import auth from "../Auth/AuthProvider";
+import db from "../database/FirestoreConfig";
 
 type menu = "open";
 
@@ -27,10 +31,41 @@ export default function Menubar() {
   //const { logout } = useLogout();
   const navigate = useNavigate();
   const { user } = useSignup();
+  const [data, setData] = useState(null);
 
   const [state, setState] = React.useState({
     open: false,
   });
+
+  const findUserInfo = async (user) => {
+    const docRef = doc(db, "Profiles", user.uid);
+    const docSnap = await getDoc(docRef);
+    const obj = docSnap.data();
+    const firstName = obj.firstName;
+    const lastName = obj.lastName;
+    const newObject = {
+      firstName,
+      lastName,
+    };
+
+    setData({ ...data, ...newObject });
+
+    // if (docSnap.exists()) {
+    //   setData({...data, ...newObject})
+    // } else {
+    //   console.log("No Document Exists");
+    // }
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        findUserInfo(user);
+      } else {
+        navigate("/login");
+      }
+    });
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -131,7 +166,15 @@ export default function Menubar() {
                     <MenuIcon fontSize="large" />
                   </Button>
                 </Box>
-                <Box sx={{ mr: 0, ml: "auto" }}>
+                <Box
+                  sx={{
+                    mr: 0,
+                    ml: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="body1">{`${user.displayName}`}</Typography>
                   <Button color="inherit" onClick={handleDashboard}>
                     <img
                       className={styles.levelupmedslogo}

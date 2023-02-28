@@ -30,6 +30,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { setDoc, doc } from "firebase/firestore";
+import db from "../database/FirestoreConfig";
 
 function Register() {
   const [displayName, setDisplayName] = useState("");
@@ -41,7 +43,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   // const { signup } = useSignup();
-
+  const { signUp } = UserAuth();
   const { createUser } = UserAuth();
   const navigate = useNavigate();
 
@@ -50,6 +52,37 @@ function Register() {
    */
   const goBackToLogin = () => {
     navigate("/login");
+  };
+
+  const handleRegister = async () => {
+    setError("");
+    const res = await signUp(email, password);
+    if (res) {
+      const fullName = `${firstName} ${lastName}`;
+      try {
+        await setDoc(doc(db, "Profiles", auth.currentUser.uid), {
+          fName: firstName,
+          lName: lastName,
+          email: email,
+          sex: gender,
+          uid: auth.currentUser.uid,
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+      updateProfile(auth.currentUser, {
+        displayName: fullName,
+      })
+        .then(() => {
+          navigate("/dashboard");
+        })
+        .catch(() => {
+          console.log("Error updating profile.");
+        });
+    } else {
+      setError("An error occcured while creating account");
+      console.log(error);
+    }
   };
 
   // const handleRegister = () => {
@@ -69,28 +102,27 @@ function Register() {
    * * Login Function Once User Clicks Submit
    */
 
-  const handleSubmit = async (e) => {
-    try {
-      await createUser(email, password);
-      updateProfile(auth.currentUser, {
-        displayName: firstName + " " + lastName,
-      })
-        .then(() => {
-          console.log("profile updated");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      navigate("/dashboard");
-    } catch (e) {
-      setError(e);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   try {
+  //     await createUser(email, password);
+  //     updateProfile(auth.currentUser, {
+  //       displayName: firstName + " " + lastName,
+  //     })
+  //       .then(() => {
+  //         console.log("profile updated");
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //     navigate("/dashboard");
+  //   } catch (e) {
+  //     setError(e);
+  //   }
+  // };
 
-  // const handleSubmit = (e) => {
+  // const handleSubmit = async (e) => {
   //   e.preventDefault();
-  //   updateDisplayName();
-  //   signUp(email, password, displayName);
+  //   await signUp(email, password, displayName);
   // };
 
   /**
@@ -237,7 +269,7 @@ function Register() {
           </Button>
           <Button
             variant="contained"
-            onClick={handleSubmit}
+            onClick={handleRegister}
             sx={{ marginLeft: "0.4rem" }}
           >
             Next
