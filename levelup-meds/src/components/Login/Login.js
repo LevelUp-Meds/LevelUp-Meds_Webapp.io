@@ -106,6 +106,7 @@ function Login() {
 
         <Grid item>
           <TextField
+            variant="standard"
             id="standard-basic"
             label="Email"
             className={styles.InputField}
@@ -125,6 +126,7 @@ function Login() {
         </Grid>
         <Grid item sx={{ paddingTop: "1.5rem" }}>
           <TextField
+            variant="standard"
             id="standard-basic"
             label="Password"
             type="password"
