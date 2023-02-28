@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { FormLabel, Button } from "@mui/material";
-import { UserAuth } from "../context/AuthContext";
+import { AuthContext, UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import Menubar from "../Menubar/Menubar";
@@ -18,16 +18,16 @@ import auth from "../Auth/AuthProvider";
 function Dashboard() {
   // const { logout } = UserAuth();
   // const { logout } = useLogout();
-  const { user } = useSignup();
+  // const { user } = useSignup();
   const [data, setData] = useState(null);
   const navigate = useNavigate();
+  const { user } = UserAuth();
 
   // const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!user) {
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log(user);
+  }, []);
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (data) => {
@@ -87,15 +87,16 @@ function Dashboard() {
     // }
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        findUserInfo(user);
-      } else {
-        navigate("/login");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   console.log(user.displayName);
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       findUserInfo(user);
+  //     } else {
+  //       navigate("/login");
+  //     }
+  //   });
+  // }, []);
 
   // const logout = () => {
   //   signOut(auth);
@@ -107,12 +108,9 @@ function Dashboard() {
       <Box className={styles.Body}>
         <Box className={styles.LandingCard}>
           <Box className={styles.CardContents}>
-            {/* <FormLabel
+            <FormLabel
               sx={{ fontSize: "3rem" }}
             >{`Welcome, ${user.displayName}!`}</FormLabel>
-            {/* <p>User email: {user && user.email}</p> */}
-            {/* {user && <p> Name: {user.displayName}</p>} */}
-            {/* <Medication></Medication> */}
           </Box>
         </Box>
       </Box>
