@@ -14,6 +14,7 @@ import Footer from "../Footer/Footer";
 import Appointment from "../Appointment/Appointment";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
+import firebaseConfig from "../config/firebase";
 
 function Dashboard() {
   // const { logout } = UserAuth();
