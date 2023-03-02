@@ -11,8 +11,8 @@ import {
   getDoc,
 } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
+import { AuthContext } from "../context/AuthContext";
 import { UserAuth } from "../context/AuthContext";
-import "./Search.scss";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -23,7 +23,7 @@ const Search = () => {
 
   const handleSearch = async () => {
     const q = query(
-      collection(db, "users"),
+      collection(db, "Profiles"),
       where("displayName", "==", username)
     );
 
@@ -42,14 +42,15 @@ const Search = () => {
   };
 
   const handleSelect = async () => {
-    //check whether the group(chats in firestore) exists, if not create
+    // check whether the group(chats in firestore) exists, if not create
     const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
+      user.uid > currentUser.uid
+        ? user.uid + currentUser.uid
+        : currentUser.uid + user.uid;
+
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-
+      console.log(res);
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
@@ -57,14 +58,14 @@ const Search = () => {
         //create user chats
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
 
-        await updateDoc(doc(db, "userChats", user.uid), {
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
             displayName: user.displayName,
@@ -73,7 +74,10 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) {}
+    } catch (error) {
+      console.log("Edward");
+      console.log(error.message);
+    }
 
     setCurrentUser(null);
     setUsername("");
@@ -90,11 +94,11 @@ const Search = () => {
         />
       </div>
       {err && <span>User not found!</span>}
-      {user && (
+      {currentUser && (
         <div className="userChat" onClick={handleSelect}>
-          <img src={user.photoURL} alt="" />
+          <img src={currentUser.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{user.displayName}</span>
+            <span>{currentUser.displayName}</span>
           </div>
         </div>
       )}

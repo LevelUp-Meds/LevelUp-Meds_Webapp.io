@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import db from "../database/FirestoreConfig";
-import "./Chats.scss";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
@@ -31,7 +30,7 @@ const Chats = () => {
 
   return (
     <div className="chats">
-      {Object.entries(chats)
+      {/* {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
           <div
@@ -45,7 +44,7 @@ const Chats = () => {
               <p>{chat[1].lastMessage?.text}</p>
             </div>
           </div>
-        ))}
+        ))} */}
     </div>
   );
 };

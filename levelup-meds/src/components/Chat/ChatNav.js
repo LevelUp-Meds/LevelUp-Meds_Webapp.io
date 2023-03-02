@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
-import "../../styles.scss";
-import "./ChatNav.scss";
 
 const Navbar = () => {
   const { logout } = UserAuth();
@@ -11,11 +9,10 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <span className="logo">Lama Chat</span>
+      <span className="logo">Inbox</span>
       <div className="user">
-        <img src={user?.photoURL} alt="" />
-        <span>{user?.displayName}</span>
-        <button onClick={() => logout()}>logout</button>
+        {/* <img src={user?.photoURL} alt="" />
+        <span>{user?.displayName}</span> */}
       </div>
     </div>
   );

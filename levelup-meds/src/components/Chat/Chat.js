@@ -5,7 +5,6 @@ import More from "../../assets/more.png";
 import Messages from "../Message/Messages";
 import Input from "../Input/Input";
 import { ChatContext } from "../context/ChatContext";
-import "./Chat.scss";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);

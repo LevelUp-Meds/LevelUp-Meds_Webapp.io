@@ -8,10 +8,14 @@ import "../../styles.scss";
 
 export default function InboxPage() {
   return (
-    <Box className="InboxPageContainer">
+    <div>
       <Menubar></Menubar>
-      <Sidebar></Sidebar>
-      <Chat></Chat>
-    </Box>
+      <div className="home">
+        <div className="container">
+          <Sidebar></Sidebar>
+          <Chat></Chat>
+        </div>
+      </div>
+    </div>
   );
 }
