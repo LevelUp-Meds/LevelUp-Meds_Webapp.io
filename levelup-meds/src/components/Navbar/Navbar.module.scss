@@ -1,0 +1,129 @@
+.Navbar {
+  position: sticky;
+  top: 0px;
+  height: 70px;
+  background-color: black;
+  opacity: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px 0px 30px;
+  margin-bottom: -70px;
+  z-index: 5;
+}
+
+.NavbarLogo {
+  color: white;
+  font-family: sans-serif;
+  font-size: 2.5rem;
+}
+
+.NavbarList {
+  display: flex;
+  list-style: none;
+}
+
+.NavbarItem {
+  white-space: nowrap;
+}
+
+.NavbarLink {
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 0px 5px;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: transparent;
+  transition: 250ms;
+  -webkit-transition: 250ms;
+  -moz-transition: 250ms;
+  -ms-transition: 250ms;
+  -o-transition: 250ms;
+}
+
+.NavbarLink:hover {
+  border-color: white;
+  transition: 250ms;
+  -webkit-transition: 250ms;
+  -moz-transition: 250ms;
+  -ms-transition: 250ms;
+  -o-transition: 250ms;
+}
+
+.NavbarMenu {
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .NavbarList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: 300px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+  }
+
+  .NavbarListActive {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: 300px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    left: 0;
+  }
+
+  .NavbarItem {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    flex: 1;
+  }
+
+  .NavbarLink {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    border-width: 0px;
+    background-color: black;
+    opacity: 0.75;
+  }
+
+  .NavbarLink:hover {
+    opacity: 0.9;
+  }
+
+  .NavbarMenu {
+    display: block;
+  }
+}

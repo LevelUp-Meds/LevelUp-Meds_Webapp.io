@@ -18,6 +18,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import Menubar from "../Menubar/Menubar";
 
 const Medication = () => {
   const [value, setValue] = useState(dayjs("2014-08-18T21:11:54"));
@@ -27,6 +28,9 @@ const Medication = () => {
   };
 
   return (
+    <>
+      <Menubar></Menubar>
+    
     <Card className={styles.MedContainer}>
       <CardContent className={styles.InputContainer}>
         <List>
@@ -103,6 +107,7 @@ const Medication = () => {
         </List>
       </CardContent>
     </Card>
+    </>
   );
 };
 

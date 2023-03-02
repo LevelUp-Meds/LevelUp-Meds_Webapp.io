@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { FormLabel } from "@mui/material";
+import { FormLabel, Typography } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
@@ -11,6 +11,7 @@ import Medication from "../Medication/Medication";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
+import Appointment from "../Appointment/Appointment";
 // import { useLogout } from "../hooks/useLogout";
 
 function Dashboard() {
@@ -85,7 +86,6 @@ function Dashboard() {
           </Box>
         </Box>
       </Box>
-      <Medication></Medication>
     </Box>
   );
 }
