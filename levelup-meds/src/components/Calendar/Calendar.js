@@ -19,7 +19,7 @@ const medications = collection(db, "Medications");
 
 const calendarStyle = {
   height: 950, 
-  width: 1100,
+  width: 999,
   position: "fixed",
   float: "left",
   backgroundColor: 'white',
