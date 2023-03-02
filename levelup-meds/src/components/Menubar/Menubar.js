@@ -30,7 +30,8 @@ export default function Menubar() {
   const { logout } = UserAuth();
   //const { logout } = useLogout();
   const navigate = useNavigate();
-  const { user } = useSignup();
+  // useSignUp
+  const { user } = UserAuth();
   const [data, setData] = useState(null);
 
   const [state, setState] = React.useState({
