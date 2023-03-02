@@ -16,7 +16,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { UserAuth } from "../context/AuthContext";
 import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Footer from "../Footer/Footer";
 
 function Login() {
   // used for navigating between pages
