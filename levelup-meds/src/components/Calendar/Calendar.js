@@ -10,8 +10,10 @@ import DeleteMedication from "../DeleteMedication/DeleteMedication";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointment";
 import AddMedications from "../AddMedications/AddMedications";
 import UpdateMedications from "../UpdateMedications/UpdateMedications";
-import { collection, getDocs, Timestamp } from "firebase/firestore";
+import auth from "../Auth/AuthProvider";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import Menubar from "../Menubar/Menubar";
+import { onAuthStateChanged } from "firebase/auth";
 
 const localizer = momentLocalizer(moment);
 
@@ -43,8 +45,9 @@ const formStyle = {
 const LevelUpMedsCalendar = () => {
   var calEvents = [];
 
-  const getMedications = async () => {
-    const medSnap = await getDocs(medications);
+  const getMedications = async (loggedInUser) => {
+    const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
+    const medSnap = await getDocs(medQuery);
 
     medSnap.forEach((doc) => {
       //console.log(doc);
@@ -61,36 +64,36 @@ const LevelUpMedsCalendar = () => {
         doc.data().notes +
         "\nStart date: " +
         start +
-        "\nDays to take:\n";
+        "\nDays to take:";
 
       let days = doc.data().days;
 
       if (days.m === true) {
-        info += "Monday\n";
+        info += "\nMonday";
       }
 
       if (days.t === true) {
-        info += "Tuesday\n";
+        info += "\nTuesday";
       }
 
       if (days.w === true) {
-        info += "Wednesday\n";
+        info += "\nWednesday";
       }
 
       if (days.r === true) {
-        info += "Thursday\n";
+        info += "\nThursday";
       }
 
       if (days.f === true) {
-        info += "Friday\n";
+        info += "\nFriday";
       }
 
       if (days.s === true) {
-        info += "Saturday\n";
+        info += "\nSaturday";
       }
 
       if (days.u === true) {
-        info += "Sunday\n";
+        info += "\nSunday";
       }
 
       let color = "green";
@@ -100,8 +103,9 @@ const LevelUpMedsCalendar = () => {
     });
   };
 
-  const getAppointments = async () => {
-    const appSnap = await getDocs(appointments);
+  const getAppointments = async (loggedInUser) => {
+    const appQuery = query(appointments, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
+    const appSnap = await getDocs(appQuery)
 
     appSnap.forEach((doc) => {
       //console.log(doc)
@@ -124,11 +128,17 @@ const LevelUpMedsCalendar = () => {
     });
   };
 
-  getAppointments();
-  getMedications();
+  onAuthStateChanged(auth, (user) => {
+    if (user)
+    {
+      getAppointments(user);
+      getMedications(user);
+    }
+  })
 
   return (
     <>
+      <Menubar></Menubar>
       <Calendar
         events={calEvents}
         localizer={localizer}
@@ -158,20 +168,7 @@ const LevelUpMedsCalendar = () => {
         <AddMedications />
         <UpdateMedications />
       </div>
-
-      <Menubar></Menubar>
-
-      <>
-        <Calendar
-          events={calEvents}
-          localizer={localizer}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 700 }}
-          defaultView="day"
-          defaultDate={moment().toDate()}
-        />
-      </>
+    
     </>
   );
 };
