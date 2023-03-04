@@ -12,6 +12,7 @@ import DeleteMedication from "../DeleteMedication/DeleteMedication";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointment";
 import AddMedications from "../AddMedications/AddMedications";
 import UpdateMedications from "../UpdateMedications/UpdateMedications";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const localizer = momentLocalizer(moment);
 
@@ -19,8 +20,8 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 900, 
-  width: 1125,
+  height: 880, 
+  width: 1130,
   top: 50,
   position: "fixed",
   float: "left",
@@ -46,7 +47,8 @@ const LevelUpMedsCalendar = () => {
   
   const getMedications = async () => {
     const medSnap = await getDocs(medications);
-  
+    let i = 7;
+
     medSnap.forEach((doc) => {
       //console.log(doc);
       let title = doc.data().name;
@@ -95,10 +97,14 @@ const LevelUpMedsCalendar = () => {
         info+="Sunday\n"
       }
 
+      const infoSpeech = <TexttoSpeech icon="Volume" id={i} textToRead={info} ></TexttoSpeech>
+
       let color = "green";
 
-      let event = { start, end, title, info, color};
+      let event = { start, end, title, info, color, infoSpeech };
       calEvents.push(event);
+
+      i++;
     });
   };
   
@@ -134,7 +140,7 @@ const LevelUpMedsCalendar = () => {
         defaultView="day"
         defaultDate={moment().toDate()}
         selectable
-        onSelectEvent={event=>alert(event.info)}
+        onSelectEvent={event=>alert(event.info + event.infoSpeech)}
         slotPropGetter={()=>{return {style: {backgroundColor: 'white'}}}}
         eventPropGetter={(event)=>{
           const backgroundColor = event.color === "green" ? 'green': 'blue'
@@ -143,17 +149,17 @@ const LevelUpMedsCalendar = () => {
       />
 
       <div style={formStyle}>
-        <AddAppointment id={1} label="Add Appointment Speech" /> 
+        <AddAppointment id={1}/> 
         <br /> <br />
-        <DeleteAppointment id={2} label="Delete Appointment Speech"/>
+        <DeleteAppointment id={2}/>
         <br /> <br />
-        <UpdateAppointment id={3} label="Update Appointment Speech"/>
+        <UpdateAppointment id={3}/>
         <br /> <br />
-        <AddMedications id={5} label="Add Medication Speech" />
+        <AddMedications id={5}/>
         <br /> <br />
-        <DeleteMedication id={4} label="Delete Medication Speech"/>
+        <DeleteMedication id={4}/>
         <br /> <br />
-        <UpdateMedications id={6} label="Update Medication Speech"/>
+        <UpdateMedications id={6}/>
         <br /> <br />
       </div>
     </>

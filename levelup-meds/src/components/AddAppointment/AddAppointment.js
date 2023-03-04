@@ -22,7 +22,7 @@ const formStyle = {
   marginBottom: "10px"
 }
 
-const AddAppointment = ({id, label}) => {
+const AddAppointment = ({id}) => {
     var textForSpeech = "Add Appointment Form, "
     textForSpeech+="Enter Appointment Name, "
     textForSpeech+="Then Enter location of appointment, "

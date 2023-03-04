@@ -23,7 +23,7 @@ const formStyle = {
   marginBottom: "10px"
 }
 
-const DeleteAppointment = ({id, label}) => {
+const DeleteAppointment = ({id}) => {
 
   var textForSpeech = "Delete Appointment Form, "
     textForSpeech+="Select from drop down menu which appointment you want to remove from the database and calendar"

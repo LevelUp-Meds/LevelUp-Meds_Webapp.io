@@ -5,7 +5,7 @@ import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 
-const AddMedications = ({id, label}) => {
+const AddMedications = ({id}) => {
 
     var textForSpeech = "Add Medication Form, "
     textForSpeech+="Enter the dosage of the medication the patient needs to take, no measurement required, "

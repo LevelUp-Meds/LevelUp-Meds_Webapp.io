@@ -6,7 +6,7 @@ import Select from "react-select"
 
 const medications = collection(db, "Medications");
 
-const UpdateMedications = ({id, label}) => {
+const UpdateMedications = ({id}) => {
 
     var textForSpeech = "Update Medication Form, "
     textForSpeech+="Select which medication you wish to update, "

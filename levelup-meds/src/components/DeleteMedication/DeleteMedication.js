@@ -22,7 +22,7 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const DeleteMedication = ({id, label}) => {
+const DeleteMedication = ({id}) => {
 
   var textForSpeech = "Delete Medication Form, "
     textForSpeech+="Select from drop down menu which medication you want to remove from the database and calendar"
