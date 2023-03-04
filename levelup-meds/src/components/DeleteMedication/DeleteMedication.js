@@ -82,7 +82,7 @@ const DeleteMedication = ({id, label}) => {
           </fieldset>
         </form>
       </div>
-      <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
+      <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
       </>)
       
 

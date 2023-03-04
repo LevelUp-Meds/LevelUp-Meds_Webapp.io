@@ -15,7 +15,6 @@ import MedTwo from "../../assets/medical_2.jpg";
 import ChatImage from "../../assets/chat_image.jpg";
 import MedImage from "../../assets/medicine.jpg";
 import Navbar from "../Navbar/Navbar";
-import TextToSpeech from "../TextToSpeech/TextToSpeech";
 
 const navbarLinks = [
   { url: "/login", title: "Login" },
@@ -46,8 +45,6 @@ function Homepage() {
         title={"Schedule Your Appointments"}
         subTitle={"scheduling an appointment has never been easier."}
       ></Slider>
-      <TextToSpeech id={0} label="Schedule Speech" textToRead="Schedule Your Appointments, 
-              scheduling an appointment has never been easier"></TextToSpeech>
       
       <Slider
         imageSrc={ChatImage}
@@ -55,16 +52,12 @@ function Homepage() {
         subTitle="Send and receive messages with a medical professional."
         flipped={true}
       ></Slider>
-      <TextToSpeech id={1} label="Message Speech" textToRead="Live Chat, 
-          Send and receive messages with a medical professional"></TextToSpeech>
-
+    
       <Slider
         imageSrc={MedImage}
         title={"Track You Medications"}
         subTitle="Look at the calendar and see what medications you need to take."
       ></Slider>
-      <TextToSpeech id={2} label="Medication Speech"  textToRead="Track Your Medications, 
-          Look at the calendar and see what medications you need to take"></TextToSpeech>
     </Box>
   );
 }
