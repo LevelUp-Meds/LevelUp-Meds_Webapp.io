@@ -4,7 +4,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-
 import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
 import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
@@ -34,15 +33,55 @@ import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menubar from "../Menubar/Menubar";
 import cabinetpill from "../../assets/cabinet-pill.png";
+import { UserAuth } from "../context/AuthContext";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+} from "firebase/firestore";
+import db from "../database/FirestoreConfig";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Medication = () => {
-  const [value, setValue] = useState(dayjs("2014-08-18T21:11:54"));
+  const [date, setDate] = useState(dayjs("2014-08-18T21:11:54"));
+  const [medicationName, setMedicationName] = useState("");
+  const [dosage, setDosage] = useState("");
+  const [frequency, setFrequency] = useState({
+    mon: false,
+    tue: false,
+    wed: false,
+    thu: false,
+    fri: false,
+    sat: false,
+    sun: false,
+  });
+
   const [unit, setUnit] = useState("");
+  const { user } = UserAuth();
 
   const handleChange = (newValue) => {
-    setValue(newValue);
+    setDate(newValue);
+  };
+
+  const handleDays = (day) => {
+    setFrequency({ ...frequency, [day.target.name]: day.target.checked });
+    console.log(frequency);
+  };
+
+  const handleAddMedication = async () => {
+    // const q = query(collection(db, "Medications"));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.data());
+    // });
+    const docRef = await addDoc(collection(db, "Medications"), {
+      name: "Oxycodone",
+      amount: "10 mg",
+    });
   };
 
   const handleUnit = (event) => {
@@ -82,6 +121,7 @@ const Medication = () => {
                 sx={{ m: 1, width: "30ch" }}
                 className={styles.InputMedication}
                 required
+                onChange={(e) => setMedicationName(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -98,6 +138,7 @@ const Medication = () => {
                 label="Dosage"
                 className={styles.InputDosage}
                 required
+                onChange={(e) => setDosage(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="end">
@@ -122,7 +163,7 @@ const Medication = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimePicker
                     label="Time"
-                    value={value}
+                    value={date}
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField
@@ -141,7 +182,10 @@ const Medication = () => {
               <Box>
                 {days.map((day) => (
                   <FormControlLabel
-                    control={<Checkbox />}
+                    key={day}
+                    control={
+                      <Checkbox name={day} onChange={(e) => handleDays(e)} />
+                    }
                     label={day}
                   ></FormControlLabel>
                 ))}
@@ -153,6 +197,7 @@ const Medication = () => {
             variant="contained"
             color="success"
             startIcon={<AddCircleOutlineIcon />}
+            onClick={handleAddMedication}
           >
             Add
           </Button>

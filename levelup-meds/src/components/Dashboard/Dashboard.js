@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { FormLabel, Button } from "@mui/material";
-import { AuthContext, UserAuth } from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import Menubar from "../Menubar/Menubar";
@@ -20,14 +20,11 @@ function Dashboard() {
   // const { logout } = useLogout();
   // const { user } = useSignup();
   const [data, setData] = useState(null);
-  const navigate = useNavigate();
   const { user } = UserAuth();
 
   // const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  useEffect(() => {}, [user]);
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (data) => {
@@ -77,7 +74,6 @@ function Dashboard() {
       firstName,
       lastName,
     };
-
     setData({ ...data, ...newObject });
 
     // if (docSnap.exists()) {

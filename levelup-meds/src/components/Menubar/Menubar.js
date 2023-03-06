@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -97,11 +97,10 @@ export default function Menubar() {
   const handleInbox = () => {
     navigate("/inboxpage");
   };
-  const toggleDrawer =
-    (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
-      setState({ ...state, [anchor]: open });
-    };
-  const list = (anchor: menu) => (
+  const toggleDrawer = (anchor, open) => (event) => {
+    setState({ ...state, [anchor]: open });
+  };
+  const list = (anchor) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
       role="presentation"
