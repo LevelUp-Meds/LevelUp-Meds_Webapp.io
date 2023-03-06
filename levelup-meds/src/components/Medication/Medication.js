@@ -51,13 +51,13 @@ const Medication = () => {
   const [medicationName, setMedicationName] = useState("");
   const [dosage, setDosage] = useState("");
   const [frequency, setFrequency] = useState({
-    mon: false,
-    tue: false,
-    wed: false,
-    thu: false,
-    fri: false,
-    sat: false,
-    sun: false,
+    Mon: false,
+    Tue: false,
+    Wed: false,
+    Thu: false,
+    Fri: false,
+    Sat: false,
+    Sun: false,
   });
 
   const [unit, setUnit] = useState("");
@@ -69,7 +69,6 @@ const Medication = () => {
 
   const handleDays = (day) => {
     setFrequency({ ...frequency, [day.target.name]: day.target.checked });
-    console.log(frequency);
   };
 
   const handleAddMedication = async () => {
