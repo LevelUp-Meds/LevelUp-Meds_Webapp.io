@@ -92,7 +92,7 @@
 }
 
 .home {
-  background-color: #a7bcff;
+  background-color: orange;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -108,7 +108,7 @@
 
     .sidebar {
       flex: 1;
-      background-color: #3e3c61;
+      background-color: #3c4048;
       position: relative;
 
       .navbar {
@@ -147,7 +147,6 @@
       }
       .search {
         border-bottom: 1px solid gray;
-
         .searchForm {
           padding: 10px;
 
@@ -172,7 +171,7 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #2f2d52;
+          background-color: #3c4048;
         }
 
         img {
@@ -199,7 +198,7 @@
 
       .chatInfo {
         height: 50px;
-        background-color: #5d5b8d;
+        background-color: #eaeaea;
         display: flex;
         align-items: center;
         justify-content: space-between;

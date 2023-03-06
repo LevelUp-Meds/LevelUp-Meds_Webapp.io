@@ -55,7 +55,7 @@ const Medication = () => {
       <Box className={styles.AddNewMedWrapper}>
         <Box className={styles.HeaderTitle}>
           <Typography variant="h4" className={styles.HeaderTitle}>
-            My Cabinet
+            My Medications
           </Typography>
           <img src={cabinetpill} alt="cabinet-pill" height="64px"></img>
         </Box>
