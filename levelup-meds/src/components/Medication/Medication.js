@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
-import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import styles from "./Medication.module.scss";
 import {
   TextField,
@@ -78,8 +74,9 @@ const Medication = () => {
     //   console.log(doc.data());
     // });
     const docRef = await addDoc(collection(db, "Medications"), {
-      name: "Oxycodone",
-      amount: "10 mg",
+      name: medicationName,
+      amount: `${dosage}${unit}`,
+      profile: `/Profiles/${user.uid}`
     });
   };
 
