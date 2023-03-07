@@ -76,7 +76,7 @@ const Medication = () => {
     const docRef = await addDoc(collection(db, "Medications"), {
       name: medicationName,
       amount: `${dosage}${unit}`,
-      profile: `/Profiles/${user.uid}`
+      profile: `/Profiles/${user.uid}`,
     });
   };
 
