@@ -4,6 +4,7 @@ import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
 import { onAuthStateChanged } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -105,6 +106,11 @@ export default function Menubar() {
   const handleMedication = () => {
 
   }
+
+  const handleProfile = () => {
+    navigate("/profile");
+  }
+
   const toggleDrawer =
     (anchor, open) => (event) => {
       setState({ ...state, [anchor]: open });
@@ -153,6 +159,13 @@ export default function Menubar() {
           <ListItemButton>
             <LogoutIcon sx={{ margin: 1 }} />
             <ListItemText primary="Logout" onClick={handleLogout} />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{ margin: 0 }} />
+        <ListItem disablePadding>
+          <ListItemButton>
+            <AccountCircleIcon sx={{ margin: 1 }} />
+            <ListItemText primary="Profile" onClick={handleProfile} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
