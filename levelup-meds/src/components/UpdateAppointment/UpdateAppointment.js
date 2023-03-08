@@ -22,7 +22,7 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const UpdateAppointment = ({id, label}) => {
+const UpdateAppointment = ({id}) => {
 
   var textForSpeech = "Update Appointment Form, "
     textForSpeech+="Select from drop down menu which appointment you want to update, "
@@ -149,7 +149,7 @@ const UpdateAppointment = ({id, label}) => {
           </div>
           </fieldset>
         </form>
-        <TexttoSpeech id={id} label={label} textToRead={textForSpeech}></TexttoSpeech>
+        <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 
