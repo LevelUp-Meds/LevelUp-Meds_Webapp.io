@@ -3,7 +3,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import auth from "../Auth/AuthProvider";
 import { UserAuth } from "../context/AuthContext";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
+
 // import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
@@ -11,7 +12,6 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
   const { createUser } = UserAuth();
   const [user, setUser] = useState({});
-  // const { dispatch } = useAuthContext();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -40,6 +40,7 @@ export const useSignup = () => {
       })
         .then(() => {
           const name = displayName.split(" ");
+          console.log(auth.currentUser.uid);
           setDoc(doc(db, "Accounts", auth.currentUser.uid), {
             fname: name[0],
             lname: name[1],

@@ -1,4 +1,4 @@
-.LoginContainer {
+.LoginWrapper {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -16,7 +16,7 @@
     align-items: center;
     max-width: 350px;
     padding: 1.5rem;
-    background-color: white;
+    background-color: #edf0f5;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -35,20 +35,17 @@
 
 .MainButton {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
 
 @media only screen and (max-width: 500px)  {
     .CardContainer {
-        background-color: white;
+        background-color: #edf0f5;
         max-width: 70%;
     }
     .Logo {
         height: 8rem;
     }
 }
-
-
 
 // .Container {
 //    background-color: orange;

@@ -19,7 +19,6 @@ import Navbar from "../Navbar/Navbar";
 const navbarLinks = [
   { url: "/login", title: "Login" },
   { url: "/", title: "Home" },
-  { url: "/about", title: "About" },
 ];
 
 function Homepage() {

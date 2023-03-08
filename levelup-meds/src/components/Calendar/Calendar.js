@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs } from "firebase/firestore";
 import '../../Calendar.css'
 import Menubar from "../Menubar/Menubar";
@@ -49,11 +49,11 @@ const LevelUpMedsCalendar = () => {
     const medSnap = await getDocs(medications);
 
 
-    medSnap.forEach((doc) => {
-      //console.log(doc);
-      let title = doc.data().name;
-      let start = doc.data().time.toDate();
-      let end = doc.data().time.toDate();
+  medSnap.forEach((doc) => {
+    console.log(doc);
+    let title = doc.data().name;
+    let start = doc.data().time.toDate();
+    let end = doc.data().time.toDate();
 
       let info = "Name: " + title + "\nAmount: " + doc.data().amount + 
                 "\nNotes: " + doc.data().notes + 
