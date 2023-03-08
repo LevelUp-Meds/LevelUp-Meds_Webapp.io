@@ -1,5 +1,5 @@
 import {useRef} from "react";
-import { db } from "../firebase/config";
+import db  from "../database/FirestoreConfig";
 import { collection, Timestamp, addDoc } from "firebase/firestore";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"

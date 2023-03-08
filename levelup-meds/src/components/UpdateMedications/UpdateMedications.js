@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 import { collection, getDocs, updateDoc, doc, Timestamp } from "firebase/firestore";
 import Select from "react-select"
