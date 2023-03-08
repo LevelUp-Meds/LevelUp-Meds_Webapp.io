@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
-
+import { onAuthStateChanged } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,18 +19,53 @@ import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Typography from "@mui/material/Typography";
+import { doc, getDoc } from "firebase/firestore";
+import auth from "../Auth/AuthProvider";
+import db from "../database/FirestoreConfig";
 
-type menu = "open";
+var menu = "open";
 
 export default function Menubar() {
   const { logout } = UserAuth();
   //const { logout } = useLogout();
   const navigate = useNavigate();
   const { user } = useSignup();
+  const [data, setData] = useState(null);
 
   const [state, setState] = React.useState({
     open: false,
   });
+
+  const findUserInfo = async (user) => {
+    const docRef = doc(db, "Profiles", user.uid);
+    const docSnap = await getDoc(docRef);
+    const obj = docSnap.data();
+    const firstName = obj.firstName;
+    const lastName = obj.lastName;
+    const newObject = {
+      firstName,
+      lastName,
+    };
+
+    setData({ ...data, ...newObject });
+
+    // if (docSnap.exists()) {
+    //   setData({...data, ...newObject})
+    // } else {
+    //   console.log("No Document Exists");
+    // }
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        findUserInfo(user);
+      } else {
+        navigate("/login");
+      }
+    });
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -44,44 +79,37 @@ export default function Menubar() {
   const calenderdirect = async () => {
     try {
       await logout();
-      navigate("/calender");
+      navigate("/calendar");
       if (!user) {
-        <redirect to="/calender"></redirect>;
+        <redirect to="/calendar"></redirect>;
       }
     } catch (e) {}
   };
-  const inboxdirect = async () => {
-    try {
-      await logout();
-      navigate("/inbox");
-      if (!user) {
-        <redirect to="/inbox"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleAppointment = () => {
+    navigate("/appointment");
   };
-  const appointmentdirect = async () => {
-    try {
-      await logout();
-      navigate("/appointment");
-      if (!user) {
-        <redirect to="/appointment"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleCalendar = () => {
+    navigate("/calendar");
   };
-  const medicationsdirect = async () => {
-    try {
-      await logout();
-      navigate("/medication");
-      if (!user) {
-        <redirect to="/medication"></redirect>;
-      }
-    } catch (e) {}
+
+  const handleDashboard = () => {
+    navigate("/dashboard");
   };
+
+  const handleInbox = () => {
+    navigate("/inboxpage");
+  };
+
+  const handleMedication = () => {
+
+  }
   const toggleDrawer =
-    (anchor: menu, open: boolean) => (event: React.MouseEvent) => {
+    (anchor, open) => (event) => {
       setState({ ...state, [anchor]: open });
     };
-  const list = (anchor: menu) => (
+  const list = (anchor) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
       role="presentation"
@@ -97,27 +125,27 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" onClick={medicationsdirect}/>
+            <ListItemText primary="Medications" onClick={handleMedication} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" onClick={appointmentdirect}/>
+            <ListItemText primary="Appointments" onClick={handleAppointment} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <CalendarMonthIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Calendar"onClick={calenderdirect} />
+            <ListItemText primary="Calendar" onClick={handleCalendar} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={inboxdirect}/>
+            <ListItemText primary="Inbox" onClick={handleInbox} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
@@ -147,8 +175,16 @@ export default function Menubar() {
                     <MenuIcon fontSize="large" />
                   </Button>
                 </Box>
-                <Box sx={{ mr: 0, ml: "auto" }}>
-                  <Button color="inherit">
+                <Box
+                  sx={{
+                    mr: 0,
+                    ml: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="body1">{`${user.displayName}`}</Typography>
+                  <Button color="inherit" onClick={handleDashboard}>
                     <img
                       className={styles.levelupmedslogo}
                       src={LUMLogo}
