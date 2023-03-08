@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { db } from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
@@ -12,7 +13,6 @@ import DeleteMedication from "../DeleteMedication/DeleteMedication";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointment";
 import AddMedications from "../AddMedications/AddMedications";
 import UpdateMedications from "../UpdateMedications/UpdateMedications";
-import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const localizer = momentLocalizer(moment);
 
@@ -21,7 +21,7 @@ const medications = collection(db, "Medications");
 
 const calendarStyle = {
   height: 880, 
-  width: 1130,
+  width: 1123,
   top: 50,
   position: "fixed",
   float: "left",
@@ -44,10 +44,10 @@ const formStyle = {
 
 const LevelUpMedsCalendar = () => {
   var calEvents = [];
-  
+
   const getMedications = async () => {
     const medSnap = await getDocs(medications);
-    let i = 7;
+
 
     medSnap.forEach((doc) => {
       //console.log(doc);
@@ -97,14 +97,11 @@ const LevelUpMedsCalendar = () => {
         info+="Sunday\n"
       }
 
-      const infoSpeech = <TexttoSpeech icon="Volume" id={i} textToRead={info} ></TexttoSpeech>
-
       let color = "green";
 
-      let event = { start, end, title, info, color, infoSpeech };
+      let event = { start, end, title, info, color };
       calEvents.push(event);
-
-      i++;
+      
     });
   };
   
@@ -123,7 +120,7 @@ const LevelUpMedsCalendar = () => {
       calEvents.push(event);
     });
   };
-  
+
   
   getAppointments();
   getMedications();
@@ -140,14 +137,14 @@ const LevelUpMedsCalendar = () => {
         defaultView="day"
         defaultDate={moment().toDate()}
         selectable
-        onSelectEvent={event=>alert(event.info + event.infoSpeech)}
+        onSelectEvent={(event)=>{alert(event.info)}}
         slotPropGetter={()=>{return {style: {backgroundColor: 'white'}}}}
         eventPropGetter={(event)=>{
           const backgroundColor = event.color === "green" ? 'green': 'blue'
           return {style: {backgroundColor: backgroundColor, color: 'white'}}
         }}
       />
-
+      
       <div style={formStyle}>
         <AddAppointment id={1}/> 
         <br /> <br />
