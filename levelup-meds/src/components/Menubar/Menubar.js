@@ -50,12 +50,6 @@ export default function Menubar() {
     };
 
     setData({ ...data, ...newObject });
-
-    // if (docSnap.exists()) {
-    //   setData({...data, ...newObject})
-    // } else {
-    //   console.log("No Document Exists");
-    // }
   };
 
   useEffect(() => {

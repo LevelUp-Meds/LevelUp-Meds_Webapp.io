@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
@@ -7,11 +7,9 @@ import styles from "./Medication.module.scss";
 import {
   TextField,
   InputAdornment,
-  Stack,
   Typography,
   Box,
   Grid,
-  Menu,
   MenuItem,
   FormControl,
   InputLabel,
@@ -30,20 +28,14 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menubar from "../Menubar/Menubar";
 import cabinetpill from "../../assets/cabinet-pill.png";
 import { UserAuth } from "../context/AuthContext";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-} from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Medication = () => {
-  const [date, setDate] = useState(dayjs("2014-08-18T21:11:54"));
+  const [d, setD] = useState(new Date());
+  const [date, setDate] = useState(dayjs(d));
   const [medicationName, setMedicationName] = useState("");
   const [dosage, setDosage] = useState("");
   const [frequency, setFrequency] = useState({
@@ -59,6 +51,8 @@ const Medication = () => {
   const [unit, setUnit] = useState("");
   const { user } = UserAuth();
 
+  const [userMedications, setUserMedications] = useState([]);
+
   const handleChange = (newValue) => {
     setDate(newValue);
   };
@@ -73,16 +67,58 @@ const Medication = () => {
     // querySnapshot.forEach((doc) => {
     //   console.log(doc.data());
     // });
-    const docRef = await addDoc(collection(db, "Medications"), {
+    await addDoc(collection(db, "Medications"), {
       name: medicationName,
       amount: `${dosage}${unit}`,
-      profile: `/Profiles/${user.uid}`,
+      time: date.toDate(),
+      days: frequency,
+      profileID: `/Profiles/${user.uid}`,
     });
   };
 
   const handleUnit = (event) => {
     setUnit(event.target.value);
   };
+
+  const fetchMedication = (item) => {
+    setUserMedications([...userMedications, item.data()]);
+  };
+
+  const loadUserMedications = async () => {
+    const querySnapshot = await getDocs(
+      collection(db, "Medications"),
+      where(`ProfileID`, "==", `/Profiles/${user.uid}`)
+    );
+
+    querySnapshot.forEach((doc) => {
+      fetchMedication(doc);
+    });
+
+    // const q = query(
+    //   collection(db, "Medications"),
+    //   where("ProfileID", "==", `/Profiles/${currentUser.uid}`)
+    // );
+
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+
+    // } catch (e) {
+    //   console.log(e.message);
+    // const q = query(
+    //   collection(db, "Medications"),
+    //   where("ProfileID", "==", `/Profiles/${user.uid}`)
+    // );
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+  };
+
+  useEffect(() => {
+    loadUserMedications();
+  }, []);
 
   return (
     <Box className={styles.MedWrapper}>
@@ -197,14 +233,26 @@ const Medication = () => {
           >
             Add
           </Button>
+          <Button
+            sx={{ marginTop: "1rem" }}
+            variant="contained"
+            color="success"
+            startIcon={<AddCircleOutlineIcon />}
+            onClick={loadUserMedications}
+          >
+            UPdate
+          </Button>
         </CardContent>
+      </Box>
+      <Box>
+        <>
+          {userMedications.map((e) => (
+            <h1>{e.name}</h1>
+          ))}
+        </>
       </Box>
     </Box>
   );
 };
-
-Medication.propTypes = {};
-
-Medication.defaultProps = {};
 
 export default Medication;
