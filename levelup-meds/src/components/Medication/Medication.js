@@ -81,7 +81,7 @@ const Medication = () => {
   };
 
   const fetchMedication = (item) => {
-    setUserMedications([...userMedications, item.data()]);
+    setUserMedications((prevMeds) => [...prevMeds, item.data()]);
   };
 
   const loadUserMedications = async () => {
@@ -115,8 +115,10 @@ const Medication = () => {
     //   console.log(doc.id, " => ", doc.data());
     // });
   };
-
+  var count = 1;
   useEffect(() => {
+    console.log(count);
+    count++;
     loadUserMedications();
   }, []);
 
@@ -233,21 +235,12 @@ const Medication = () => {
           >
             Add
           </Button>
-          <Button
-            sx={{ marginTop: "1rem" }}
-            variant="contained"
-            color="success"
-            startIcon={<AddCircleOutlineIcon />}
-            onClick={loadUserMedications}
-          >
-            UPdate
-          </Button>
         </CardContent>
       </Box>
       <Box>
         <>
           {userMedications.map((e) => (
-            <h1>{e.name}</h1>
+            <h1 key={`${e.name} + ${user.uid}`}>{e.name}</h1>
           ))}
         </>
       </Box>
