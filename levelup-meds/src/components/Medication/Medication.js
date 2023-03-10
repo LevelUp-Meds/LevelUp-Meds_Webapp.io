@@ -50,8 +50,6 @@ const Medication = () => {
   const [unit, setUnit] = useState("");
   const { user } = UserAuth();
 
-  const [userMedications, setUserMedications] = useState([]);
-
   const handleChange = (newValue) => {
     setDate(newValue);
   };
@@ -66,68 +64,28 @@ const Medication = () => {
     // querySnapshot.forEach((doc) => {
     //   console.log(doc.data());
     // });
-    await addDoc(collection(db, "Medications"), {
-      name: medicationName,
-      amount: `${dosage}${unit}`,
-      time: date.toDate(),
-      days: frequency,
-      profileID: `/Profiles/${user.uid}`,
-    });
+    // await addDoc(collection(db, "Medications"), {
+    //   name: medicationName,
+    //   amount: `${dosage}${unit}`,
+    //   time: date.toDate(),
+    //   days: frequency,
+    //   profileID: `/Profiles/${user.uid}`,
+    // });
+
+    setMedicationName("");
+    setDosage("");
+    setDate(dayjs(new Date()));
+    setFrequency({});
   };
 
   const handleUnit = (event) => {
     setUnit(event.target.value);
   };
 
-  const fetchMedication = (item) => {
-    setUserMedications((prevMeds) => [...prevMeds, item.data()]);
-  };
-
-  const loadUserMedications = async () => {
-    const querySnapshot = await getDocs(
-      collection(db, "Medications"),
-      where(`ProfileID`, "==", `/Profiles/${user.uid}`)
-    );
-
-    querySnapshot.forEach((doc) => {
-      fetchMedication(doc);
-    });
-
-    // const q = query(
-    //   collection(db, "Medications"),
-    //   where("ProfileID", "==", `/Profiles/${currentUser.uid}`)
-    // );
-
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-
-    // } catch (e) {
-    //   console.log(e.message);
-    // const q = query(
-    //   collection(db, "Medications"),
-    //   where("ProfileID", "==", `/Profiles/${user.uid}`)
-    // );
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-  };
-  useEffect(() => {
-    loadUserMedications();
-  }, []);
-
   return (
     <Box className={styles.MedWrapper}>
-      <Menubar></Menubar>
+      {/* <Menubar></Menubar> */}
       <Box className={styles.AddNewMedWrapper}>
-        <Box className={styles.HeaderTitle}>
-          <Typography variant="h4" className={styles.HeaderTitle}>
-            My Medications
-          </Typography>
-          <img src={cabinetpill} alt="cabinet-pill" height="64px"></img>
-        </Box>
         <CardContent className={styles.InputContainer} sx={{ boxShadow: 10 }}>
           <Grid container>
             <Grid
@@ -151,6 +109,7 @@ const Medication = () => {
                 sx={{ m: 1, width: "30ch" }}
                 className={styles.InputMedication}
                 required
+                value={medicationName}
                 onChange={(e) => setMedicationName(e.target.value)}
                 InputProps={{
                   startAdornment: (
@@ -166,6 +125,7 @@ const Medication = () => {
               <TextField
                 size="small"
                 label="Dosage"
+                value={dosage}
                 className={styles.InputDosage}
                 required
                 onChange={(e) => setDosage(e.target.value)}
@@ -232,13 +192,6 @@ const Medication = () => {
             Add
           </Button>
         </CardContent>
-      </Box>
-      <Box>
-        <>
-          {userMedications.map((e) => (
-            <h1 key={`${e.name} + ${user.uid}`}>{e.name}</h1>
-          ))}
-        </>
       </Box>
     </Box>
   );
