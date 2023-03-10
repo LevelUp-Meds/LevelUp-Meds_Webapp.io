@@ -14,6 +14,8 @@ import Footer from "../Footer/Footer";
 import Appointment from "../Appointment/Appointment";
 import { onAuthStateChanged } from "firebase/auth";
 // import auth from "../Auth/AuthProvider";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import UserMedications from "../UserMedications/UserMedications";
 
 function Dashboard() {
   // const { logout } = UserAuth();
@@ -21,10 +23,6 @@ function Dashboard() {
   // const { user } = useSignup();
   const [data, setData] = useState(null);
   const { user } = UserAuth();
-
-  // const navigate = useNavigate();
-
-  useEffect(() => {}, [user]);
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (data) => {
@@ -101,13 +99,10 @@ function Dashboard() {
   return (
     <Box className={styles.Dashboard}>
       <Menubar></Menubar>
-      <Box className={styles.Body}>
-        <Box className={styles.LandingCard}>
-          <Box className={styles.CardContents}>
-            <FormLabel
-              sx={{ fontSize: "3rem" }}
-            >{`Welcome, ${user.displayName}!`}</FormLabel>
-          </Box>
+      <Box className={styles.DashboardContent}>
+        <Box className={styles.MedicationsWrapper}>
+          <Medication></Medication>
+          <UserMedications></UserMedications>
         </Box>
       </Box>
     </Box>
