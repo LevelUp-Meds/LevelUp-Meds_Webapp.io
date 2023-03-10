@@ -22,7 +22,6 @@ import { TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menubar from "../Menubar/Menubar";
@@ -115,10 +114,7 @@ const Medication = () => {
     //   console.log(doc.id, " => ", doc.data());
     // });
   };
-  var count = 1;
   useEffect(() => {
-    console.log(count);
-    count++;
     loadUserMedications();
   }, []);
 
