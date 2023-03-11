@@ -87,7 +87,7 @@ const Profile = () => {
             })
           }
 
-          const emailRegex = new RegExp("[a-z0-9]@[a-z0-9].[a-z]", "i")
+          const emailRegex = new RegExp("[a-z0-9]@[a-z].[a-z]", "i")
 
           if(updatedEmail !== "")
           {
