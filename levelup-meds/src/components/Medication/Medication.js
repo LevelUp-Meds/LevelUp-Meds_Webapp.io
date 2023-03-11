@@ -58,6 +58,17 @@ const Medication = () => {
     setFrequency({ ...frequency, [day.target.name]: day.target.checked });
   };
 
+  const resetChecks = () => {
+    // eslint-disable-next-line array-callback-return
+    Object.keys(frequency).map((key) => {
+      if (frequency[key] === true) {
+        frequency[key] = false;
+      }
+    });
+
+    setFrequency(frequency);
+  };
+
   const handleAddMedication = async () => {
     // const q = query(collection(db, "Medications"));
     // const querySnapshot = await getDocs(q);
@@ -71,11 +82,10 @@ const Medication = () => {
     //   days: frequency,
     //   profileID: `/Profiles/${user.uid}`,
     // });
-
+    resetChecks();
     setMedicationName("");
     setDosage("");
     setDate(dayjs(new Date()));
-    setFrequency({});
   };
 
   const handleUnit = (event) => {
@@ -173,10 +183,14 @@ const Medication = () => {
                 {days.map((day) => (
                   <FormControlLabel
                     key={day}
-                    control={
-                      <Checkbox name={day} onChange={(e) => handleDays(e)} />
-                    }
                     label={day}
+                    control={
+                      <Checkbox
+                        name={day}
+                        checked={frequency[day]}
+                        onChange={(e) => handleDays(e)}
+                      />
+                    }
                   ></FormControlLabel>
                 ))}
               </Box>
