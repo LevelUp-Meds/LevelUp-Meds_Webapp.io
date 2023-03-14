@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import Calendar from "./components/Calendar/Calendar";
 import Medication from "./components/Medication/Medication";
 import Inbox from "./components/Inbox/Inbox";
+import Appointment from "./components/Appointment/Appointment";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/medication" element={<Medication />}></Route>
           <Route path="/resetpassword" element={<ResetPassword />}></Route>
           <Route path="/createsuccess" element={<CreateSuccess />}></Route>
+          <Route path="/appointment" element={<Appointment />}></Route>
         </Routes>
       </AuthContext>
     </div>
