@@ -1,0 +1,29 @@
+.inbox-container {
+    max-width: 400px;
+    height: 100vh;
+    background-color: tan;
+  }
+  
+  .createMessage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 4rem;
+  }
+  
+  
+  .createMessage > * {
+    position: relative;
+    float: right;
+  }
+  
+  @media only screen and (max-width: 500px)  {
+    .inbox-container {
+        background-color: #edf0f5;
+        max-width: 40%;
+    }
+  }
+  
+  
+  
