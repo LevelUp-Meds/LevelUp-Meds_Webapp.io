@@ -101,10 +101,6 @@ export default function Menubar() {
     navigate("/inboxpage");
   };
 
-  const handleMedication = () => {
-
-  }
-
   const handleProfile = () => {
     navigate("/profile");
   }
@@ -217,4 +213,4 @@ export default function Menubar() {
       ))}
     </div>
   );
-}
+}}

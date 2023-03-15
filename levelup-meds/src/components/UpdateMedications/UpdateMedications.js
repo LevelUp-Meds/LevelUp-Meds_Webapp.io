@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs, updateDoc, doc, Timestamp, where, query } from "firebase/firestore";
 import auth from "../Auth/AuthProvider";
 import Select from "react-select";

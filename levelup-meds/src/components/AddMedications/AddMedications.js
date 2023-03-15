@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import auth from "../Auth/AuthProvider";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";

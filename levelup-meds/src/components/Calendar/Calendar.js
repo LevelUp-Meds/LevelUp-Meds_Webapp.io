@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import "../../Calendar.css";
 import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
