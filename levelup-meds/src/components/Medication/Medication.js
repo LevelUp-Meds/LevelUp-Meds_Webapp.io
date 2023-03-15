@@ -70,18 +70,18 @@ const Medication = () => {
   };
 
   const handleAddMedication = async () => {
-    // const q = query(collection(db, "Medications"));
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.data());
-    // });
-    // await addDoc(collection(db, "Medications"), {
-    //   name: medicationName,
-    //   amount: `${dosage}${unit}`,
-    //   time: date.toDate(),
-    //   days: frequency,
-    //   profileID: `/Profiles/${user.uid}`,
-    // });
+    const q = query(collection(db, "Medications"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+    await addDoc(collection(db, "Medications"), {
+      name: medicationName,
+      amount: `${dosage}${unit}`,
+      time: date.toDate(),
+      days: frequency,
+      profileID: `/Profiles/${user.uid}`,
+    });
     resetChecks();
     setMedicationName("");
     setDosage("");
