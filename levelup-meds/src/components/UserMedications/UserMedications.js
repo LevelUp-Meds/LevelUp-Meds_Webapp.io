@@ -9,6 +9,7 @@ import {
   query,
   doc,
   getDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
 import db from "../database/FirestoreConfig";
@@ -41,9 +42,14 @@ export default function UserMedications() {
     const medSnap = await getDocs(q);
 
     medSnap.forEach((doc) => {
-      addMedication(doc);
+      //addMedication(doc);
     });
 
+    onSnapshot(q, (snapshot) => {
+      setUserMedications([]);
+      console.log(snapshot.docs.map((doc) => addMedication(doc)));
+      // setUserMedications(snapshot.docs.map((doc) => [...doc, doc.data()]));
+    });
     // console.log(`/Profiles/${user.uid}`);
 
     // querySnapshot.forEach((doc) => {
@@ -75,6 +81,8 @@ export default function UserMedications() {
         navigate("/login");
       }
     });
+
+    setUserMedications([]);
   }, []);
 
   return (
