@@ -1,10 +1,12 @@
 import {useState} from "react";
-import db  from "../database/FirestoreConfig";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { collection, getDocs, deleteDoc, doc, query, where } from "firebase/firestore";
 import Select from "react-select";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "../Auth/AuthProvider";
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
@@ -30,9 +32,10 @@ const DeleteAppointment = ({id}) => {
 
 
     var appointmentOptions = [];
-    const getAppointmentTitleandID = async() => {
-        const appSnap = await getDocs(appointments);
-        
+    const getAppointmentTitleandID = async(loggedInUser) => {
+        const appQuery = query(appointments, where('profileID', '==', "/Profiles/" + loggedInUser.uid));
+
+        const appSnap = await getDocs(appQuery);
         appSnap.forEach((doc) => {
         let label =  doc.data().name
         let value = doc.id
@@ -40,9 +43,15 @@ const DeleteAppointment = ({id}) => {
         let item = {value, label}
         appointmentOptions.push(item);
         })
-      };
+      }
 
-      getAppointmentTitleandID();
+      onAuthStateChanged(auth, (user)=>{
+        if(user){
+          getAppointmentTitleandID(user);
+        }
+       
+      })
+
       const [selectedAppointment, setSelectedAppointments] = useState("");
 
       const setDeletedAppointment = async(selectedOption) => {

@@ -1,6 +1,8 @@
 import {useRef, useState} from "react";
-import db  from "../database/FirestoreConfig";
+import { db } from "../firebase/config";
+import auth from "../Auth/AuthProvider";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
@@ -56,7 +58,7 @@ const AddMedications = ({id}) => {
     const doctorNotes = useRef();
     const firstDate = useRef();
 
-    const addAppointmentHandler = async(event) => {
+    const addAppointmentHandler = (event) => {
         event.preventDefault();
         
         if (mondaySelected === "" && tuesdaySelected === "" && wednesdaySelected === "" && thursdaySelected === "" && 
@@ -113,15 +115,22 @@ const AddMedications = ({id}) => {
         {
             daysToTake.u = true;
         }
-
-        await addDoc(medications, {
-            amount: amountToTake,
-            days: daysToTake,
-            name: name,
-            notes: medNotes,
-            time: Timestamp.fromDate(startDate)
+        
+        onAuthStateChanged(auth, async (user)=>{
+            if(user)
+            {
+                const addMedications = async(loggedInUser) => {
+                await addDoc(medications, {
+                    amount: amountToTake,
+                    days: daysToTake,
+                    name: name,
+                    notes: medNotes,
+                    time: Timestamp.fromDate(startDate),
+                    profileID: "/Profiles/" + loggedInUser.uid
+                  })}
+                  addMedications(user)
+            }
         })
-
         window.location.reload(true);
             
     }

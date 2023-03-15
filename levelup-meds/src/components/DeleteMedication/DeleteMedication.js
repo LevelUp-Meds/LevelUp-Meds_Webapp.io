@@ -1,6 +1,8 @@
 import {useState} from "react";
-import db  from "../database/FirestoreConfig";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { collection, getDocs, deleteDoc, doc, query, where} from "firebase/firestore";
+import {onAuthStateChanged} from "firebase/auth";
+import auth from "../Auth/AuthProvider";
 import Select from "react-select";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
@@ -29,8 +31,9 @@ const DeleteMedication = ({id}) => {
    
     var medicationOptions = [];
 
-    const getMedicationTitleandID = async() => {
-        const medSnap = await getDocs(medications);
+    const getMedicationTitleandID = async(loggedInUser) => {
+        const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid))
+        const medSnap = await getDocs(medQuery);
     
       medSnap.forEach((doc) => {
         let label =  doc.data().name 
@@ -40,8 +43,13 @@ const DeleteMedication = ({id}) => {
         medicationOptions.push(item); 
       });
       }
-
-      getMedicationTitleandID();
+        
+      onAuthStateChanged(auth, (user)=> {
+        if(user)
+        {
+          getMedicationTitleandID(user);
+        }
+      })
       const [selectedMedication, setSelectedMedication] = useState("");
 
       const deleteMedication = async(selectedOption) => {

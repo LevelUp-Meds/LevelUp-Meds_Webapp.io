@@ -1,8 +1,10 @@
 import {useRef, useState} from "react";
-import db from "../database/FirestoreConfig";
+import { db } from "../firebase/config";
+import { collection, getDocs, updateDoc, doc, Timestamp, where, query } from "firebase/firestore";
+import auth from "../Auth/AuthProvider";
+import Select from "react-select";
+import { onAuthStateChanged } from "firebase/auth";
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
-import { collection, getDocs, updateDoc, doc, Timestamp } from "firebase/firestore";
-import Select from "react-select"
 
 const medications = collection(db, "Medications");
 
@@ -20,8 +22,9 @@ const UpdateMedications = ({id}) => {
 
     var medicationOptions = [];
 
-    const getMedicationTitleandID = async() => {
-        const medSnap = await getDocs(medications);
+    const getMedicationTitleandID = async(loggedInUser) => {
+        const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid))
+        const medSnap = await getDocs(medQuery);
     
       medSnap.forEach((doc) => {
         let label =  doc.data().name 
@@ -32,7 +35,11 @@ const UpdateMedications = ({id}) => {
       });
       }
 
-      getMedicationTitleandID();
+      onAuthStateChanged(auth, (user)=>{
+        if(user)
+            getMedicationTitleandID(user);
+      })
+
       const [selectedMedication, setSelectedMedication] = useState("");
       
       const updateMedication = async(selectedOption) => {

@@ -85,19 +85,22 @@ export default function Menubar() {
         <redirect to="/calendar"></redirect>;
       }
     } catch (e) {}
-  };
 
-  const handleAppointment = () => {
-    navigate("/appointment");
-  };
+    const handleMedication = () => {
+      navigate("/medication");
+    };
 
-  const handleCalendar = () => {
-    navigate("/calendar");
-  };
+    const handleAppointment = () => {
+      navigate("/appointment");
+    };
 
-  const handleDashboard = () => {
-    navigate("/dashboard");
-  };
+    const handleCalendar = () => {
+      navigate("/calendar");
+    };
+
+    const handleDashboard = () => {
+      navigate("/dashboard");
+    };
 
   const handleInbox = () => {
     navigate("/inboxpage");

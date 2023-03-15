@@ -1,11 +1,13 @@
 import {useRef, useState} from "react";
-import db from "../database/FirestoreConfig";
-import { collection, getDocs, updateDoc, doc, Timestamp } from "firebase/firestore";
-import Select from "react-select"
-import TexttoSpeech from "../TextToSpeech/TextToSpeech";
+import { db } from "../firebase/config";
+import { collection, getDocs, updateDoc, doc, Timestamp, query, where } from "firebase/firestore";
+import Select from "react-select";
+import auth from "../Auth/AuthProvider";
+import { onAuthStateChanged } from "firebase/auth";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
 const formStyle = {
@@ -13,7 +15,6 @@ const formStyle = {
     backgroundColor: "yellow",
     border: "5px solid red",
     borderRadius: "25px",
-    fontSize: "30px",
     margin: "auto",
     textAlign: "center",
     fontFamily: "Montserrat",
@@ -34,8 +35,9 @@ const UpdateAppointment = ({id}) => {
     textForSpeech+="However, you need to update at least one of the aforementioned pieces of information"
 
     var appointmentOptions = [];
-    const getAppointmentTitleandID = async() => {
-        const appSnap = await getDocs(appointments);
+    const getAppointmentTitleandID = async(loggedInUser) => {
+        const appQuery = query(appointments, where('profileID', '==', '/Profiles/' + loggedInUser.uid))
+        const appSnap = await getDocs(appQuery);
         
         appSnap.forEach((doc) => {
         let label =  doc.data().name
@@ -46,7 +48,12 @@ const UpdateAppointment = ({id}) => {
       })
       };
 
-      getAppointmentTitleandID()
+      onAuthStateChanged(auth, (user)=>{
+        if(user)
+        {
+          getAppointmentTitleandID(user)
+        }
+      })
 
       const [appUpdated, setUpdatedAppointment] = useState("");
 

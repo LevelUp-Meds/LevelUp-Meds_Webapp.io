@@ -3,16 +3,18 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import db from "../database/FirestoreConfig";
-import { collection, getDocs } from "firebase/firestore";
-import '../../Calendar.css'
-import Menubar from "../Menubar/Menubar";
+import { db } from "../firebase/config";
+import "../../Calendar.css";
 import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
 import DeleteMedication from "../DeleteMedication/DeleteMedication";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointment";
 import AddMedications from "../AddMedications/AddMedications";
 import UpdateMedications from "../UpdateMedications/UpdateMedications";
+import auth from "../Auth/AuthProvider";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import Menubar from "../Menubar/Menubar";
+import { onAuthStateChanged } from "firebase/auth";
 
 const localizer = momentLocalizer(moment);
 
@@ -20,14 +22,14 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 880, 
-  width: 1123,
+  height: 950, 
+  width: 999,
   top: 50,
   position: "fixed",
   float: "left",
-  backgroundColor: 'white',
-  fontFamily: 'Montserrat'
-}
+  backgroundColor: "white",
+  fontFamily: "Montserrat"
+};
 
 const formStyle = {
   color: "black",
@@ -39,62 +41,92 @@ const formStyle = {
   textAlign: "center",
   fontFamily: "Montserrat",
   float: "right",
-  position: "relative",
+  position: "relative"
 }
 
-const LevelUpMedsCalendar = () => {
-  var calEvents = [];
+var calEvents = []
 
-  const getMedications = async () => {
-    const medSnap = await getDocs(medications);
-
+const getMedications = async () => {
+  const medSnap = await getDocs(medications);
 
   medSnap.forEach((doc) => {
-    console.log(doc);
     let title = doc.data().name;
     let start = doc.data().time.toDate();
     let end = doc.data().time.toDate();
 
-      let info = "Name: " + title + "\nAmount: " + doc.data().amount + 
-                "\nNotes: " + doc.data().notes + 
-                "\nStart date: " + start +
-                "\nDays to take:\n"
-                
-      let days = doc.data().days
-      
-      if (days.m === true)
-      {
-        info+="Monday\n"
+    let event = { start, end, title };
+    calEvents.push(event);
+  });
+};
+
+const getAppointments = async () => {
+  const appSnap = await getDocs(appointments);
+
+  appSnap.forEach((doc) => {
+    let title = doc.data().name;
+    let start = doc.data().appointmentDate.toDate();
+    let end = doc.data().appointmentDate.toDate();
+
+    let event = { start, end, title };
+    calEvents.push(event);
+  });
+};
+
+getAppointments();
+getMedications();
+
+const LevelUpMedsCalendar = () => {
+  var calEvents = [];
+
+  const getMedications = async (loggedInUser) => {
+    const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
+    const medSnap = await getDocs(medQuery);
+
+    medSnap.forEach((doc) => {
+      //console.log(doc);
+      let title = doc.data().name;
+      let start = doc.data().time.toDate();
+      let end = doc.data().time.toDate();
+
+      let info =
+        "Name: " +
+        title +
+        "\nAmount: " +
+        doc.data().amount +
+        "\nNotes: " +
+        doc.data().notes +
+        "\nStart date: " +
+        start +
+        "\nDays to take:";
+
+      let days = doc.data().days;
+
+      if (days.m === true) {
+        info += "\nMonday";
       }
 
-      if (days.t === true)
-      {
-        info+="Tuesday\n"
+      if (days.t === true) {
+        info += "\nTuesday";
       }
 
-      if (days.w === true)
-      {
-        info+="Wednesday\n"
+      if (days.w === true) {
+        info += "\nWednesday";
       }
 
-      if (days.r === true)
-      {
-        info+="Thursday\n"
+      if (days.r === true) {
+        info += "\nThursday";
       }
 
-      if(days.f === true)
-      {
-        info+="Friday\n"
+      if (days.f === true) {
+        info += "\nFriday";
       }
 
-      if (days.s === true)
-      {
-        info+="Saturday\n"
+      if (days.s === true) {
+        info += "\nSaturday";
       }
 
-      if (days.u === true)
-      {
-        info+="Sunday\n"
+      if (days.u === true) {
+        info += "\nSunday";
       }
 
       let color = "green";
@@ -104,26 +136,39 @@ const LevelUpMedsCalendar = () => {
       
     });
   };
-  
-  const getAppointments = async () => {
-    const appSnap = await getDocs(appointments);
-  
+
+  const getAppointments = async (loggedInUser) => {
+    const appQuery = query(appointments, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
+    const appSnap = await getDocs(appQuery)
+
     appSnap.forEach((doc) => {
       //console.log(doc)
-      let title =  doc.data().name
+      let title = doc.data().name;
       let start = doc.data().appointmentDate.toDate();
       let end = doc.data().appointmentDate.toDate();
 
-      let info = "Name: " + title + "\nStarts at: " + start + "\nAddress: " + doc.data().address + "\nNotes: " + doc.data().notes
+      let info =
+        "Name: " +
+        title +
+        "\nStarts at: " +
+        start +
+        "\nAddress: " +
+        doc.data().address +
+        "\nNotes: " +
+        doc.data().notes;
 
-      let event = { start, end, title, info};
+      let event = { start, end, title, info };
       calEvents.push(event);
     });
   };
 
-  
-  getAppointments();
-  getMedications();
+  onAuthStateChanged(auth, (user) => {
+    if (user)
+    {
+      getAppointments(user);
+      getMedications(user);
+    }
+  })
 
   return (
     <>
@@ -137,11 +182,15 @@ const LevelUpMedsCalendar = () => {
         defaultView="day"
         defaultDate={moment().toDate()}
         selectable
-        onSelectEvent={(event)=>{alert(event.info)}}
-        slotPropGetter={()=>{return {style: {backgroundColor: 'white'}}}}
-        eventPropGetter={(event)=>{
-          const backgroundColor = event.color === "green" ? 'green': 'blue'
-          return {style: {backgroundColor: backgroundColor, color: 'white'}}
+        onSelectEvent={(event) => alert(event.info)}
+        slotPropGetter={() => {
+          return { style: { backgroundColor: "white" } };
+        }}
+        eventPropGetter={(event) => {
+          const backgroundColor = event.color === "green" ? "green" : "blue";
+          return {
+            style: { backgroundColor: backgroundColor, color: "white" },
+          };
         }}
       />
       
@@ -159,6 +208,7 @@ const LevelUpMedsCalendar = () => {
         <UpdateMedications id={6}/>
         <br /> <br />
       </div>
+
     </>
   );
 };

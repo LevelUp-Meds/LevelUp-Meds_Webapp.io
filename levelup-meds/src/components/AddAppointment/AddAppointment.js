@@ -3,6 +3,10 @@ import db  from "../database/FirestoreConfig";
 import { collection, Timestamp, addDoc } from "firebase/firestore";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
+import '../../Calendar.css';
+import auth from "../Auth/AuthProvider";
+import { onAuthStateChanged } from "firebase/auth";
+
 import '../../Calendar.css'
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
@@ -34,20 +38,29 @@ const AddAppointment = ({id}) => {
     const appDate = useRef();
     const appAddress = useRef();
 
-    const addToCalendarHandler = async(event) => {
+    const addToCalendarHandler = (event) => {
         event.preventDefault();
      
         const appointment = appName.current.value;
         const appointmentNotes = appNotes.current.value;
         const appointmentDate = new Date(appDate.current.value);
         const apppointmentLocation = appAddress.current.value;
-      
-        await addDoc(appointments, {
-         address: apppointmentLocation,
-         appointmentDate: Timestamp.fromDate(appointmentDate),
-         name: appointment,
-         notes: appointmentNotes
-        })
+
+        onAuthStateChanged(auth, (user)=>{
+          if(user)
+          {
+            const addAppointment = async(loggedInUser) => {
+              await addDoc(appointments, {
+              address: apppointmentLocation,
+              appointmentDate: Timestamp.fromDate(appointmentDate),
+              name: appointment,
+              notes: appointmentNotes,
+              profileID: "/Profiles/" + loggedInUser.uid
+            })}
+            addAppointment(user)
+          }}
+           
+          )
      
         window.location.reload(true);
      
