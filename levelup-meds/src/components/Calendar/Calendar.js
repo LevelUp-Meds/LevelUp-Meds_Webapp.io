@@ -46,37 +46,36 @@ const formStyle = {
 
 var calEvents = []
 
-const getMedications = async () => {
-  const medSnap = await getDocs(medications);
+// const getMedications = async () => {
+//   const medSnap = await getDocs(medications);
 
-  medSnap.forEach((doc) => {
-    let title = doc.data().name;
-    let start = doc.data().time.toDate();
-    let end = doc.data().time.toDate();
+//   medSnap.forEach((doc) => {
+//     let title = doc.data().name;
+//     let start = doc.data().time.toDate();
+//     let end = doc.data().time.toDate();
 
-    let event = { start, end, title };
-    calEvents.push(event);
-  });
-};
+//     let event = { start, end, title };
+//     calEvents.push(event);
+//   });
+// };
 
-const getAppointments = async () => {
-  const appSnap = await getDocs(appointments);
+// const getAppointments = async () => {
+//   const appSnap = await getDocs(appointments);
 
-  appSnap.forEach((doc) => {
-    let title = doc.data().name;
-    let start = doc.data().appointmentDate.toDate();
-    let end = doc.data().appointmentDate.toDate();
+//   appSnap.forEach((doc) => {
+//     let title = doc.data().name;
+//     let start = doc.data().appointmentDate.toDate();
+//     let end = doc.data().appointmentDate.toDate();
 
-    let event = { start, end, title };
-    calEvents.push(event);
-  });
-};
+//     let event = { start, end, title };
+//     calEvents.push(event);
+//   });
+// };
 
-getAppointments();
-getMedications();
+// getAppointments();
+// getMedications();
 
 const LevelUpMedsCalendar = () => {
-  var calEvents = [];
 
   const getMedications = async (loggedInUser) => {
     const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid));

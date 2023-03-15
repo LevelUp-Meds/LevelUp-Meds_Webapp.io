@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import List from "@mui/material/List";
@@ -31,7 +31,8 @@ export default function Menubar() {
   const { logout } = UserAuth();
   //const { logout } = useLogout();
   const navigate = useNavigate();
-  const { user } = useSignup();
+  // useSignUp
+  const { user } = UserAuth();
   const [data, setData] = useState(null);
 
   const [state, setState] = React.useState({
@@ -50,12 +51,6 @@ export default function Menubar() {
     };
 
     setData({ ...data, ...newObject });
-
-    // if (docSnap.exists()) {
-    //   setData({...data, ...newObject})
-    // } else {
-    //   console.log("No Document Exists");
-    // }
   };
 
   useEffect(() => {
