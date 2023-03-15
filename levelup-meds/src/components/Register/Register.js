@@ -70,6 +70,8 @@ function Register() {
       } catch (e) {
         console.log(e.message);
       }
+      await setDoc(doc(db, "userChats", res.user.uid), {});
+      
       updateProfile(auth.currentUser, {
         displayName: fullName,
       })

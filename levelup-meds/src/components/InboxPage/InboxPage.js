@@ -1,12 +1,22 @@
 import React from "react";
-import "./InboxPage.css";
+import "./InboxPage.scss";
 import { Box } from "@mui/material";
-import Inbox from "../Inbox/Inbox";
+import Sidebar from './Sidebar';
+import Chat from './Chat';
+import Menubar from "../Menubar/Menubar";
 
-export default function InboxPage() {
+function InboxPage() {
   return (
-    <Box className="InboxPageContainer">
-      <Inbox></Inbox>
+    <Box>
+      <Menubar></Menubar>
+    <div className="home">
+      <div className="container">
+        <Sidebar/>
+        <Chat/>
+      </div>
+    </div>
     </Box>
   );
 }
+
+export default InboxPage
