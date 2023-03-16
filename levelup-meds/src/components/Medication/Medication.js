@@ -23,6 +23,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Button from "@mui/material/Button";
+import Menubar from "../Menubar/Menubar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { UserAuth } from "../context/AuthContext";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";

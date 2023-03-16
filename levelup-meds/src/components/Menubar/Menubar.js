@@ -24,7 +24,7 @@ import { doc, getDoc } from "firebase/firestore";
 import auth from "../Auth/AuthProvider";
 import db from "../database/FirestoreConfig";
 
-type menu = "open";
+var menu = "open";
 
 export default function Menubar() {
   const { logout } = UserAuth();
