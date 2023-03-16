@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs, updateDoc, doc, Timestamp, query, where } from "firebase/firestore";
 import Select from "react-select";
 import auth from "../Auth/AuthProvider";
@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
 const formStyle = {
@@ -22,7 +23,17 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const UpdateAppointment = () => {
+const UpdateAppointment = ({id}) => {
+
+  var textForSpeech = "Update Appointment Form, "
+    textForSpeech+="Select from drop down menu which appointment you want to update, "
+    textForSpeech+="Then, you have the choice of updating whichever of the following you want to, "
+    textForSpeech+="1, the name of the appointment, "
+    textForSpeech+="2, the location of the appointment, "
+    textForSpeech+="3, the notes for the appointment, "
+    textForSpeech+="4, the date and time of the appointment, "
+    textForSpeech+="However, you need to update at least one of the aforementioned pieces of information"
+
     var appointmentOptions = [];
     const getAppointmentTitleandID = async(loggedInUser) => {
         const appQuery = query(appointments, where('profileID', '==', '/Profiles/' + loggedInUser.uid))
@@ -145,6 +156,7 @@ const UpdateAppointment = () => {
           </div>
           </fieldset>
         </form>
+        <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 

@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import "../../Calendar.css";
 import AddAppointment from "../AddAppointment/AddAppointment";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointment";
@@ -23,10 +24,11 @@ const medications = collection(db, "Medications");
 const calendarStyle = {
   height: 950, 
   width: 999,
+  top: 50,
   position: "fixed",
   float: "left",
   backgroundColor: "white",
-  fontFamily: "Montserrat",
+  fontFamily: "Montserrat"
 };
 
 const formStyle = {
@@ -39,11 +41,41 @@ const formStyle = {
   textAlign: "center",
   fontFamily: "Montserrat",
   float: "right",
-  position: "relative",
-};
+  position: "relative"
+}
+
+var calEvents = []
+
+// const getMedications = async () => {
+//   const medSnap = await getDocs(medications);
+
+//   medSnap.forEach((doc) => {
+//     let title = doc.data().name;
+//     let start = doc.data().time.toDate();
+//     let end = doc.data().time.toDate();
+
+//     let event = { start, end, title };
+//     calEvents.push(event);
+//   });
+// };
+
+// const getAppointments = async () => {
+//   const appSnap = await getDocs(appointments);
+
+//   appSnap.forEach((doc) => {
+//     let title = doc.data().name;
+//     let start = doc.data().appointmentDate.toDate();
+//     let end = doc.data().appointmentDate.toDate();
+
+//     let event = { start, end, title };
+//     calEvents.push(event);
+//   });
+// };
+
+// getAppointments();
+// getMedications();
 
 const LevelUpMedsCalendar = () => {
-  var calEvents = [];
 
   const getMedications = async (loggedInUser) => {
     const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
@@ -100,6 +132,7 @@ const LevelUpMedsCalendar = () => {
 
       let event = { start, end, title, info, color };
       calEvents.push(event);
+      
     });
   };
 
@@ -159,16 +192,22 @@ const LevelUpMedsCalendar = () => {
           };
         }}
       />
-
+      
       <div style={formStyle}>
-        <AddAppointment />
-        <DeleteAppointment />
-        <DeleteMedication />
-        <UpdateAppointment />
-        <AddMedications />
-        <UpdateMedications />
+        <AddAppointment id={1}/> 
+        <br /> <br />
+        <DeleteAppointment id={2}/>
+        <br /> <br />
+        <UpdateAppointment id={3}/>
+        <br /> <br />
+        <AddMedications id={5}/>
+        <br /> <br />
+        <DeleteMedication id={4}/>
+        <br /> <br />
+        <UpdateMedications id={6}/>
+        <br /> <br />
       </div>
-    
+
     </>
   );
 };

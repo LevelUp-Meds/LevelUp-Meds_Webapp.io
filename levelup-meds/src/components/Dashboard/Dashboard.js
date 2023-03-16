@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { FormLabel, Typography } from "@mui/material";
+import { FormLabel, Button, Typography } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
@@ -12,18 +12,17 @@ import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
 import Appointment from "../Appointment/Appointment";
-// import { useLogout } from "../hooks/useLogout";
+import { onAuthStateChanged } from "firebase/auth";
+// import auth from "../Auth/AuthProvider";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import UserMedications from "../UserMedications/UserMedications";
 
 function Dashboard() {
   // const { logout } = UserAuth();
   // const { logout } = useLogout();
-  const { user } = useSignup();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!user) {
-  //   }
-  // }, []);
+  // const { user } = useSignup();
+  const [data, setData] = useState(null);
+  const { user } = UserAuth();
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (data) => {
@@ -46,22 +45,52 @@ function Dashboard() {
   //   } catch (e) {}
   // };
 
-  const handleUpdate = () => {
-    const findUser = async () => {
-      const docRef = doc(db, "Accounts", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log(docSnap.data());
-      } else {
-        console.log("No Document Exists");
-      }
+  // const handleUpdate = () => {
+  //   const findUser = async () => {
+  //     const docRef = doc(db, "Profiles", user.uid);
+  //     const docSnap = await getDoc(docRef);
+  //     if (docSnap.exists()) {
+  //       console.log(docSnap.data());
+  //     } else {
+  //       console.log("No Document Exists");
+  //     }
+  //   };
+  //   findUser();
+  // };
+
+  // useEffect(() => {
+  //   handleUpdate();
+  // }, []);
+
+  const findUserInfo = async (user) => {
+    const docRef = doc(db, "Profiles", user.uid);
+    const docSnap = await getDoc(docRef);
+    const obj = docSnap.data();
+    const firstName = obj.firstName;
+    const lastName = obj.lastName;
+    const newObject = {
+      firstName,
+      lastName,
     };
-    findUser();
+    setData({ ...data, ...newObject });
+
+    // if (docSnap.exists()) {
+    //   setData({...data, ...newObject})
+    // } else {
+    //   console.log("No Document Exists");
+    // }
   };
 
-  const handleClick = () => {
-    handleUpdate();
-  };
+  // useEffect(() => {
+  //   console.log(user.displayName);
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       findUserInfo(user);
+  //     } else {
+  //       navigate("/login");
+  //     }
+  //   });
+  // }, []);
 
   // const logout = () => {
   //   signOut(auth);
@@ -73,16 +102,15 @@ function Dashboard() {
       <Box className={styles.Body}>
         <Box className={styles.LandingCard}>
           <Box className={styles.CardContents}>
-            <FormLabel
+            {/* <FormLabel
               sx={{ fontSize: "3rem" }}
-            >{`Welcome, ${user.displayName}!`}</FormLabel>
+            >{`Welcome, ${userName}!`}
+            <br />
+            
+            </FormLabel>
             {/* <p>User email: {user && user.email}</p> */}
             {/* {user && <p> Name: {user.displayName}</p>} */}
-            <CustomDay></CustomDay>
             {/* <Medication></Medication> */}
-            {/* <Button variant="contained" onClick={handleClick}>
-              Update User
-            </Button> */}
           </Box>
         </Box>
       </Box>

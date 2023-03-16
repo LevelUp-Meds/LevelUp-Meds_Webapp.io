@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs, deleteDoc, doc, query, where } from "firebase/firestore";
 import Select from "react-select";
 import { Box } from "@mui/system";
@@ -7,6 +7,7 @@ import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from
 import '../../Calendar.css'
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
 
@@ -24,7 +25,12 @@ const formStyle = {
   marginBottom: "10px"
 }
 
-const DeleteAppointment = () => {
+const DeleteAppointment = ({id}) => {
+
+  var textForSpeech = "Delete Appointment Form, "
+    textForSpeech+="Select from drop down menu which appointment you want to remove from the database and calendar"
+
+
     var appointmentOptions = [];
     const getAppointmentTitleandID = async(loggedInUser) => {
         const appQuery = query(appointments, where('profileID', '==', "/Profiles/" + loggedInUser.uid));
@@ -85,6 +91,7 @@ const DeleteAppointment = () => {
           </fieldset>
         </form>
       </div>
+      <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 

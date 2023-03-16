@@ -1,13 +1,25 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs, updateDoc, doc, Timestamp, where, query } from "firebase/firestore";
 import auth from "../Auth/AuthProvider";
 import Select from "react-select";
 import { onAuthStateChanged } from "firebase/auth";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 
-const UpdateMedications = () => {
+const UpdateMedications = ({id}) => {
+
+    var textForSpeech = "Update Medication Form, "
+    textForSpeech+="Select which medication you wish to update, "
+    textForSpeech+="Then, you have the choice of updating whichever of the following you want to, "
+    textForSpeech+="1, the amount of medication to be taken by the patient, measurement not required, "
+    textForSpeech+="2, the days for the patient to take the medication, "
+    textForSpeech+="3, the name of the medication, "
+    textForSpeech+="4, the notes about the medication, "
+    textForSpeech+="5, the date where the patient starts taking the medication, "
+    textForSpeech+="However, you need to update at least one of the aforementioned pieces of information"
+
     var medicationOptions = [];
 
     const getMedicationTitleandID = async(loggedInUser) => {
@@ -194,8 +206,8 @@ const UpdateMedications = () => {
 
     }
 
-    return(
-    <>
+    return(<>
+    <div>
     <form onSubmit={updateMedicationHandler}>
         <fieldset>
             <legend>Update Medications: </legend>
@@ -207,7 +219,7 @@ const UpdateMedications = () => {
 
             <div>
                 <label>Amount: </label>
-                <input type="text" ref={updatedAmount} size="3"></input>
+                <input type="text" ref={updatedAmount} size="5"></input>
             </div>
 
             <div>
@@ -261,6 +273,8 @@ const UpdateMedications = () => {
             </div>
         </fieldset>
     </form>
+    </div>
+    <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
     </>)
 
 }

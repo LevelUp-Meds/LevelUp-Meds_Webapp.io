@@ -1,5 +1,5 @@
 import {useRef} from "react";
-import { db } from "../firebase/config";
+import db  from "../database/FirestoreConfig";
 import { collection, Timestamp, addDoc } from "firebase/firestore";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
@@ -7,6 +7,8 @@ import '../../Calendar.css';
 import auth from "../Auth/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
 
+import '../../Calendar.css'
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
 
@@ -24,7 +26,13 @@ const formStyle = {
   marginBottom: "10px"
 }
 
-const AddAppointment = () => {
+const AddAppointment = ({id}) => {
+    var textForSpeech = "Add Appointment Form, "
+    textForSpeech+="Enter Appointment Name, "
+    textForSpeech+="Then Enter location of appointment, "
+    textForSpeech+="Then Enter important information or reminders to remember for the appointment, "
+    textForSpeech+="Lastly enter the day and time that the appointment begins"
+
     const appName = useRef();
     const appNotes = useRef();
     const appDate = useRef();
@@ -89,6 +97,7 @@ const AddAppointment = () => {
           </fieldset>
         </form>
         </div>
+        <TexttoSpeech id={id} textToRead={textForSpeech} icon="Info"></TexttoSpeech>
     </>)
 }
 

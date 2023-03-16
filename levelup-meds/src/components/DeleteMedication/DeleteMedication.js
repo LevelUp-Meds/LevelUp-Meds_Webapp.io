@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import { collection, getDocs, deleteDoc, doc, query, where} from "firebase/firestore";
 import {onAuthStateChanged} from "firebase/auth";
 import auth from "../Auth/AuthProvider";
@@ -7,6 +7,7 @@ import Select from "react-select";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
 import '../../Calendar.css'
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 const formStyle = {
@@ -23,7 +24,11 @@ const formStyle = {
     marginBottom: "10px"
   }
 
-const DeleteMedication = () => {
+const DeleteMedication = ({id}) => {
+
+  var textForSpeech = "Delete Medication Form, "
+    textForSpeech+="Select from drop down menu which medication you want to remove from the database and calendar"
+   
     var medicationOptions = [];
 
     const getMedicationTitleandID = async(loggedInUser) => {
@@ -85,6 +90,7 @@ const DeleteMedication = () => {
           </fieldset>
         </form>
       </div>
+      <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
       </>)
       
 

@@ -1,12 +1,20 @@
 import {useRef, useState} from "react";
-import { db } from "../firebase/config";
+import db from "../database/FirestoreConfig";
 import auth from "../Auth/AuthProvider";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const medications = collection(db, "Medications");
 
-const AddMedications = () => {
+const AddMedications = ({id}) => {
+
+    var textForSpeech = "Add Medication Form, "
+    textForSpeech+="Enter the dosage of the medication the patient needs to take, no measurement required, "
+    textForSpeech+="Then select which days the medication must be taken, "
+    textForSpeech+="Then enter the name of the medication, "
+    textForSpeech+="Then enter any necessary notes for the medication, "
+    textForSpeech+="Finally, enter the date that the patient begins taking the medication"
 
     const [mondaySelected, setMondaySelected] = useState("")
     const [tuesdaySelected, setTuesdaySelected] = useState("");
@@ -126,7 +134,7 @@ const AddMedications = () => {
         window.location.reload(true);
             
     }
-
+   
     return (<>
     <div>
     <form onSubmit={addAppointmentHandler}>
@@ -134,7 +142,7 @@ const AddMedications = () => {
             <legend>Add Medications:</legend>
             <div>
                 <label>Amount: </label>
-                <input type="text" ref={amount} size="3" required></input>
+                <input type="text" ref={amount} size="5" required></input>
             </div>
 
             <div>
@@ -187,9 +195,10 @@ const AddMedications = () => {
                 <input type="submit" value="Add Medication"></input>
             </div>
         </fieldset>
-       
     </form>
     </div>
+
+    <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
     </>)
 
 
