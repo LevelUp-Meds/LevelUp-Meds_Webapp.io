@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { FormLabel, Button } from "@mui/material";
@@ -13,21 +13,16 @@ import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
 import Appointment from "../Appointment/Appointment";
 import { onAuthStateChanged } from "firebase/auth";
-import auth from "../Auth/AuthProvider";
+// import auth from "../Auth/AuthProvider";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import UserMedications from "../UserMedications/UserMedications";
 
 function Dashboard() {
   // const { logout } = UserAuth();
   // const { logout } = useLogout();
-  const { user } = useSignup();
+  // const { user } = useSignup();
   const [data, setData] = useState(null);
-  const navigate = useNavigate();
-
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!user) {
-  //   }
-  // }, []);
+  const { user } = UserAuth();
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (data) => {
@@ -77,7 +72,6 @@ function Dashboard() {
       firstName,
       lastName,
     };
-
     setData({ ...data, ...newObject });
 
     // if (docSnap.exists()) {
@@ -87,15 +81,16 @@ function Dashboard() {
     // }
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        findUserInfo(user);
-      } else {
-        navigate("/login");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   console.log(user.displayName);
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       findUserInfo(user);
+  //     } else {
+  //       navigate("/login");
+  //     }
+  //   });
+  // }, []);
 
   // const logout = () => {
   //   signOut(auth);
@@ -104,16 +99,10 @@ function Dashboard() {
   return (
     <Box className={styles.Dashboard}>
       <Menubar></Menubar>
-      <Box className={styles.Body}>
-        <Box className={styles.LandingCard}>
-          <Box className={styles.CardContents}>
-            {/* <FormLabel
-              sx={{ fontSize: "3rem" }}
-            >{`Welcome, ${user.displayName}!`}</FormLabel>
-            {/* <p>User email: {user && user.email}</p> */}
-            {/* {user && <p> Name: {user.displayName}</p>} */}
-            {/* <Medication></Medication> */}
-          </Box>
+      <Box className={styles.DashboardContent}>
+        <Box className={styles.MedicationsWrapper}>
+          <Medication></Medication>
+          <UserMedications></UserMedications>
         </Box>
       </Box>
     </Box>

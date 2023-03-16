@@ -1,22 +1,15 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Card from "@mui/material/Card";
+import React, { useEffect, useState } from "react";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-
 import MedicationRoundedIcon from "@mui/icons-material/MedicationRounded";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
-import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import styles from "./Medication.module.scss";
 import {
   TextField,
   InputAdornment,
-  Stack,
   Typography,
   Box,
   Grid,
-  Menu,
   MenuItem,
   FormControl,
   InputLabel,
@@ -29,20 +22,69 @@ import { TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menubar from "../Menubar/Menubar";
-import cabinetpill from "../../assets/cabinet-pill.png";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { UserAuth } from "../context/AuthContext";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import db from "../database/FirestoreConfig";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Medication = () => {
-  const [value, setValue] = useState(dayjs("2014-08-18T21:11:54"));
+  const [d, setD] = useState(new Date());
+  const [date, setDate] = useState(dayjs(d));
+  const [medicationName, setMedicationName] = useState("");
+  const [dosage, setDosage] = useState("");
+  const [frequency, setFrequency] = useState({
+    Mon: false,
+    Tue: false,
+    Wed: false,
+    Thu: false,
+    Fri: false,
+    Sat: false,
+    Sun: false,
+  });
+
   const [unit, setUnit] = useState("");
+  const { user } = UserAuth();
 
   const handleChange = (newValue) => {
-    setValue(newValue);
+    setDate(newValue);
+  };
+
+  const handleDays = (day) => {
+    setFrequency({ ...frequency, [day.target.name]: day.target.checked });
+  };
+
+  const resetChecks = () => {
+    // eslint-disable-next-line array-callback-return
+    Object.keys(frequency).map((key) => {
+      if (frequency[key] === true) {
+        frequency[key] = false;
+      }
+    });
+
+    setFrequency(frequency);
+  };
+
+  const handleAddMedication = async () => {
+    const q = query(collection(db, "Medications"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+    await addDoc(collection(db, "Medications"), {
+      name: medicationName,
+      amount: `${dosage}${unit}`,
+      time: date.toDate(),
+      days: frequency,
+      profileID: `/Profiles/${user.uid}`,
+    });
+    resetChecks();
+    setMedicationName("");
+    setDosage("");
+    setDate(dayjs(new Date()));
   };
 
   const handleUnit = (event) => {
@@ -51,14 +93,8 @@ const Medication = () => {
 
   return (
     <Box className={styles.MedWrapper}>
-      <Menubar></Menubar>
+      {/* <Menubar></Menubar> */}
       <Box className={styles.AddNewMedWrapper}>
-        <Box className={styles.HeaderTitle}>
-          <Typography variant="h4" className={styles.HeaderTitle}>
-            My Cabinet
-          </Typography>
-          <img src={cabinetpill} alt="cabinet-pill" height="64px"></img>
-        </Box>
         <CardContent className={styles.InputContainer} sx={{ boxShadow: 10 }}>
           <Grid container>
             <Grid
@@ -82,6 +118,8 @@ const Medication = () => {
                 sx={{ m: 1, width: "30ch" }}
                 className={styles.InputMedication}
                 required
+                value={medicationName}
+                onChange={(e) => setMedicationName(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -96,8 +134,10 @@ const Medication = () => {
               <TextField
                 size="small"
                 label="Dosage"
+                value={dosage}
                 className={styles.InputDosage}
                 required
+                onChange={(e) => setDosage(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="end">
@@ -122,7 +162,7 @@ const Medication = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimePicker
                     label="Time"
-                    value={value}
+                    value={date}
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField
@@ -141,8 +181,15 @@ const Medication = () => {
               <Box>
                 {days.map((day) => (
                   <FormControlLabel
-                    control={<Checkbox />}
+                    key={day}
                     label={day}
+                    control={
+                      <Checkbox
+                        name={day}
+                        checked={frequency[day]}
+                        onChange={(e) => handleDays(e)}
+                      />
+                    }
                   ></FormControlLabel>
                 ))}
               </Box>
@@ -153,6 +200,7 @@ const Medication = () => {
             variant="contained"
             color="success"
             startIcon={<AddCircleOutlineIcon />}
+            onClick={handleAddMedication}
           >
             Add
           </Button>
@@ -161,9 +209,5 @@ const Medication = () => {
     </Box>
   );
 };
-
-Medication.propTypes = {};
-
-Medication.defaultProps = {};
 
 export default Medication;

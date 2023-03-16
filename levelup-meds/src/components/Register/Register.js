@@ -155,6 +155,7 @@ function Register() {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
+            variant="standard"
             label="First Name"
             value={firstName}
             type="text"
@@ -170,6 +171,7 @@ function Register() {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
+            variant="standard"
             label="Last Name"
             value={lastName}
             type="text"
@@ -210,6 +212,7 @@ function Register() {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
+            variant="standard"
             label="E-Mail Address"
             value={email}
             type="text"
@@ -228,6 +231,7 @@ function Register() {
 
         <Grid item xs={12} md={12}>
           <TextField
+            variant="standard"
             label="Password"
             value={password}
             type="password"
@@ -245,6 +249,7 @@ function Register() {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
+            variant="standard"
             label="Confirm Password"
             value={confirmPassword}
             type="password"

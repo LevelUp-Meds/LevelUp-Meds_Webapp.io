@@ -16,7 +16,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { UserAuth } from "../context/AuthContext";
 import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Footer from "../Footer/Footer";
 
 function Login() {
   // used for navigating between pages
@@ -106,6 +105,7 @@ function Login() {
 
         <Grid item>
           <TextField
+            variant="standard"
             id="standard-basic"
             label="Email"
             className={styles.InputField}
@@ -125,6 +125,7 @@ function Login() {
         </Grid>
         <Grid item sx={{ paddingTop: "1.5rem" }}>
           <TextField
+            variant="standard"
             id="standard-basic"
             label="Password"
             type="password"

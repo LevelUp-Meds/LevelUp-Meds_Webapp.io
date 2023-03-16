@@ -37,6 +37,7 @@
     "react-scripts": "5.0.1",
     "resolve-url-loader": "^5.0.0",
     "typescript": "^4.9.3",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
