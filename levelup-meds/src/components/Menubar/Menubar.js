@@ -4,6 +4,7 @@ import styles from "./Menubar.module.scss";
 import { AppBar, Toolbar, Box, Button, Divider } from "@mui/material";
 import { onAuthStateChanged, User } from "firebase/auth";
 import Drawer from "@mui/material/Drawer";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -24,7 +25,7 @@ import { doc, getDoc } from "firebase/firestore";
 import auth from "../Auth/AuthProvider";
 import db from "../database/FirestoreConfig";
 
-type menu = "open";
+var menu = "open";
 
 export default function Menubar() {
   const { logout } = UserAuth();
@@ -71,29 +72,43 @@ export default function Menubar() {
       }
     } catch (e) {}
   };
+  const calenderdirect = async () => {
+    try {
+      await logout();
+      navigate("/calendar");
+      if (!user) {
+        <redirect to="/calendar"></redirect>;
+      }
+    } catch (e) {}
 
-  const handleMedication = () => {
-    navigate("/medication");
-  };
+    const handleMedication = () => {
+      navigate("/medication");
+    };
 
-  const handleAppointment = () => {
-    navigate("/appointment");
-  };
+    const handleAppointment = () => {
+      navigate("/appointment");
+    };
 
-  const handleCalendar = () => {
-    navigate("/calendar");
-  };
+    const handleCalendar = () => {
+      navigate("/calendar");
+    };
 
-  const handleDashboard = () => {
-    navigate("/dashboard");
-  };
+    const handleDashboard = () => {
+      navigate("/dashboard");
+    };
 
   const handleInbox = () => {
     navigate("/inboxpage");
   };
-  const toggleDrawer = (anchor, open) => (event) => {
-    setState({ ...state, [anchor]: open });
-  };
+
+  const handleProfile = () => {
+    navigate("/profile");
+  }
+
+  const toggleDrawer =
+    (anchor, open) => (event) => {
+      setState({ ...state, [anchor]: open });
+    };
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "right" || anchor === "bottom" ? "auto" : 350 }}
@@ -138,6 +153,13 @@ export default function Menubar() {
           <ListItemButton>
             <LogoutIcon sx={{ margin: 1 }} />
             <ListItemText primary="Logout" onClick={handleLogout} />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{ margin: 0 }} />
+        <ListItem disablePadding>
+          <ListItemButton>
+            <AccountCircleIcon sx={{ margin: 1 }} />
+            <ListItemText primary="Profile" onClick={handleProfile} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
@@ -191,4 +213,4 @@ export default function Menubar() {
       ))}
     </div>
   );
-}
+}}

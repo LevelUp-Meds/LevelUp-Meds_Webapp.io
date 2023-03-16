@@ -15,32 +15,32 @@ import Calendar from "./components/Calendar/Calendar";
 import Medication from "./components/Medication/Medication";
 import Appointment from "./components/Appointment/Appointment";
 import InboxPage from "./components/InboxPage/InboxPage";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
     <div className="App">
       <AuthContext>
-        <ChatContextProvider>
-          <Routes>
-            <Route path="/" element={<Homepage />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            ></Route>
-            <Route path="/calendar" element={<Calendar />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/medication" element={<Medication />}></Route>
-            <Route path="/resetpassword" element={<ResetPassword />}></Route>
-            <Route path="/createsuccess" element={<CreateSuccess />}></Route>
-            <Route path="/appointment" element={<Appointment />}></Route>
-            <Route path="/inboxpage" element={<InboxPage />}></Route>
-          </Routes>
-        </ChatContextProvider>
+        <Routes>
+          <Route path="/" element={<Homepage />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route path="/calendar" element={<Calendar />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/medication" element={<Medication />}></Route>
+          <Route path="/resetpassword" element={<ResetPassword />}></Route>
+          <Route path="/createsuccess" element={<CreateSuccess />}></Route>
+          <Route path="/appointment" element={<Appointment />}></Route>
+          <Route path="/inboxpage" element={<InboxPage/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
+        </Routes>
       </AuthContext>
     </div>
   );

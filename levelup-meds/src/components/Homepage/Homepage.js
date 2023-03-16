@@ -43,16 +43,18 @@ function Homepage() {
         title={"Schedule Your Appointments"}
         subTitle={"scheduling an appointment has never been easier."}
       ></Slider>
+      
       <Slider
         imageSrc={ChatImage}
         title={"Live Chat"}
         subTitle="Send and receive messages with a medical professional."
         flipped={true}
       ></Slider>
+    
       <Slider
         imageSrc={MedImage}
         title={"Track You Medications"}
-        subTitle="Look at your calendar and see what medications you need to take."
+        subTitle="Look at the calendar and see what medications you need to take."
       ></Slider>
     </Box>
   );

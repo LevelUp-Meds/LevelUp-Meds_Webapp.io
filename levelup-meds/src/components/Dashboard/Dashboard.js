@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { FormLabel, Button } from "@mui/material";
+import { FormLabel, Button, Typography } from "@mui/material";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
@@ -99,10 +99,19 @@ function Dashboard() {
   return (
     <Box className={styles.Dashboard}>
       <Menubar></Menubar>
-      <Box className={styles.DashboardContent}>
-        <Box className={styles.MedicationsWrapper}>
-          <Medication></Medication>
-          <UserMedications></UserMedications>
+      <Box className={styles.Body}>
+        <Box className={styles.LandingCard}>
+          <Box className={styles.CardContents}>
+            {/* <FormLabel
+              sx={{ fontSize: "3rem" }}
+            >{`Welcome, ${userName}!`}
+            <br />
+            
+            </FormLabel>
+            {/* <p>User email: {user && user.email}</p> */}
+            {/* {user && <p> Name: {user.displayName}</p>} */}
+            {/* <Medication></Medication> */}
+          </Box>
         </Box>
       </Box>
     </Box>
