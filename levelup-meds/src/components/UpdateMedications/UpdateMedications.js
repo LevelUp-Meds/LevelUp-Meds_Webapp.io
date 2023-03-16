@@ -5,6 +5,7 @@ import auth from "../Auth/AuthProvider";
 import Select from "react-select";
 import { onAuthStateChanged } from "firebase/auth";
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
+import "../../Calendar.css";
 
 const medications = collection(db, "Medications");
 

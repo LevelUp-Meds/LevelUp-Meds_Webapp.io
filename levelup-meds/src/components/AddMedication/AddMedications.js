@@ -4,6 +4,7 @@ import auth from "../Auth/AuthProvider";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
+import "../../Calendar.css";
 
 const medications = collection(db, "Medications");
 

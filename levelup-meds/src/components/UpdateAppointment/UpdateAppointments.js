@@ -6,7 +6,7 @@ import auth from "../Auth/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
-// import '../../Calendar.css'
+import '../../Calendar.css'
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 const appointments = collection(db, "Appointments");

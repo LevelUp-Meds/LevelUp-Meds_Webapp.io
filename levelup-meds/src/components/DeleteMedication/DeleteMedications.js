@@ -6,7 +6,7 @@ import auth from "../Auth/AuthProvider";
 import Select from "react-select";
 import { Box } from "@mui/system";
 import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
-// import '../../Calendar.css'
+import '../../Calendar.css'
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 const medications = collection(db, "Medications");
