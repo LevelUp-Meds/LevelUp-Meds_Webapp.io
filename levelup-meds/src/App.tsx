@@ -15,6 +15,7 @@ import Calendar from "./components/Calendar/Calendar";
 import Medication from "./components/Medication/Medication";
 import Appointment from "./components/Appointment/Appointment";
 import InboxPage from "./components/InboxPage/InboxPage";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/createsuccess" element={<CreateSuccess />}></Route>
             <Route path="/appointment" element={<Appointment />}></Route>
             <Route path="/inboxpage" element={<InboxPage />}></Route>
+            <Route path="/profile" element={<Profile/>}></Route>
           </Routes>
         </ChatContextProvider>
       </AuthContext>

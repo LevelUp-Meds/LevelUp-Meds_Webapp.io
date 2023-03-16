@@ -8,6 +8,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LUMLogo from "../../assets/Logo_Orange.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -88,6 +89,10 @@ export default function Menubar() {
     navigate("/dashboard");
   };
 
+  const handleProfile = () => {
+    navigate("/profile");
+  }
+
   const handleInbox = () => {
     navigate("/inboxpage");
   };
@@ -131,6 +136,13 @@ export default function Menubar() {
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
             <ListItemText primary="Inbox" onClick={handleInbox} />
+          </ListItemButton>
+        </ListItem>
+        <Divider sx={{ margin: 0 }} />
+        <ListItem disablePadding>
+          <ListItemButton>
+            <AccountCircleIcon sx={{margin: 1}}/>
+            <ListItemText primary="Profile" onClick={handleProfile} />
           </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
