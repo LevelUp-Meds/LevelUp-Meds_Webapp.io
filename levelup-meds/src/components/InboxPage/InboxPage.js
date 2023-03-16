@@ -6,16 +6,18 @@ import Sidebar from "../SideBar/SideBar";
 import Chat from "../Chat/Chat";
 import "../../styles.scss";
 
-export default function InboxPage() {
+function InboxPage() {
   return (
-    <div>
+    <Box>
       <Menubar></Menubar>
-      <div className="home">
-        <div className="container">
-          <Sidebar></Sidebar>
-          <Chat></Chat>
-        </div>
+    <div className="home">
+      <div className="container">
+        <Sidebar/>
+        <Chat/>
       </div>
     </div>
+    </Box>
   );
 }
+
+export default InboxPage
