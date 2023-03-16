@@ -47,7 +47,7 @@ export default function UserMedications() {
 
     onSnapshot(q, (snapshot) => {
       setUserMedications([]);
-      console.log(snapshot.docs.map((doc) => addMedication(doc)));
+      snapshot.docs.map((doc) => addMedication(doc));
       // setUserMedications(snapshot.docs.map((doc) => [...doc, doc.data()]));
     });
     // console.log(`/Profiles/${user.uid}`);

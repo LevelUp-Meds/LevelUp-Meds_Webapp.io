@@ -24,12 +24,10 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import Menubar from "../Menubar/Menubar";
-import cabinetpill from "../../assets/cabinet-pill.png";
 import { UserAuth } from "../context/AuthContext";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
-xxwxw
+
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Medication = () => {
