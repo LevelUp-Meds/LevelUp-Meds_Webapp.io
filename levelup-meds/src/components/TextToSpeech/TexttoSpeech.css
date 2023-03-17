@@ -1,0 +1,10 @@
+
+button#speechButton, #stopButton
+{
+    border-radius: 25px;
+    font-size: 30px;
+    font-family: inherit;
+    border: 1px solid black;
+    padding: 8px;
+    background-color: whitesmoke!important;
+}
