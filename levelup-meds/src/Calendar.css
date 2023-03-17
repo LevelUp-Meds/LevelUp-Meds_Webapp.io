@@ -1,19 +1,20 @@
-input[type='text'], [type="datetime-local"], Select{
+/* input[type='text'], [type="datetime-local"], Select{
     border-radius: 25px;
     border: 1px solid black;
     height: 30px;
     font-size: 25px;
-}
+} */
 
 input
 {
     background-color: white;
 }
 
-input:focus
+/* input:focus
 {
     background-color: cornsilk;
-}
+} */
+
 input[type='radio']
 {
     border-radius: 50%;

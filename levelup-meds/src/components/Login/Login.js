@@ -59,7 +59,6 @@ function Login() {
       if (data) {
         goToDashBoard();
       } else {
-        console.log(errorMessage);
       }
     });
   }, [goToDashBoard]);
