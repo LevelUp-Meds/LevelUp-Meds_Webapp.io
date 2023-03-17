@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./Hero.module.scss";
 import { Box } from "@mui/material";
 
