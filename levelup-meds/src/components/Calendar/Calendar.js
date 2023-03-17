@@ -21,13 +21,13 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 950, 
+  height: 950,
   width: 999,
   top: 50,
   position: "fixed",
   float: "left",
   backgroundColor: "white",
-  fontFamily: "Montserrat"
+  fontFamily: "Montserrat",
 };
 
 const formStyle = {
@@ -40,10 +40,10 @@ const formStyle = {
   textAlign: "center",
   fontFamily: "Montserrat",
   float: "right",
-  position: "relative"
-}
+  position: "relative",
+};
 
-var calEvents = []
+var calEvents = [];
 
 // const getMedications = async () => {
 //   const medSnap = await getDocs(medications);
@@ -75,9 +75,11 @@ var calEvents = []
 // getMedications();
 
 const LevelUpMedsCalendar = () => {
-
   const getMedications = async (loggedInUser) => {
-    const medQuery = query(medications, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
+    const medQuery = query(
+      medications,
+      where("profileID", "==", "/Profiles/" + loggedInUser.uid)
+    );
     const medSnap = await getDocs(medQuery);
 
     medSnap.forEach((doc) => {
@@ -131,13 +133,15 @@ const LevelUpMedsCalendar = () => {
 
       let event = { start, end, title, info, color };
       calEvents.push(event);
-      
     });
   };
 
   const getAppointments = async (loggedInUser) => {
-    const appQuery = query(appointments, where('profileID', '==', '/Profiles/' + loggedInUser.uid));
-    const appSnap = await getDocs(appQuery)
+    const appQuery = query(
+      appointments,
+      where("profileID", "==", "/Profiles/" + loggedInUser.uid)
+    );
+    const appSnap = await getDocs(appQuery);
 
     appSnap.forEach((doc) => {
       //console.log(doc)
@@ -161,12 +165,11 @@ const LevelUpMedsCalendar = () => {
   };
 
   onAuthStateChanged(auth, (user) => {
-    if (user)
-    {
+    if (user) {
       getAppointments(user);
       getMedications(user);
     }
-  })
+  });
 
   return (
     <>
@@ -191,22 +194,21 @@ const LevelUpMedsCalendar = () => {
           };
         }}
       />
-      
+
       <div style={formStyle}>
-        <AddAppointment id={1}/> 
+        <AddAppointment id={1} />
         <br /> <br />
-        <DeleteAppointment id={2}/>
+        <DeleteAppointment id={2} />
         <br /> <br />
-        <UpdateAppointment id={3}/>
+        <UpdateAppointment id={3} />
         <br /> <br />
-        <AddMedications id={5}/>
+        <AddMedications id={5} />
         <br /> <br />
-        <DeleteMedication id={4}/>
+        <DeleteMedication id={4} />
         <br /> <br />
-        <UpdateMedications id={6}/>
+        <UpdateMedications id={6} />
         <br /> <br />
       </div>
-
     </>
   );
 };
