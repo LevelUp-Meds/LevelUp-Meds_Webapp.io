@@ -8,7 +8,6 @@ import AddAppointment from "../AddAppointment/AddAppointments";
 import DeleteAppointment from "../DeleteAppointment/DeleteAppointments";
 import DeleteMedication from "../DeleteMedication/DeleteMedications";
 import UpdateAppointment from "../UpdateAppointment/UpdateAppointments";
-import AddMedications from "../AddMedication/AddMedications";
 import UpdateMedications from "../UpdateMedications/UpdateMedications";
 import auth from "../Auth/AuthProvider";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -201,8 +200,6 @@ const LevelUpMedsCalendar = () => {
         <DeleteAppointment id={2} />
         <br /> <br />
         <UpdateAppointment id={3} />
-        <br /> <br />
-        <AddMedications id={5} />
         <br /> <br />
         <DeleteMedication id={4} />
         <br /> <br />

@@ -1,13 +1,20 @@
-import {useRef} from "react";
-import db  from "../database/FirestoreConfig";
+import { useRef } from "react";
+import db from "../database/FirestoreConfig";
 import { collection, Timestamp, addDoc } from "firebase/firestore";
 import { Box } from "@mui/system";
-import {FormControl, FormGroup, InputLabel, FormLabel, Button, ButtonGroup} from "@mui/material"
-import '../../Calendar.css';
+import {
+  FormControl,
+  FormGroup,
+  InputLabel,
+  FormLabel,
+  Button,
+  ButtonGroup,
+} from "@mui/material";
+import "../../Calendar.css";
 import auth from "../Auth/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
 
-import '../../Calendar.css'
+import "../../Calendar.css";
 import TexttoSpeech from "../TextToSpeech/TextToSpeech";
 
 const appointments = collection(db, "Appointments");
@@ -23,82 +30,113 @@ const formStyle = {
   fontFamily: "Montserrat",
   float: "right",
   position: "relative",
-  marginBottom: "10px"
-}
+  marginBottom: "10px",
+};
 
-const AddAppointment = ({id}) => {
-    var textForSpeech = "Add Appointment Form, "
-    textForSpeech+="Enter Appointment Name, "
-    textForSpeech+="Then Enter location of appointment, "
-    textForSpeech+="Then Enter important information or reminders to remember for the appointment, "
-    textForSpeech+="Lastly enter the day and time that the appointment begins"
+const AddAppointment = ({ id }) => {
+  var textForSpeech = "Add Appointment Form, ";
+  textForSpeech += "Enter Appointment Name, ";
+  textForSpeech += "Then Enter location of appointment, ";
+  textForSpeech +=
+    "Then Enter important information or reminders to remember for the appointment, ";
+  textForSpeech += "Lastly enter the day and time that the appointment begins";
 
-    const appName = useRef();
-    const appNotes = useRef();
-    const appDate = useRef();
-    const appAddress = useRef();
+  const appName = useRef();
+  const appNotes = useRef();
+  const appDate = useRef();
+  const appAddress = useRef();
 
-    const addToCalendarHandler = (event) => {
-        event.preventDefault();
-     
-        const appointment = appName.current.value;
-        const appointmentNotes = appNotes.current.value;
-        const appointmentDate = new Date(appDate.current.value);
-        const apppointmentLocation = appAddress.current.value;
+  const addToCalendarHandler = (event) => {
+    event.preventDefault();
 
-        onAuthStateChanged(auth, (user)=>{
-          if(user)
-          {
-            const addAppointment = async(loggedInUser) => {
-              await addDoc(appointments, {
-              address: apppointmentLocation,
-              appointmentDate: Timestamp.fromDate(appointmentDate),
-              name: appointment,
-              notes: appointmentNotes,
-              profileID: "/Profiles/" + loggedInUser.uid
-            })}
-            addAppointment(user)
-          }}
-           
-          )
-     
-        window.location.reload(true);
-     
-       }
+    const appointment = appName.current.value;
+    const appointmentNotes = appNotes.current.value;
+    const appointmentDate = new Date(appDate.current.value);
+    const apppointmentLocation = appAddress.current.value;
 
-    return(<>
-        <div>
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const addAppointment = async (loggedInUser) => {
+          await addDoc(appointments, {
+            address: apppointmentLocation,
+            appointmentDate: Timestamp.fromDate(appointmentDate),
+            name: appointment,
+            notes: appointmentNotes,
+            profileID: "/Profiles/" + loggedInUser.uid,
+          });
+        };
+        addAppointment(user);
+      }
+    });
+
+    window.location.reload(true);
+  };
+
+  return (
+    <>
+      <div>
         <form onSubmit={addToCalendarHandler}>
           <fieldset>
             <legend>Add Appointment:</legend>
-          <div>
-            <label>Appointment Name: </label>
-            <input type="text" ref={appName} name="name" size="35" required ></input>
-          </div>
+            <div>
+              <label>Appointment Name: </label>
+              <input
+                type="text"
+                ref={appName}
+                name="name"
+                size="35"
+                required
+              ></input>
+            </div>
 
-          <div>
-            <label>Address: </label>
-            <input type="text" ref={appAddress} name="name" size="50" required></input>
-          </div>
-          
-          <div>
-            <label>Notes: </label>
-            <input type="text" ref={appNotes} name="app_notes" required ></input>
-          </div>
+            <div>
+              <label>Address: </label>
+              <input
+                type="text"
+                ref={appAddress}
+                name="name"
+                size="50"
+                required
+              ></input>
+            </div>
 
-          <div>
-            <label>Date and Time: </label>
-            <input type="datetime-local" ref={appDate} name="date" required ></input>
-          </div>
+            <div>
+              <label>Notes: </label>
+              <input
+                type="text"
+                ref={appNotes}
+                name="app_notes"
+                required
+              ></input>
+            </div>
 
-          <div>
-            <input type="submit" name="Submit" value="Add to Calendar"></input>
-          </div>
+            <div>
+              <label>Date and Time: </label>
+              <input
+                type="datetime-local"
+                ref={appDate}
+                name="date"
+                required
+              ></input>
+            </div>
+
+            <div>
+              <input
+                type="submit"
+                name="Submit"
+                value="Add to Calendar"
+              ></input>
+            </div>
           </fieldset>
         </form>
-        </div>
-        <TexttoSpeech id={id} textToRead={textForSpeech} icon="Info"></TexttoSpeech>
-    </>)
-}
+      </div>
+      <TexttoSpeech
+        id={id}
+        textToRead={textForSpeech}
+        icon="Info"
+      ></TexttoSpeech>
+    </>
+  );
+};
 
 export default AddAppointment;
