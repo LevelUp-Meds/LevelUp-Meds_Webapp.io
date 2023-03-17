@@ -12,12 +12,14 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
+import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 import db from "../database/FirestoreConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function UserMedications() {
+  
   const [userMedications, setUserMedications] = useState([]);
   const { user } = UserAuth();
 
@@ -85,17 +87,25 @@ export default function UserMedications() {
     setUserMedications([]);
   }, []);
 
+  let textToRead = "Your Medications"
+
   return (
     <Box className={styles.UserMedWrapper}>
       <CardContent className={styles.UserMeds} sx={{ boxShadow: 10 }}>
         <Typography variant="h5" sx={{ margin: "1rem", color: "black" }}>
           My Medications
+          <TexttoSpeech id={userMedications.length+1} icon="Info" textToRead={textToRead}></TexttoSpeech>
         </Typography>{" "}
         <>
-          {userMedications.map((e) => (
-            <Box key={`${e.name} + ${user.uid}`}>{e.name}</Box>
+          {userMedications.map((e, index) => (
+            <Box key={`${e.name} + ${user.uid}`}>{e.name}
+            <TexttoSpeech id={index} icon="Info" textToRead={"Medication " + index + ", " + e.name}></TexttoSpeech>
+            </Box>
+            
           ))}
         </>
+
+        
       </CardContent>
     </Box>
   );
