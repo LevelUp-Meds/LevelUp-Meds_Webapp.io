@@ -148,7 +148,7 @@ const Profile = () => {
           <Card sx={profileStyle} variant="outlined">
             <CardHeader title='PROFILE INFORMATION' sx={{textDecoration: 'underline'}}></CardHeader>
             <Divider></Divider>
-              <CardContent>Username: {name}</CardContent>
+              <CardContent>Name: {name}</CardContent>
               <Divider></Divider>
               <CardContent>Email: {emailAddress}</CardContent>
               <Divider></Divider>

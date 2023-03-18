@@ -6,6 +6,7 @@ import Sidebar from "../SideBar/SideBar";
 import Chat from "../Chat/Chat";
 import "../../styles.scss";
 
+
 function InboxPage() {
   return (
     <Box>
