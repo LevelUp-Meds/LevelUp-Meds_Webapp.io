@@ -6,18 +6,9 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import Info from '@mui/icons-material/Info';
 
-const TexttoSpeech = ({id, textToRead, icon}) => {
+const TexttoSpeech = ({id, textToRead}) => {
     
-    var startSpeech;
-    switch(icon)
-    {
-        case 'Volume':
-            startSpeech = <IconButton><VolumeUpIcon color='primary' fontSize='large'/></IconButton>
-            break;
-
-        default:
-            startSpeech = <IconButton><Info color='primary' fontSize='large'/></IconButton>
-    }
+    var startSpeech = <IconButton><Info color='primary' fontSize='large'/></IconButton>
     
     const startSpeechBtn = startSpeech;
     const stopSpeech = <IconButton><VolumeOffIcon color='primary' fontSize='large'/></IconButton>

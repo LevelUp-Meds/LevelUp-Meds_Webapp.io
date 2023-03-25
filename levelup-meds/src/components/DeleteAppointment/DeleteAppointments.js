@@ -91,7 +91,7 @@ const DeleteAppointment = ({id}) => {
           </fieldset>
         </form>
       </div>
-      <TexttoSpeech id={id} icon="Info" textToRead={textForSpeech}></TexttoSpeech>
+      <TexttoSpeech id={id} textToRead={textForSpeech}></TexttoSpeech>
       </>)
 }
 
