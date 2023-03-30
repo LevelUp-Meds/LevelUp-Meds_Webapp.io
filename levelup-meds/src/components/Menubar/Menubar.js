@@ -132,6 +132,7 @@ export default function Menubar() {
             <ListItemText primary="Calendar" onClick={handleCalendar} />
           </ListItemButton>
         </ListItem>
+        <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
