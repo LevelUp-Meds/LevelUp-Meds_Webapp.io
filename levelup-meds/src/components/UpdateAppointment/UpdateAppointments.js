@@ -10,18 +10,6 @@ import '../../Calendar.css'
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 const appointments = collection(db, "Appointments");
-const formStyle = {
-    color: "black",
-    backgroundColor: "yellow",
-    border: "5px solid red",
-    borderRadius: "25px",
-    margin: "auto",
-    textAlign: "center",
-    fontFamily: "Montserrat",
-    float: "right",
-    position: "relative",
-    marginBottom: "10px"
-  }
 
 const UpdateAppointment = ({id}) => {
 
