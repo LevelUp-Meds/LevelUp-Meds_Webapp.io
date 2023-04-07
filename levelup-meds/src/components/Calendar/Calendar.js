@@ -29,6 +29,7 @@ const calendarStyle = {
 };
 
 const formStyle = {
+  width: '100%',
   color: "black",
   backgroundColor: "white",
   border: "3px solid grey",
