@@ -32,8 +32,6 @@ const formStyle = {
   width: '100%',
   color: "black",
   backgroundColor: "white",
-  border: "3px solid grey",
-  borderRadius: "25px",
   fontSize: "30px",
   margin: "auto",
   textAlign: "center",

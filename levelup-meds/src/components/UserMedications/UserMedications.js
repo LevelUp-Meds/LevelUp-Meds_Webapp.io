@@ -84,7 +84,7 @@ export default function UserMedications() {
     });
 
     setUserMedications([]);
-  }, []);
+  }, )
 
   let textToRead = "Your Medications";
 
