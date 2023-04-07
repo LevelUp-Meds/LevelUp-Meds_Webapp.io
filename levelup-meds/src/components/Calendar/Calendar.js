@@ -20,20 +20,18 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 950,
-  width: "100%",
-  top: 50,
-  position: "fixed",
+  height: 800,
+  width: '100%',
+  position: "float",
   float: "left",
   backgroundColor: "white",
   fontFamily: "Montserrat",
 };
 
 const formStyle = {
+  width: '100%',
   color: "black",
-  backgroundColor: "yellow",
-  border: "5px solid red",
-  borderRadius: "25px",
+  backgroundColor: "white",
   fontSize: "30px",
   margin: "auto",
   textAlign: "center",

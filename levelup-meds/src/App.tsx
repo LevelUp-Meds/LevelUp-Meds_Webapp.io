@@ -12,8 +12,6 @@ import { ChatContextProvider } from "./components/context/ChatContext";
 import CreateSuccess from "./components/CreateSuccess/CreateSuccess";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import Calendar from "./components/Calendar/Calendar";
-
-import Appointment from "./components/Appointment/Appointment";
 import InboxPage from "./components/InboxPage/InboxPage";
 import Profile from "./components/Profile/Profile";
 import MedicationPage from "./pages/MedicationPage/MedicationPage";
@@ -36,10 +34,8 @@ function App() {
             ></Route>
             <Route path="/calendar" element={<Calendar />}></Route>
             <Route path="/register" element={<Register />}></Route>
-            <Route path="/medicationpage" element={<MedicationPage />}></Route>
             <Route path="/resetpassword" element={<ResetPassword />}></Route>
             <Route path="/createsuccess" element={<CreateSuccess />}></Route>
-            <Route path="/appointment" element={<Appointment />}></Route>
             <Route path="/inboxpage" element={<InboxPage />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
           </Routes>

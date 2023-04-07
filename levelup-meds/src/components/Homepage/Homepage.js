@@ -3,8 +3,6 @@ import styles from "./Homepage.module.scss";
 import { Button, CssBaseline } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Menubar from "../Menubar/Menubar";
-import Appointment from "../Appointment/Appointment";
-import Medication from "../Medication/Medication";
 import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
 import Hero from "../Hero/Hero";

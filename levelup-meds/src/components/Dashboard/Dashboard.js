@@ -11,7 +11,6 @@ import Medication from "../Medication/Medication";
 import { Box } from "@mui/system";
 import CustomDay from "../Calendar/CustomDay";
 import Footer from "../Footer/Footer";
-import Appointment from "../Appointment/Appointment";
 import { onAuthStateChanged } from "firebase/auth";
 // import auth from "../Auth/AuthProvider";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
