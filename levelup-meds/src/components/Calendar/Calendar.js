@@ -20,10 +20,9 @@ const appointments = collection(db, "Appointments");
 const medications = collection(db, "Medications");
 
 const calendarStyle = {
-  height: 950,
-  width: 999,
-  top: 50,
-  position: "fixed",
+  height: 800,
+  width: '100%',
+  position: "float",
   float: "left",
   backgroundColor: "white",
   fontFamily: "Montserrat",
