@@ -31,8 +31,8 @@ const calendarStyle = {
 
 const formStyle = {
   color: "black",
-  backgroundColor: "yellow",
-  border: "5px solid red",
+  backgroundColor: "white",
+  border: "3px solid grey",
   borderRadius: "25px",
   fontSize: "30px",
   margin: "auto",
