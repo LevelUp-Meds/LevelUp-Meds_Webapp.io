@@ -16,6 +16,7 @@ import db from "../database/FirestoreConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import MedicationCard from "../MedicationCard/MedicationCard";
 
 export default function UserMedications() {
   const [userMedications, setUserMedications] = useState([]);
@@ -93,7 +94,12 @@ export default function UserMedications() {
         </Typography>{" "}
         <>
           {userMedications.map((e) => (
-            <Box key={`${e.name} + ${user.uid}`}>{e.name}</Box>
+            <MedicationCard
+              name={e.name}
+              amount={e.amount}
+              frequency={e.days[0]}
+              key={`${e.name} + ${user.uid}`}
+            ></MedicationCard>
           ))}
         </>
       </CardContent>

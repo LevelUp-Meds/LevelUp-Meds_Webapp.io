@@ -80,7 +80,7 @@ function Register() {
           console.log("Error updating profile.");
         });
     } else {
-      setError("An error occcured while creating account");
+      setError("An error occured while creating account");
       console.log(error);
     }
   };
@@ -137,9 +137,7 @@ function Register() {
     <Box className={styles.RegisterWrapper}>
       <Grid container className={styles.RegisterCard}>
         <Grid item className={styles.Header} xs={12}>
-          <FormLabel sx={{ fontSize: "2rem", margin: "100px" }}>
-            Sign Up
-          </FormLabel>
+          <FormLabel sx={{ fontSize: "2rem" }}>Sign Up</FormLabel>
         </Grid>
         <Grid
           item
@@ -183,31 +181,7 @@ function Register() {
             }}
           ></TextField>
         </Grid>
-        <Grid item xs={12}>
-          <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              value={gender}
-              onChange={handleGenderChange}
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                value="female"
-                control={<Radio />}
-                label="Female"
-              />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel
-                value="other"
-                control={<Radio />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
+
         <Grid item xs={12} md={12}>
           <TextField
             variant="standard"
