@@ -21,7 +21,7 @@ const medications = collection(db, "Medications");
 
 const calendarStyle = {
   height: 950,
-  width: 999,
+  width: "100%",
   top: 50,
   position: "fixed",
   float: "left",
@@ -192,7 +192,7 @@ const LevelUpMedsCalendar = () => {
         }}
       />
 
-      <div style={formStyle}>
+      {/* <div style={formStyle}>
         <AddAppointment id={1} />
         <br /> <br />
         <DeleteAppointment id={2} />
@@ -203,7 +203,7 @@ const LevelUpMedsCalendar = () => {
         <br /> <br />
         <UpdateMedications id={6} />
         <br /> <br />
-      </div>
+      </div> */}
     </>
   );
 };
