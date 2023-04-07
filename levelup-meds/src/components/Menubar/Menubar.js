@@ -24,6 +24,7 @@ import Typography from "@mui/material/Typography";
 import { doc, getDoc } from "firebase/firestore";
 import auth from "../Auth/AuthProvider";
 import db from "../database/FirestoreConfig";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 var menu = "open";
 
@@ -73,14 +74,6 @@ export default function Menubar() {
     } catch (e) {}
   };
 
-  const handleMedication = () => {
-    navigate("/medicationpage");
-  };
-
-  const handleAppointment = () => {
-    navigate("/appointment");
-  };
-
   const handleCalendar = () => {
     navigate("/calendar");
   };
@@ -113,18 +106,14 @@ export default function Menubar() {
           </Button>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
-            <MedicationIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Medications" onClick={handleMedication} />
-          </ListItemButton>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
-          <ListItemButton>
-            <EventIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Appointments" onClick={handleAppointment} />
-          </ListItemButton>
         </ListItem>
+        <ListItemButton>
+            <DashboardIcon sx={{ margin: 1 }} />
+            <ListItemText primary="Dashboard" onClick={handleDashboard} />
+          </ListItemButton>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
           <ListItemButton>
@@ -137,6 +126,8 @@ export default function Menubar() {
             <MailIcon sx={{ margin: 1 }} />
             <ListItemText primary="Inbox" onClick={handleInbox} />
           </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
         </ListItem>
         <Divider sx={{ margin: 0 }} />
         <ListItem disablePadding>
