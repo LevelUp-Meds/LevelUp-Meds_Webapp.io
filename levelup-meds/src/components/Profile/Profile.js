@@ -154,7 +154,7 @@ const Profile = () => {
               <Divider></Divider>
               <CardContent>Gender: {gender}</CardContent>
               <Divider></Divider>
-              <CardContent><TexttoSpeech id={0} textToRead={"Profile Information, UserName, " + name + " , Email, " + emailAddress + " , Gender, " + gender} icon="Info"></TexttoSpeech></CardContent>
+              <CardContent><TexttoSpeech id={0} textToRead={"Profile Information, UserName, " + name + " , Email, " + emailAddress + " , Gender, " + gender}></TexttoSpeech></CardContent>
               <Divider></Divider>
           </Card>
 

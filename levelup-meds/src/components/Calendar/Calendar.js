@@ -91,39 +91,37 @@ const LevelUpMedsCalendar = () => {
         title +
         "\nAmount: " +
         doc.data().amount +
-        "\nNotes: " +
-        doc.data().notes +
         "\nStart date: " +
         start +
         "\nDays to take:";
 
       let days = doc.data().days;
 
-      if (days.m === true) {
+      if (days.Mon === true) {
         info += "\nMonday";
       }
 
-      if (days.t === true) {
+      if (days.Tue === true) {
         info += "\nTuesday";
       }
 
-      if (days.w === true) {
+      if (days.Wed === true) {
         info += "\nWednesday";
       }
 
-      if (days.r === true) {
+      if (days.Thu === true) {
         info += "\nThursday";
       }
 
-      if (days.f === true) {
+      if (days.Fri === true) {
         info += "\nFriday";
       }
 
-      if (days.s === true) {
+      if (days.Sat === true) {
         info += "\nSaturday";
       }
 
-      if (days.u === true) {
+      if (days.Sun === true) {
         info += "\nSunday";
       }
 
@@ -193,7 +191,7 @@ const LevelUpMedsCalendar = () => {
         }}
       />
 
-      <div style={formStyle}>
+      {/* <div style={formStyle}>
         <AddAppointment id={1} />
         <br /> <br />
         <DeleteAppointment id={2} />
@@ -204,7 +202,7 @@ const LevelUpMedsCalendar = () => {
         <br /> <br />
         <UpdateMedications id={6} />
         <br /> <br />
-      </div>
+      </div> */}
     </>
   );
 };

@@ -84,7 +84,7 @@ export default function UserMedications() {
     });
 
     setUserMedications([]);
-  }, []);
+  }, )
 
   let textToRead = "Your Medications";
 
@@ -95,7 +95,6 @@ export default function UserMedications() {
           My Medications
           <TexttoSpeech
             id={userMedications.length + 1}
-            icon="Info"
             textToRead={textToRead}
           ></TexttoSpeech>
         </Typography>{" "}
@@ -105,7 +104,6 @@ export default function UserMedications() {
               {e.name}
               <TexttoSpeech
                 id={index}
-                icon="Info"
                 textToRead={"Medication " + index + ", " + e.name}
               ></TexttoSpeech>
             </Box>
