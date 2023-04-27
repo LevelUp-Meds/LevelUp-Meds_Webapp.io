@@ -41,39 +41,10 @@ const formStyle = {
   position: "relative",
 };
 
-var calEvents = [];
-
-// const getMedications = async () => {
-//   const medSnap = await getDocs(medications);
-
-//   medSnap.forEach((doc) => {
-//     let title = doc.data().name;
-//     let start = doc.data().time.toDate();
-//     let end = doc.data().time.toDate();
-
-//     let event = { start, end, title };
-//     calEvents.push(event);
-//   });
-// };
-
-// const getAppointments = async () => {
-//   const appSnap = await getDocs(appointments);
-
-//   appSnap.forEach((doc) => {
-//     let title = doc.data().name;
-//     let start = doc.data().appointmentDate.toDate();
-//     let end = doc.data().appointmentDate.toDate();
-
-//     let event = { start, end, title };
-//     calEvents.push(event);
-//   });
-// };
-
-// getAppointments();
-// getMedications();
 
 const LevelUpMedsCalendar = () => {
-  const getMedications = async (loggedInUser) => {
+  var calEvents = [];
+  const getMedications = async(loggedInUser) => {
     const medQuery = query(
       medications,
       where("profileID", "==", "/Profiles/" + loggedInUser.uid)
@@ -132,7 +103,7 @@ const LevelUpMedsCalendar = () => {
     });
   };
 
-  const getAppointments = async (loggedInUser) => {
+  const getAppointments = async(loggedInUser) => {
     const appQuery = query(
       appointments,
       where("profileID", "==", "/Profiles/" + loggedInUser.uid)
@@ -161,10 +132,8 @@ const LevelUpMedsCalendar = () => {
   };
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
       getAppointments(user);
       getMedications(user);
-    }
   });
 
   return (
@@ -190,19 +159,6 @@ const LevelUpMedsCalendar = () => {
           };
         }}
       />
-
-      {/* <div style={formStyle}>
-        <AddAppointment id={1} />
-        <br /> <br />
-        <DeleteAppointment id={2} />
-        <br /> <br />
-        <UpdateAppointment id={3} />
-        <br /> <br />
-        <DeleteMedication id={4} />
-        <br /> <br />
-        <UpdateMedications id={6} />
-        <br /> <br />
-      </div> */}
     </>
   );
 };
