@@ -61,6 +61,7 @@ function Register() {
       const fullName = `${firstName} ${lastName}`;
       try {
         await setDoc(doc(db, "Profiles", auth.currentUser.uid), {
+          displayName: fullName,
           fName: firstName,
           lName: lastName,
           email: email,

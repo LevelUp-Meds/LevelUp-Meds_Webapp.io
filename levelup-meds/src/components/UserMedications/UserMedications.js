@@ -40,11 +40,10 @@ export default function UserMedications() {
       medRef,
       where("profileID", "==", `/Profiles/${currentUser.uid}`)
     );
+
     const medSnap = await getDocs(q);
 
-    medSnap.forEach((doc) => {
-      //addMedication(doc);
-    });
+    medSnap.forEach((doc) => {});
 
     onSnapshot(q, (snapshot) => {
       setUserMedications([]);

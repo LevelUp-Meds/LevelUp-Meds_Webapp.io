@@ -27,6 +27,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { UserAuth } from "../context/AuthContext";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
+import Appointment from "../Appointment/Appointment";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -78,6 +79,7 @@ const Medication = () => {
       amount: `${dosage}${unit}`,
       time: date.toDate(),
       days: frequency,
+      medicationID: `${user.uid}/${medicationName}`,
       profileID: `/Profiles/${user.uid}`,
     });
     resetChecks();
@@ -194,6 +196,7 @@ const Medication = () => {
               </Box>
             </Grid>
           </Grid>
+          <Divider sx={{ margin: 1 }} />
           <Button
             sx={{ marginTop: "1rem" }}
             variant="contained"

@@ -9,11 +9,11 @@
 
 .MedWrapper {
   width: 100%;
-  height: 100vh;
+  height: fit-content;
 }
 
 .AddNewMedWrapper {
-  margin: 2rem 0 0 2rem;
+  margin: 0 0 0 2rem;
 }
 
 .HeaderTitle {
@@ -40,20 +40,20 @@
 .InputDosage {
 }
 
-@media only screen and (max-width: 500px) and (min-width: 300px) {
-  .MedWrapper {
-    text-align: center;
-  }
+// @media only screen and (max-width: 500px) and (min-width: 300px) {
+//   .MedWrapper {
+//     text-align: center;
+//   }
 
-  .HeaderTitle {
-    display: flex;
-    margin: 1rem 0 0.5rem 1rem;
-    justify-content: center;
-    align-items: center;
-  }
+//   .HeaderTitle {
+//     display: flex;
+//     margin: 1rem 0 0.5rem 1rem;
+//     justify-content: center;
+//     align-items: center;
+//   }
 
-  .AddNewMedWrapper {
-    width: 350px;
-    height: 55vh;
-  }
-}
+//   .AddNewMedWrapper {
+//     width: 350px;
+//     height: 55vh;
+//   }
+// }

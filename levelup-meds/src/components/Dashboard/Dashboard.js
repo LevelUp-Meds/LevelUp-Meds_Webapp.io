@@ -16,23 +16,23 @@ import { onAuthStateChanged } from "firebase/auth";
 // import auth from "../Auth/AuthProvider";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import UserMedications from "../UserMedications/UserMedications";
+import Map from "../Map/Map";
 
 function Dashboard() {
   // const { logout } = UserAuth();
   // const { logout } = useLogout();
   // const { user } = useSignup();
   const [data, setData] = useState(null);
-  const { user } = UserAuth();
+  const { user, auth } = UserAuth();
+  const navigate = useNavigate();
 
   // useEffect(() => {
-  //   onAuthStateChanged(auth, (data) => {
-  //     if (!user) {
-  //       console.log("Edward");
-  //       navigate("/login");
-  //     } else {
-  //       console.log("Edward");
-  //     }
-  //   });
+  //   if (!user) {
+  //     console.log("Edward");
+  //     navigate("/login");
+  //   } else {
+  //     console.log("Edward");
+  //   }
   // }, []);
 
   // const handleLogout = async (e) => {
@@ -62,39 +62,13 @@ function Dashboard() {
   //   handleUpdate();
   // }, []);
 
-  const findUserInfo = async (user) => {
-    const docRef = doc(db, "Profiles", user.uid);
-    const docSnap = await getDoc(docRef);
-    const obj = docSnap.data();
-    const firstName = obj.firstName;
-    const lastName = obj.lastName;
-    const newObject = {
-      firstName,
-      lastName,
-    };
-    setData({ ...data, ...newObject });
-
-    // if (docSnap.exists()) {
-    //   setData({...data, ...newObject})
-    // } else {
-    //   console.log("No Document Exists");
-    // }
-  };
-
-  // useEffect(() => {
-  //   console.log(user.displayName);
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       findUserInfo(user);
-  //     } else {
-  //       navigate("/login");
-  //     }
-  //   });
-  // }, []);
-
-  // const logout = () => {
-  //   signOut(auth);
-  // };
+  useEffect(() => {
+    if (user) {
+      setData(user);
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Box className={styles.Dashboard}>
@@ -103,6 +77,7 @@ function Dashboard() {
         <Box className={styles.MedicationsWrapper}>
           <Medication></Medication>
           <UserMedications></UserMedications>
+          <Appointment></Appointment>
         </Box>
       </Box>
     </Box>
