@@ -17,7 +17,7 @@ import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 const users = collection(db, "Profiles");
 
 const profileStyle = {
-    textAlign: "center",
+    textAlign: "left",
     width: "50%",
     margin: "auto",
     marginTop: "20px",
@@ -26,6 +26,18 @@ const profileStyle = {
     fontSize: "25px",
     boxSizing: "inherit",
     borderRadius: "25px",
+}
+
+const titleStyle = {
+  textAlign: "Center",
+  width: "50%",
+  margin: "auto",
+  marginTop: "20px",
+  marginBottom: "40px",
+  fontFamily: "inherit",
+  fontSize: "25px",
+  boxSizing: "inherit",
+  borderRadius: "25px",
 }
 
 const medStyle = {
@@ -146,7 +158,7 @@ const Profile = () => {
     return (<>
         <Menubar></Menubar>
           <Card sx={profileStyle} variant="outlined">
-            <CardHeader title='PROFILE INFORMATION' sx={{textDecoration: 'underline'}}></CardHeader>
+            <CardHeader sx={titleStyle} title='PROFILE INFORMATION' sx={{textDecoration: 'underline'}}></CardHeader>
             <Divider></Divider>
               <CardContent>Name: {name}</CardContent>
               <Divider></Divider>

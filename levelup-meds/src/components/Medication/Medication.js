@@ -151,8 +151,9 @@ const Medication = () => {
               <FormControl>
                 <InputLabel id="demo-select-small"></InputLabel>
                 <Select size="small" value={unit} onChange={handleUnit}>
-                  <MenuItem value="Mg">mL</MenuItem>
-                  <MenuItem value="mL">Mg</MenuItem>
+                  <MenuItem value="Mg">Mg</MenuItem>
+                  <MenuItem value="Ml">Ml</MenuItem>
+                  <MenuItem value="Units">Units</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
