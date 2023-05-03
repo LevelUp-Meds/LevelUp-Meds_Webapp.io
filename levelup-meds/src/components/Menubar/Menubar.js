@@ -125,7 +125,7 @@ export default function Menubar() {
         <ListItem disablePadding>
           <ListItemButton>
             <MailIcon sx={{ margin: 1 }} />
-            <ListItemText primary="Inbox" onClick={handleInbox} />
+            <ListItemText primary="Inbox (Coming Soon)" /*onClick={handleInbox}*/ />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
