@@ -50,37 +50,31 @@ const Search = () => {
 
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(res);
-      if (!res.exists()) {
-        //create a chat in chats collection
+      if (res.exists()) {
+        // create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
-        //create user chats
-        await updateDoc(doc(db, "userChats", user.uid), {
+        // create user chats
+        await setDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
 
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
+        await setDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
             displayName: user.displayName,
-            photoURL: user.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+      } else {
       }
-    } catch (error) {
-      console.log("Edward");
-      console.log(error.message);
-    }
+    } catch (error) {}
 
-    setCurrentUser(null);
-    setUsername("");
+    // setCurrentUser(null);
+    // setUsername("");
   };
   return (
     <div className="search">
@@ -96,7 +90,7 @@ const Search = () => {
       {err && <span>User not found!</span>}
       {currentUser && (
         <div className="userChat" onClick={handleSelect}>
-          <img src={currentUser.photoURL} alt="" />
+          {/* <img src={currentUser.photoURL} alt="" /> */}
           <div className="userChatInfo">
             <span>{currentUser.displayName}</span>
           </div>

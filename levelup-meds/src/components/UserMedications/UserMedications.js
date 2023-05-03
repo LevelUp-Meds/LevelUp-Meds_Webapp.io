@@ -17,6 +17,7 @@ import db from "../database/FirestoreConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import MedicationCard from "../MedicationCard/MedicationCard";
 
 export default function UserMedications() {
   const [userMedications, setUserMedications] = useState([]);
@@ -40,11 +41,10 @@ export default function UserMedications() {
       medRef,
       where("profileID", "==", `/Profiles/${currentUser.uid}`)
     );
+
     const medSnap = await getDocs(q);
 
-    medSnap.forEach((doc) => {
-      //addMedication(doc);
-    });
+    medSnap.forEach((doc) => {});
 
     onSnapshot(q, (snapshot) => {
       setUserMedications([]);
@@ -84,7 +84,7 @@ export default function UserMedications() {
     });
 
     setUserMedications([]);
-  }, )
+  });
 
   let textToRead = "Your Medications";
 
@@ -99,14 +99,13 @@ export default function UserMedications() {
           ></TexttoSpeech>
         </Typography>{" "}
         <>
-          {userMedications.map((e, index) => (
-            <Box key={`${e.name} + ${user.uid}`}>
-              {e.name}
-              <TexttoSpeech
-                id={index}
-                textToRead={"Medication " + index + ", " + e.name}
-              ></TexttoSpeech>
-            </Box>
+          {userMedications.map((e) => (
+            <MedicationCard
+              name={e.name}
+              amount={e.amount}
+              frequency={e.days[0]}
+              key={`${e.name} + ${user.uid}`}
+            ></MedicationCard>
           ))}
         </>
       </CardContent>

@@ -39,7 +39,6 @@ const Input = () => {
                 text,
                 senderId: user.uid,
                 date: Timestamp.now(),
-                img: downloadURL,
               }),
             });
           });

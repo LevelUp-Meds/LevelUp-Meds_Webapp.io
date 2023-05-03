@@ -13,7 +13,6 @@ const Messages = () => {
       doc.exists() && setMessages(doc.data().messages);
     });
 
-    console.log(messages);
     return () => {
       unSub();
     };

@@ -11,8 +11,7 @@ const Navbar = () => {
     <div className="navbar">
       <span className="logo">Inbox</span>
       <div className="user">
-        {/* <img src={user?.photoURL} alt="" />
-        <span>{user?.displayName}</span> */}
+        <span>{user?.displayName}</span>
       </div>
     </div>
   );

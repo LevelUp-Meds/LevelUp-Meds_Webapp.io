@@ -1,10 +1,10 @@
-.MedWrapper {
+.AddAppointmentWrapper {
   width: 100%;
-  height: fit-content;
+  height: 500px;
 }
 
-.AddNewMedWrapper {
-  margin: 0 0 0 2rem;
+.AddNewAppointmentWrapper {
+  margin: 2rem 0 0 2rem;
 }
 
 .HeaderTitle {
@@ -28,21 +28,3 @@
   -ms-border-radius: 2.5rem;
   -o-border-radius: 2.5rem;
 }
-
-// @media only screen and (max-width: 500px) and (min-width: 300px) {
-//   .MedWrapper {
-//     text-align: center;
-//   }
-
-//   .HeaderTitle {
-//     display: flex;
-//     margin: 1rem 0 0.5rem 1rem;
-//     justify-content: center;
-//     align-items: center;
-//   }
-
-//   .AddNewMedWrapper {
-//     width: 350px;
-//     height: 55vh;
-//   }
-// }

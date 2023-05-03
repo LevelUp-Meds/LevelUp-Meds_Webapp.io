@@ -1,0 +1,28 @@
+.MedicationCardWrapper {
+  background-color: #dadada;
+  color: black;
+  border-radius: 0.5rem;
+  width: 90%;
+  height: 50px;
+  margin-top: 0.4rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.MedicationCardWrapper .MedInfoWrapper {
+  width: inherit;
+  height: inherit;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.MedicationCardWrapper .CancelIconWrapper {
+  display: flex;
+  align-items: center;
+}
