@@ -17,6 +17,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import auth from "../Auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import MedicationCard from "../MedicationCard/MedicationCard";
+import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 export default function UserMedications() {
   const [userMedications, setUserMedications] = useState([]);
@@ -90,15 +91,18 @@ export default function UserMedications() {
       <CardContent className={styles.UserMeds} sx={{ boxShadow: 10 }}>
         <Typography variant="h5" sx={{ margin: "1rem", color: "black" }}>
           My Medications
+          <TexttoSpeech id={0} textToRead={"Your Medications"}></TexttoSpeech>
         </Typography>{" "}
         <>
-          {userMedications.map((e) => (
+          {userMedications.map((e, index) => (
             <MedicationCard
               name={e.name}
               amount={e.amount}
               frequency={e.days[0]}
               key={`${e.name} + ${user.uid}`}
-            ></MedicationCard>
+            ><TexttoSpeech id={index} textToRead={"Medication " + index + ", " + e.name + ", Amount, " + e.amount}></TexttoSpeech>
+            </MedicationCard>
+            
           ))}
         </>
       </CardContent>
