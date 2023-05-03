@@ -95,7 +95,7 @@ const AddAppointment = ({id}) => {
           </fieldset>
         </form>
         </div>
-        <TexttoSpeech id={id} textToRead={textForSpeech} icon="Info"></TexttoSpeech>
+        <TexttoSpeech id={id} textToRead={textForSpeech}></TexttoSpeech>
     </>)
 }
 
