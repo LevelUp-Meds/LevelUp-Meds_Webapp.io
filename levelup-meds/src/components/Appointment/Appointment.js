@@ -45,6 +45,8 @@ export default function Appointment() {
 
     setAppointmentName("");
     setDate(dayjs(new Date()));
+    setAddress("");
+    setNotes("");
   };
   const handleChange = (newValue) => {
     setDate(newValue);
