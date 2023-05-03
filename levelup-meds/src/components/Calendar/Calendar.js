@@ -113,8 +113,8 @@ const LevelUpMedsCalendar = () => {
     appSnap.forEach((doc) => {
       //console.log(doc)
       let title = doc.data().name;
-      let start = doc.data().appointmentDate.toDate();
-      let end = doc.data().appointmentDate.toDate();
+      let start = doc.data().date.toDate();
+      let end = doc.data().date.toDate();
 
       let info =
         "Name: " +
