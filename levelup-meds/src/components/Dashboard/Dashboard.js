@@ -16,6 +16,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import UserMedications from "../UserMedications/UserMedications";
 import Map from "../Map/Map";
+import Appointment from "../Appointment/Appointment";
 
 function Dashboard() {
   // const { logout } = UserAuth();
