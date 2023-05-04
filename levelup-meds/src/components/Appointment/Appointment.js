@@ -40,10 +40,13 @@ export default function Appointment() {
       address: address,
       notes: notes,
       date: date.toDate(),
+      appointmentID: `${user.uid}/${appointmentName}`,
       profileID: `/Profiles/${user.uid}`,
     });
 
     setAppointmentName("");
+    setAddress("");
+    setNotes("");
     setDate(dayjs(new Date()));
   };
   const handleChange = (newValue) => {
@@ -88,6 +91,7 @@ export default function Appointment() {
               <TextField
                 size="small"
                 required
+                value={address}
                 label="Address"
                 fullWidth
                 sx={{ m: 1, width: "30ch" }}
@@ -102,6 +106,7 @@ export default function Appointment() {
               <Grid item>
                 <TextField
                   label="Notes"
+                  value={notes}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start"></InputAdornment>

@@ -17,6 +17,7 @@ import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import UserMedications from "../UserMedications/UserMedications";
 import Map from "../Map/Map";
 import Appointment from "../Appointment/Appointment";
+import UserAppointments from "../UserAppointments/UserAppointments";
 
 function Dashboard() {
   // const { logout } = UserAuth();
@@ -78,6 +79,7 @@ function Dashboard() {
           <Medication></Medication>
           <UserMedications></UserMedications>
           <Appointment></Appointment>
+          <UserAppointments></UserAppointments>
         </Box>
       </Box>
     </Box>

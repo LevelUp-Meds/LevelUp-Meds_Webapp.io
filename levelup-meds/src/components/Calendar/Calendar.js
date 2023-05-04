@@ -21,7 +21,7 @@ const medications = collection(db, "Medications");
 
 const calendarStyle = {
   height: 800,
-  width: '100%',
+  width: "100%",
   position: "float",
   float: "left",
   backgroundColor: "white",
@@ -29,7 +29,7 @@ const calendarStyle = {
 };
 
 const formStyle = {
-  width: '100%',
+  width: "100%",
   color: "black",
   backgroundColor: "white",
   border: "3px solid grey",
@@ -41,10 +41,9 @@ const formStyle = {
   position: "relative",
 };
 
-
 const LevelUpMedsCalendar = () => {
   var calEvents = [];
-  const getMedications = async(loggedInUser) => {
+  const getMedications = async (loggedInUser) => {
     const medQuery = query(
       medications,
       where("profileID", "==", "/Profiles/" + loggedInUser.uid)
@@ -103,7 +102,7 @@ const LevelUpMedsCalendar = () => {
     });
   };
 
-  const getAppointments = async(loggedInUser) => {
+  const getAppointments = async (loggedInUser) => {
     const appQuery = query(
       appointments,
       where("profileID", "==", "/Profiles/" + loggedInUser.uid)
@@ -132,8 +131,8 @@ const LevelUpMedsCalendar = () => {
   };
 
   onAuthStateChanged(auth, (user) => {
-      getAppointments(user);
-      getMedications(user);
+    getAppointments(user);
+    getMedications(user);
   });
 
   return (
