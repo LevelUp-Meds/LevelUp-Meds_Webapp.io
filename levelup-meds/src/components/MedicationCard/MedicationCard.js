@@ -14,8 +14,9 @@ import {
 } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import { UserAuth } from "../context/AuthContext";
+import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
-export default function MedicationCard({ name, amount }) {
+export default function MedicationCard({ name, amount, id }) {
   const [data, setData] = useState();
   const { user } = UserAuth();
 
@@ -66,6 +67,9 @@ export default function MedicationCard({ name, amount }) {
         <IconButton size="small" onClick={loadUserMedications}>
           <CancelIcon style={{ color: "red" }} />
         </IconButton>
+      </Box>
+      <Box>
+        <TexttoSpeech id={id} textToRead={"Medication name, " + name + ", medication amount, " + amount}></TexttoSpeech>
       </Box>
     </Box>
   );

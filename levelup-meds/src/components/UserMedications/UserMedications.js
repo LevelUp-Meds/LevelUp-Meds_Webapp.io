@@ -20,6 +20,9 @@ import MedicationCard from "../MedicationCard/MedicationCard";
 import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 export default function UserMedications() {
+
+  // var textToRead = "Your Medications, ";
+
   const [userMedications, setUserMedications] = useState([]);
   const { user } = UserAuth();
 
@@ -44,7 +47,11 @@ export default function UserMedications() {
 
     const medSnap = await getDocs(q);
 
-    medSnap.forEach((doc) => {});
+    medSnap.forEach((doc) => {
+      // textToRead+="Medication name, " + doc.data().name + ", medication amount, " + doc.data().amount + ", "
+    });
+
+    // const storedText = textToRead
 
     onSnapshot(q, (snapshot) => {
       setUserMedications([]);
@@ -98,11 +105,11 @@ export default function UserMedications() {
             <MedicationCard
               name={e.name}
               amount={e.amount}
+              id={index}
               frequency={e.days[0]}
               key={`${e.name} + ${user.uid}`}
-            ><TexttoSpeech id={index} textToRead={"Medication " + index + ", " + e.name + ", Amount, " + e.amount}></TexttoSpeech>
+            >
             </MedicationCard>
-            
           ))}
         </>
       </CardContent>
