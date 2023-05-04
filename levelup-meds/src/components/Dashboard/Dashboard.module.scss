@@ -5,8 +5,9 @@
 
 .DashboardContent {
   width: inherit;
-  height: inherit;
+  height: max-content;
   display: flex;
+  flex-direction: column;
   margin: 2rem 0 2rem 0;
   align-items: center;
 }
@@ -21,17 +22,18 @@
 
 .MedicationsWrapper {
   width: 100%;
-  height: 800px;
+  height: max-content;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
-@media only screen and (max-width: 800px) and (min-width: 300px) {
-  .MedicationsWrapper {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-  }
-}
+// @media only screen and (max-width: 800px) and (min-width: 300px) {
+//   .MedicationsWrapper {
+//     width: 100%;
+//     height: 100vh;
+//     display: flex;
+//     text-align: center;
+//     flex-direction: column;
+//   }
+// }

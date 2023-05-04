@@ -40,6 +40,7 @@ export default function Appointment() {
       address: address,
       notes: notes,
       date: date.toDate(),
+      appointmentID: `${user.uid}/${appointmentName}`,
       profileID: `/Profiles/${user.uid}`,
     });
 
