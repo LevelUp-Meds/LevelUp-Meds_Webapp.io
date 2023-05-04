@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import MedicationCard from "../MedicationCard/MedicationCard";
 import Appointment from "../Appointment/Appointment";
 import AppointmentCard from "../AppointmentCard/AppointmentCard";
+import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
 export default function UserAppointments() {
   const [userAppointments, setUserAppointments] = useState([]);
@@ -98,10 +99,11 @@ export default function UserAppointments() {
       <CardContent className={styles.UserApps} sx={{ boxShadow: 10 }}>
         <Typography variant="h5" sx={{ margin: "1rem", color: "black" }}>
           My Appointments
+          <TexttoSpeech id={0} textToRead={"Your Appointments"}></TexttoSpeech>
         </Typography>{" "}
         <>
-          {userAppointments.map((e) => (
-            <AppointmentCard name={e.name}></AppointmentCard>
+          {userAppointments.map((e, index) => (
+            <AppointmentCard name={e.name} id={index}></AppointmentCard>
           ))}
         </>
       </CardContent>
