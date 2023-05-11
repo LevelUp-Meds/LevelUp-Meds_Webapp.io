@@ -54,7 +54,7 @@ const LevelUpMedsCalendar = () => {
       //console.log(doc);
       let title = doc.data().name;
       let start = doc.data().time.toDate();
-      let end = doc.data().time.toDate();
+      let end = Date.now();
 
       let info =
         "Name: " +
