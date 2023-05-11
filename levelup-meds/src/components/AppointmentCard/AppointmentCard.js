@@ -70,7 +70,7 @@ export default function AppointmentCard({ name, id }) {
         </IconButton>
       </Box>
       <Box>
-        <TexttoSpeech id={id} textToRead={name}></TexttoSpeech>
+        <TexttoSpeech id={id} textToRead={"Appointment name, " + name}></TexttoSpeech>
       </Box>
     </Box>
   );
