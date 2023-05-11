@@ -14,8 +14,9 @@ import {
 } from "firebase/firestore";
 import db from "../database/FirestoreConfig";
 import { UserAuth } from "../context/AuthContext";
+import TexttoSpeech from "../TextToSpeech/TexttoSpeech";
 
-export default function AppointmentCard({ name }) {
+export default function AppointmentCard({ name, id }) {
   const [data, setData] = useState();
   const { user } = UserAuth();
 
@@ -67,6 +68,9 @@ export default function AppointmentCard({ name }) {
         <IconButton size="small" onClick={loadUserMedications}>
           <CancelIcon style={{ color: "red" }} />
         </IconButton>
+      </Box>
+      <Box>
+        <TexttoSpeech id={id} textToRead={"Appointment name, " + name}></TexttoSpeech>
       </Box>
     </Box>
   );
