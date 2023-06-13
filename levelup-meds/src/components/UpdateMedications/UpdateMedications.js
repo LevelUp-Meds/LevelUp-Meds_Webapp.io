@@ -124,37 +124,37 @@ const UpdateMedications = ({id}) => {
 
         if(mondaySelected === "Monday")
         {
-            daysToTake.m = true;
+            daysToTake.Mon = true;
         }
 
         if (tuesdaySelected === "Tuesday")
         {
-            daysToTake.t = true;
+            daysToTake.Tue = true;
         }
 
         if (wednesdaySelected === "Wednesday")
         {
-            daysToTake.w = true;
+            daysToTake.Wed = true;
         }
 
         if (thursdaySelected === "Thursday")
         {
-            daysToTake.r = true;
+            daysToTake.Thu = true;
         }
 
         if (fridaySelected === "Friday")
         {
-            daysToTake.f = true;
+            daysToTake.Fri = true;
         }
 
         if (saturdaySelected === "Saturday")
         {
-            daysToTake.s = true;
+            daysToTake.Sat = true;
         }
 
         if (sundaySelected === "Sunday")
         {
-            daysToTake.u = true;
+            daysToTake.Sun = true;
         }
 
         let id = selectedMedication.value;
